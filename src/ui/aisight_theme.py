@@ -46,14 +46,25 @@ GCAEMMCD_CUSTOM_CSS = """
     color-scheme: light !important;
 }
 
+html, body {
+    height: 100% !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 body, .gradio-container {
     background-color: #f8fafc !important;
     color: #0f172a !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
     max-width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
     padding: 0 14px !important;
     margin: 0 !important;
-    overflow-x: hidden !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
 }
 
 /* Force light backgrounds & dark text across ALL Gradio elements */
@@ -183,21 +194,27 @@ footer {
     display: flex !important;
     flex-direction: row !important;
     gap: 12px !important;
-    height: calc(100vh - 110px) !important;
-    min-height: 680px !important;
-    max-height: calc(100vh - 110px) !important;
-    margin-top: 4px !important;
+    height: calc(100vh - 105px) !important;
+    max-height: calc(100vh - 105px) !important;
+    min-height: 0 !important;
+    margin-top: 2px !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
-/* Column 1: Sample Input (23% width) */
+/* Column 1: Sample Input (Fixed Height, Independent Inner Scroll) */
 .col-sample-input {
     flex: 0 0 23% !important;
     min-width: 250px !important;
     max-width: 300px !important;
-    height: 100% !important;
-    overflow-y: auto !important;
+    height: calc(100vh - 105px) !important;
+    max-height: calc(100vh - 105px) !important;
+    min-height: 0 !important;
+    overflow-y: scroll !important;
     overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #2563eb #eff6ff !important;
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
@@ -206,13 +223,18 @@ footer {
     box-sizing: border-box !important;
 }
 
-/* Column 2: Manual Input (38% width) */
+/* Column 2: Manual Input (Fixed Height, Independent Inner Scroll) */
 .col-manual-input {
     flex: 0 0 38% !important;
     min-width: 350px !important;
-    height: 100% !important;
-    overflow-y: auto !important;
+    height: calc(100vh - 105px) !important;
+    max-height: calc(100vh - 105px) !important;
+    min-height: 0 !important;
+    overflow-y: scroll !important;
     overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #2563eb #eff6ff !important;
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
@@ -221,13 +243,18 @@ footer {
     box-sizing: border-box !important;
 }
 
-/* Column 3: Output (39% width) */
+/* Column 3: Output (Fixed Height, Independent Inner Scroll) */
 .col-diagnostic-output {
     flex: 0 0 39% !important;
     min-width: 370px !important;
-    height: 100% !important;
-    overflow-y: auto !important;
+    height: calc(100vh - 105px) !important;
+    max-height: calc(100vh - 105px) !important;
+    min-height: 0 !important;
+    overflow-y: scroll !important;
     overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #2563eb #eff6ff !important;
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
@@ -236,28 +263,29 @@ footer {
     box-sizing: border-box !important;
 }
 
-/* Sleek Inner Scrollbars */
+/* Sleek High-Contrast WebKit Scrollbars (Chrome, Safari, Edge) */
 .col-sample-input::-webkit-scrollbar,
 .col-manual-input::-webkit-scrollbar,
 .col-diagnostic-output::-webkit-scrollbar {
-    width: 6px !important;
+    width: 8px !important;
+    display: block !important;
 }
 .col-sample-input::-webkit-scrollbar-track,
 .col-manual-input::-webkit-scrollbar-track,
 .col-diagnostic-output::-webkit-scrollbar-track {
-    background: #f1f5f9 !important;
+    background: #eff6ff !important;
     border-radius: 4px !important;
 }
 .col-sample-input::-webkit-scrollbar-thumb,
 .col-manual-input::-webkit-scrollbar-thumb,
 .col-diagnostic-output::-webkit-scrollbar-thumb {
-    background: #93c5fd !important;
+    background: #2563eb !important;
     border-radius: 4px !important;
 }
 .col-sample-input::-webkit-scrollbar-thumb:hover,
 .col-manual-input::-webkit-scrollbar-thumb:hover,
 .col-diagnostic-output::-webkit-scrollbar-thumb:hover {
-    background: #2563eb !important;
+    background: #1d4ed8 !important;
 }
 
 /* Dynamic screen sizing: Wrap columns gracefully on small/tablet viewports */
