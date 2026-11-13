@@ -40,7 +40,8 @@ from src.explainability.shap_explainer import TabularShapExplainer
 from src.explainability.text_saliency import BioBERTTextSaliencyExplainer
 from src.explainability.faithfulness import evaluate_visual_faithfulness, evaluate_tabular_faithfulness
 from src.ui.aisight_theme import (
-    GCAEMMCD_CUSTOM_CSS, get_top_navbar_html, get_sub_header_html,
+    GCAEMMCD_CUSTOM_CSS, FORCE_LIGHT_MODE_JS, get_gcaemmcd_theme,
+    get_top_navbar_html, get_sub_header_html,
     get_viewer_toolbar_html, get_slide_badge_html, get_footer_disclaimer_html
 )
 
@@ -297,7 +298,8 @@ def process_aisight_case(
 # BUILD GCAEMMCD THREE-COLUMN INTERFACE
 # -----------------------------------------------------------------------------
 def build_aisight_ui():
-    with gr.Blocks(title="GCAEMMCD Clinical Pathology Workstation", css=GCAEMMCD_CUSTOM_CSS) as demo:
+    custom_theme = get_gcaemmcd_theme()
+    with gr.Blocks(title="GCAEMMCD Clinical Pathology Workstation", css=GCAEMMCD_CUSTOM_CSS, theme=custom_theme, js=FORCE_LIGHT_MODE_JS) as demo:
         # Top Global Workstation Navigation Bar
         gr.HTML(get_top_navbar_html())
 
@@ -310,15 +312,15 @@ def build_aisight_ui():
         cur_badge_text = gr.State(value="🔴 Malignant Neoplasm")
 
         # Main Workstation 3-Column Workspace: Sample Input | Manual Input | Output
-        with gr.Row(equal_height=False):
+        with gr.Row(equal_height=False, elem_classes=["workstation-row-container"]):
             # -----------------------------------------------------------------
-            # COLUMN 1: SAMPLE INPUT (~24% width)
+            # COLUMN 1: SAMPLE INPUT (Fixed Height, Column Inner Scroll)
             # -----------------------------------------------------------------
-            with gr.Column(scale=3, min_width=270, elem_classes=["workstation-column-shell"]):
+            with gr.Column(scale=3, min_width=250, elem_classes=["col-sample-input"]):
                 gr.HTML("""
                 <div class="column-title-bar">
                     <span class="column-title-text">📂 Column 1: Sample Input</span>
-                    <span class="column-badge">5 Benchmark Presets</span>
+                    <span class="column-badge">5 Presets</span>
                 </div>
                 """)
                 gr.Markdown(
@@ -328,55 +330,55 @@ def build_aisight_ui():
                 # Preset Specimen 1: Colorectal
                 with gr.Group(elem_classes=["specimen-preset-card", "active-selected"]):
                     with gr.Row():
-                        thumb_1 = gr.Image(value=SLIDE_PRESETS["slide_1"]["img_path"], show_label=False, width=48, height=48)
+                        thumb_1 = gr.Image(value=SLIDE_PRESETS["slide_1"]["img_path"], show_label=False, width=44, height=44)
                         with gr.Column(scale=3):
                             gr.Markdown("**H&E S-01** · Colon Biopsy\n<span class='status-pill-malignant'>● Malignant</span>")
-                    btn_slide_1 = gr.Button("Load Specimen S-01", size="sm", variant="secondary")
+                    btn_slide_1 = gr.Button("Load Specimen S-01", size="sm", variant="secondary", elem_classes=["btn-punchy-secondary"])
 
                 # Preset Specimen 2: Lung
                 with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
-                        thumb_2 = gr.Image(value=SLIDE_PRESETS["slide_2"]["img_path"], show_label=False, width=48, height=48)
+                        thumb_2 = gr.Image(value=SLIDE_PRESETS["slide_2"]["img_path"], show_label=False, width=44, height=44)
                         with gr.Column(scale=3):
                             gr.Markdown("**H&E S-02** · Lung Biopsy\n<span class='status-pill-malignant'>● Malignant</span>")
-                    btn_slide_2 = gr.Button("Load Specimen S-02", size="sm", variant="secondary")
+                    btn_slide_2 = gr.Button("Load Specimen S-02", size="sm", variant="secondary", elem_classes=["btn-punchy-secondary"])
 
                 # Preset Specimen 3: Breast
                 with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
-                        thumb_3 = gr.Image(value=SLIDE_PRESETS["slide_3"]["img_path"], show_label=False, width=48, height=48)
+                        thumb_3 = gr.Image(value=SLIDE_PRESETS["slide_3"]["img_path"], show_label=False, width=44, height=44)
                         with gr.Column(scale=3):
                             gr.Markdown("**H&E S-03** · Breast Biopsy\n<span class='status-pill-malignant'>● Malignant</span>")
-                    btn_slide_3 = gr.Button("Load Specimen S-03", size="sm", variant="secondary")
+                    btn_slide_3 = gr.Button("Load Specimen S-03", size="sm", variant="secondary", elem_classes=["btn-punchy-secondary"])
 
                 # Preset Specimen 4: Emphysema Normal Lung
                 with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
-                        thumb_4 = gr.Image(value=SLIDE_PRESETS["slide_4"]["img_path"], show_label=False, width=48, height=48)
+                        thumb_4 = gr.Image(value=SLIDE_PRESETS["slide_4"]["img_path"], show_label=False, width=44, height=44)
                         with gr.Column(scale=3):
                             gr.Markdown("**H&E S-04** · Lung Resection\n<span class='status-pill-normal'>● Non-Neoplastic</span>")
-                    btn_slide_4 = gr.Button("Load Specimen S-04", size="sm", variant="secondary")
+                    btn_slide_4 = gr.Button("Load Specimen S-04", size="sm", variant="secondary", elem_classes=["btn-punchy-secondary"])
 
                 # Preset Specimen 5: Fibroadenoma Benign Breast
                 with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
-                        thumb_5 = gr.Image(value=SLIDE_PRESETS["slide_5"]["img_path"], show_label=False, width=48, height=48)
+                        thumb_5 = gr.Image(value=SLIDE_PRESETS["slide_5"]["img_path"], show_label=False, width=44, height=44)
                         with gr.Column(scale=3):
                             gr.Markdown("**H&E S-05** · Breast Biopsy\n<span class='status-pill-benign'>● Benign Lesion</span>")
-                    btn_slide_5 = gr.Button("Load Specimen S-05", size="sm", variant="secondary")
+                    btn_slide_5 = gr.Button("Load Specimen S-05", size="sm", variant="secondary", elem_classes=["btn-punchy-secondary"])
 
                 gr.Markdown(
                     "**Cohort Specifications:**\n"
-                    "- **Standard Magnification:** 20× Brightfield\n"
-                    "- **Active Tissue Field:** 1.84 mm² (224×224 px)\n"
-                    "- **Staining Standard:** Certified H&E Protocol\n"
-                    "- **Modality Completeness:** 3 / 3 Modes"
+                    "- **Magnification:** 20× Brightfield\n"
+                    "- **Tissue Field:** 1.84 mm² (224×224 px)\n"
+                    "- **Staining:** Certified H&E Protocol\n"
+                    "- **Modalities:** 3 / 3 Complete"
                 )
 
             # -----------------------------------------------------------------
-            # COLUMN 2: MANUAL INPUT (~36% width)
+            # COLUMN 2: MANUAL INPUT (Fixed Height, Column Inner Scroll)
             # -----------------------------------------------------------------
-            with gr.Column(scale=4, min_width=350, elem_classes=["workstation-column-shell"]):
+            with gr.Column(scale=5, min_width=350, elem_classes=["col-manual-input"]):
                 gr.HTML("""
                 <div class="column-title-bar">
                     <span class="column-title-text">✍️ Column 2: Manual Input</span>
@@ -390,7 +392,7 @@ def build_aisight_ui():
                     custom_upload_img = gr.Image(
                         type="pil",
                         label="Upload Tissue Micrograph Tile (H&E)",
-                        height=150
+                        height=140
                     )
 
                 # Section 2: Clinical Narrative Text
@@ -410,7 +412,7 @@ def build_aisight_ui():
                         inc_tab_check = gr.Checkbox(label="Include in Fusion", value=True)
 
                     # Demographics & Performance
-                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>DEMOGRAPHICS & PERFORMANCE</div>")
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 800; color: #1e3a8a; margin: 4px 0;'>DEMOGRAPHICS & PERFORMANCE</div>")
                     with gr.Row():
                         s_age = gr.Slider(18, 100, value=64, step=1, label="Age (Years)")
                         s_sex = gr.Radio(["Male", "Female"], value="Male", label="Sex")
@@ -419,14 +421,14 @@ def build_aisight_ui():
                         s_ecog = gr.Radio(["0", "1", "2", "3"], value="1", label="ECOG")
 
                     # Serum Tumor Markers
-                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>SERUM TUMOR MARKERS</div>")
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 800; color: #1e3a8a; margin: 4px 0;'>SERUM TUMOR MARKERS</div>")
                     with gr.Row():
                         s_cea = gr.Slider(0, 150, value=34.5, step=0.1, label="CEA (ng/mL)")
                         s_ca125 = gr.Slider(0, 200, value=14.0, step=0.1, label="CA-125 (U/mL)")
                         s_ca19_9 = gr.Slider(0, 250, value=48.0, step=0.1, label="CA19-9 (U/mL)")
 
                     # Receptors & Proliferation Index
-                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>RECEPTORS & PROLIFERATION</div>")
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 800; color: #1e3a8a; margin: 4px 0;'>RECEPTORS & PROLIFERATION</div>")
                     with gr.Row():
                         s_ki67 = gr.Slider(0, 100, value=55.0, step=1.0, label="Ki-67 (%)")
                         s_er = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="ER")
@@ -435,7 +437,7 @@ def build_aisight_ui():
                         s_her2 = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="HER2")
 
                     # Molecular Genetics & Complete Blood Count
-                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>MOLECULAR GENETICS & CBC</div>")
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 800; color: #1e3a8a; margin: 4px 0;'>MOLECULAR GENETICS & CBC</div>")
                     with gr.Row():
                         s_egfr = gr.Radio(["Wild-type", "Mutant"], value="Wild-type", label="EGFR")
                         s_kras = gr.Radio(["Wild-type", "Mutant"], value="Mutant", label="KRAS")
@@ -445,12 +447,12 @@ def build_aisight_ui():
                         s_plt = gr.Slider(50, 800, value=290.0, step=1.0, label="Platelets")
 
                 # Section 4: Primary CTA Execution Button
-                btn_recompute = gr.Button("⚡ Run Diagnostic Inference & Explainability", variant="primary", size="lg")
+                btn_recompute = gr.Button("⚡ Run Diagnostic Inference & Explainability", variant="primary", size="lg", elem_classes=["btn-punchy-primary"])
 
             # -----------------------------------------------------------------
-            # COLUMN 3: OUTPUT (~40% width)
+            # COLUMN 3: OUTPUT (Fixed Height, Column Inner Scroll)
             # -----------------------------------------------------------------
-            with gr.Column(scale=5, min_width=420, elem_classes=["workstation-column-shell"]):
+            with gr.Column(scale=5, min_width=370, elem_classes=["col-diagnostic-output"]):
                 gr.HTML("""
                 <div class="column-title-bar">
                     <span class="column-title-text">🔬 Column 3: Output</span>
