@@ -1,0 +1,9 @@
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/breast/breast_08.png,breast,0
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/breast/breast_00.png,breast,0
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/breast/breast_03.png,breast,0
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/lung/lung_19.png,lung,1
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/lung/lung_06.png,lung,1
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/lung/lung_17.png,lung,1
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/colorectal/colorectal_18.png,colorectal,2
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/colorectal/colorectal_11.png,colorectal,2
+/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/sample_images/colorectal/colorectal_03.png,colorectal,2

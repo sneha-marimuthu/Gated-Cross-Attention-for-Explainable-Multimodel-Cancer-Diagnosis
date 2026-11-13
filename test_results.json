@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Valid Breast Histopathology",
+    "output": [
+      "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Breast` ($D_{cos}=0.5778$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=female` \u2014 Valid clinical text (10 words, 7 medical terms detected).\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (14/16 fields observed).",
+      "### \ud83d\udea8 CROSS-MODAL DISCORDANCE \u2014 MANUAL SPECIMEN VERIFICATION REQUIRED\n\n**Verification Status:** `DISEASE_STATUS_DISCORDANCE`\n\n**Conflicting Clinical Evidence Detected Across Modalities:**\n- DISEASE STATUS DISCORDANCE: Modalities disagree on Malignancy vs Non-Malignant state [Image (ResNet): Benign (75%), Text (BioBERT): Malignant (66%), Tabular (Biomarkers): Benign (81%)].\n\n**Clinical Decision Hold:** Automated GCA carcinoma synthesis is **suppressed** because active patient data streams contradict each other. Verify patient ID, biopsy site requisition (metastatic vs primary), and pathology report pairing.",
+      {
+        "Normal / Non-Neoplastic": 0.1577407419681549,
+        "Benign Neoplasm": 0.7509695291519165,
+        "Malignant Carcinoma": 0.09128972887992859
+      },
+      {
+        "Breast": 0.8629619479179382,
+        "Lung": 0.07318301498889923,
+        "Colorectal": 0.06385506689548492
+      },
+      "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \ud83d\udfe1 `Held (Discordant Inputs)` | Suppressed for manual review | JS Div: 0.03 |\n| \ud83d\udd17 Early Concatenation | \ud83d\udfe2 `Executed` | Benign Lesion \u2014 Breast Tissue (81.3%) | Status 81.3% / Site 95.6% |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Benign Lesion \u2014 Breast Tissue (75.1%) | Status 75.1% / Site 86.3% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (66.4%) \u2014 Site Risk: Breast (97.1%) | Status 66.4% / Site 97.1% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Benign Neoplasm (81.5%) \u2014 Site Risk: Breast (92.2%) | Status 81.5% / Site 92.2% |",
+      "### \ud83c\udf9b\ufe0f Dynamic Sigmoid Attention Gates $g = \\sigma(\\text{GateNet}[X \\parallel Y])$\n\n- **Image \u2192 Text (g_IT):** **52.8%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Image (g_TI):** **46.1%** (\ud83d\udfe1 Attenuated / Suppressed)\n- **Image \u2192 Tabular (g_IR):** **77.6%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Image (g_RI):** **77.7%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Tabular (g_TR):** **63.5%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Text (g_RT):** **67.1%** (\ud83d\udfe2 Active Consensus)\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (14/16 Observed)\n- `er_status` (val=`1.00`): **25.1%** relative influence\n- `hemoglobin` (val=`13.50`): **17.7%** relative influence\n- `sex` (val=`1.00`): **14.0%** relative influence\n- `age` (val=`55.00`): **12.0%** relative influence\n- `pr_status` (val=`1.00`): **10.9%** relative influence\n- *Masked (`Not Tested / Unknown`, excluded from attribution):* `egfr_mutation, kras_mutation`",
+      

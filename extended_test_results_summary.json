@@ -1,0 +1,362 @@
+[
+  {
+    "name": "01_Breast_Malignant_TriModal",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_01_Breast_Malignant_TriModal.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.026992321014404297,
+      "Benign Neoplasm": 0.02626592293381691,
+      "Malignant Carcinoma": 0.9467417597770691
+    },
+    "site_probs": {
+      "Breast Carcinoma": 0.9081068950417501,
+      "Lung Carcinoma": 0.04441528377891321,
+      "Colorectal Carcinoma": 0.04747782117933658
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Breast` ($D_{cos}=0.1824$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=female, Age=56` \u2014 Valid clinical text (18 words, 4 medical terms detected).\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (16/16 fields observed).",
+    "diagnostic_card": "### \ud83d\udd2c Prediction Mode: Tri-Modal Gated Cross-Attention (Concordant)\n\n\ud83c\udfc6 **GCA Multimodal Diagnosis: Malignant \u2014 Breast Carcinoma**\n\n\u2022 **Disease Status Confidence:** **94.67%** (`Malignant Carcinoma`)\n\u2022 **Carcinoma Subtype Confidence:** **90.81%** (Concordant with Phikon, BioBERT & Biomarkers)\n\u2022 **Cross-Modal Integrity:** Patient identity, site, and status verified concordant.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \ud83d\udfe2 `Executed` | Malignant \u2014 Breast Carcinoma (90.8%) | Status 94.7% / Site 90.8% |\n| \ud83d\udd17 Early Concatenation | \ud83d\udfe2 `Executed` | Malignant \u2014 Breast Carcinoma (94.9%) | Status 91.7% / Site 94.9% |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Malignant \u2014 Breast Carcinoma (92.1%) | Status 94.8% / Site 92.1% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (75.3%) \u2014 Site Risk: Breast (83.2%) | Status 75.3% / Site 83.2% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (95.1%) \u2014 Site Risk: Breast (95.3%) | Status 95.1% / Site 95.3% |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Dynamic Sigmoid Attention Gates $g = \\sigma(\\text{GateNet}[X \\parallel Y])$\n\n- **Image \u2192 Text (g_IT):** **66.4%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Image (g_TI):** **68.8%** (\ud83d\udfe2 Active Consensus)\n- **Image \u2192 Tabular (g_IR):** **84.1%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Image (g_RI):** **83.4%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Tabular (g_TR):** **57.8%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Text (g_RT):** **64.3%** (\ud83d\udfe2 Active Consensus)\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (16/16 Observed)\n- `er_status` (val=`1.00`): **22.1%** relative influence\n- `age` (val=`56.00`): **17.1%** relative influence\n- `ecog_score` (val=`1.00`): **15.9%** relative influence\n- `hemoglobin` (val=`13.50`): **11.2%** relative influence\n- `wbc_count` (val=`6.30`): **8.4%** relative influence",
+    "gradcam_caption": "**Faithful GCA Grad-CAM Target:** `Breast Carcinoma` (`gca_fusion -> head_gca_site` backpropagated to ResNet `layer4`)"
+  },
+  {
+    "name": "02_Lung_Malignant_TriModal",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_02_Lung_Malignant_TriModal.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.03179896995425224,
+      "Benign Neoplasm": 0.032760221511125565,
+      "Malignant Carcinoma": 0.9354407787322998
+    },
+    "site_probs": {
+      "Breast Carcinoma": 0.022128362012059706,
+      "Lung Carcinoma": 0.9507169815908423,
+      "Colorectal Carcinoma": 0.027154656397098045
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Lung` ($D_{cos}=0.2278$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=male, Age=66` \u2014 Valid clinical text (15 words, 3 medical terms detected).\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (16/16 fields observed).",
+    "diagnostic_card": "### \ud83d\udd2c Prediction Mode: Tri-Modal Gated Cross-Attention (Concordant)\n\n\ud83c\udfc6 **GCA Multimodal Diagnosis: Malignant \u2014 Lung Carcinoma**\n\n\u2022 **Disease Status Confidence:** **93.54%** (`Malignant Carcinoma`)\n\u2022 **Carcinoma Subtype Confidence:** **95.07%** (Concordant with Phikon, BioBERT & Biomarkers)\n\u2022 **Cross-Modal Integrity:** Patient identity, site, and status verified concordant.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \ud83d\udfe2 `Executed` | Malignant \u2014 Lung Carcinoma (95.1%) | Status 93.5% / Site 95.1% |\n| \ud83d\udd17 Early Concatenation | \ud83d\udfe2 `Executed` | Malignant \u2014 Lung Carcinoma (94.7%) | Status 93.4% / Site 94.7% |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Malignant \u2014 Lung Carcinoma (96.8%) | Status 93.4% / Site 96.8% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (93.6%) \u2014 Site Risk: Lung (94.6%) | Status 93.6% / Site 94.6% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (97.4%) \u2014 Site Risk: Lung (90.1%) | Status 97.4% / Site 90.1% |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Dynamic Sigmoid Attention Gates $g = \\sigma(\\text{GateNet}[X \\parallel Y])$\n\n- **Image \u2192 Text (g_IT):** **80.3%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Image (g_TI):** **80.4%** (\ud83d\udfe2 Active Consensus)\n- **Image \u2192 Tabular (g_IR):** **83.7%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Image (g_RI):** **83.7%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Tabular (g_TR):** **76.3%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Text (g_RT):** **77.8%** (\ud83d\udfe2 Active Consensus)\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (16/16 Observed)\n- `smoking_pack_yrs` (val=`32.00`): **29.6%** relative influence\n- `ca19_9_level` (val=`27.00`): **15.2%** relative influence\n- `age` (val=`66.00`): **10.8%** relative influence\n- `platelet_count` (val=`247.00`): **8.8%** relative influence\n- `wbc_count` (val=`13.20`): **5.7%** relative influence",
+    "gradcam_caption": "**Faithful GCA Grad-CAM Target:** `Lung Carcinoma` (`gca_fusion -> head_gca_site` backpropagated to ResNet `layer4`)"
+  },
+  {
+    "name": "03_Colorectal_Malignant_NegatedPriorHx",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_03_Colorectal_Malignant_NegatedPriorHx.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.02464417554438114,
+      "Benign Neoplasm": 0.027810536324977875,
+      "Malignant Carcinoma": 0.9475452899932861
+    },
+    "site_probs": {
+      "Breast Carcinoma": 0.03885716821987057,
+      "Lung Carcinoma": 0.02719580164791701,
+      "Colorectal Carcinoma": 0.9339470301322125
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Colorectal` ($D_{cos}=0.2275$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=male, Age=64` \u2014 Valid clinical text (17 words, 8 medical terms detected).\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (16/16 fields observed).",
+    "diagnostic_card": "### \ud83d\udd2c Prediction Mode: Tri-Modal Gated Cross-Attention (Concordant)\n\n\ud83c\udfc6 **GCA Multimodal Diagnosis: Malignant \u2014 Colorectal Carcinoma**\n\n\u2022 **Disease Status Confidence:** **94.75%** (`Malignant Carcinoma`)\n\u2022 **Carcinoma Subtype Confidence:** **93.39%** (Concordant with Phikon, BioBERT & Biomarkers)\n\u2022 **Cross-Modal Integrity:** Patient identity, site, and status verified concordant.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \ud83d\udfe2 `Executed` | Malignant \u2014 Colorectal Carcinoma (93.4%) | Status 94.8% / Site 93.4% |\n| \ud83d\udd17 Early Concatenation | \ud83d\udfe2 `Executed` | Malignant \u2014 Colorectal Carcinoma (92.1%) | Status 94.5% / Site 92.1% |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Malignant \u2014 Colorectal Carcinoma (96.3%) | Status 92.9% / Site 96.3% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (95.3%) \u2014 Site Risk: Colorectal (89.0%) | Status 95.3% / Site 89.0% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (98.6%) \u2014 Site Risk: Colorectal (83.7%) | Status 98.6% / Site 83.7% |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Dynamic Sigmoid Attention Gates $g = \\sigma(\\text{GateNet}[X \\parallel Y])$\n\n- **Image \u2192 Text (g_IT):** **73.8%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Image (g_TI):** **76.3%** (\ud83d\udfe2 Active Consensus)\n- **Image \u2192 Tabular (g_IR):** **83.2%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Image (g_RI):** **83.5%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Tabular (g_TR):** **72.8%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Text (g_RT):** **73.6%** (\ud83d\udfe2 Active Consensus)\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (16/16 Observed)\n- `wbc_count` (val=`13.60`): **20.6%** relative influence\n- `smoking_pack_yrs` (val=`12.00`): **14.1%** relative influence\n- `ki67_index` (val=`60.50`): **14.0%** relative influence\n- `ca125_level` (val=`30.30`): **10.9%** relative influence\n- `kras_mutation` (val=`1.00`): **8.1%** relative influence",
+    "gradcam_caption": "**Faithful GCA Grad-CAM Target:** `Colorectal Carcinoma` (`gca_fusion -> head_gca_site` backpropagated to ResNet `layer4`)"
+  },
+  {
+    "name": "04_Breast_Benign_TriModal",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_04_Breast_Benign_TriModal.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.022539528086781502,
+      "Benign Neoplasm": 0.954318642616272,
+      "Malignant Carcinoma": 0.02314186468720436
+    },
+    "site_probs": {
+      "Breast Tissue": 0.9104563595577198,
+      "Lung Tissue": 0.03934067060348716,
+      "Colorectal Tissue": 0.05020296983879312
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Breast` ($D_{cos}=0.1633$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=female, Age=35, \u26a0\ufe0f Negation detected` \u2014 Valid clinical text (16 words, 7 medical terms detected).\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (16/16 fields observed).",
+    "diagnostic_card": "### \ud83d\udd2c Prediction Mode: Tri-Modal Gated Cross-Attention (Concordant)\n\n\u2705 **Non-Malignant Finding: Benign Neoplasm (Breast Tissue)**\n\n\u2022 **Disease Status Confidence:** **95.43%** (`Benign Neoplasm`)\n\u2022 **Carcinoma Subtyping Bypassed:** Non-malignant specimens are never forced into carcinoma classes.\n\u2022 **Cross-Modal Integrity:** Patient identity, site, and status verified concordant.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \ud83d\udfe2 `Executed` | Benign Lesion \u2014 Breast Tissue (95.4%) | Status 95.4% / Site 91.0% |\n| \ud83d\udd17 Early Concatenation | \ud83d\udfe2 `Executed` | Benign Lesion \u2014 Breast Tissue (94.0%) | Status 94.0% / Site 94.1% |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Benign Lesion \u2014 Breast Tissue (93.0%) | Status 93.0% / Site 92.8% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Benign Neoplasm (82.4%) \u2014 Site Risk: Breast (82.9%) | Status 82.4% / Site 82.9% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Benign Neoplasm (93.9%) \u2014 Site Risk: Breast (97.0%) | Status 93.9% / Site 97.0% |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Dynamic Sigmoid Attention Gates $g = \\sigma(\\text{GateNet}[X \\parallel Y])$\n\n- **Image \u2192 Text (g_IT):** **73.1%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Image (g_TI):** **73.2%** (\ud83d\udfe2 Active Consensus)\n- **Image \u2192 Tabular (g_IR):** **83.2%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Image (g_RI):** **83.5%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Tabular (g_TR):** **71.2%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Text (g_RT):** **73.0%** (\ud83d\udfe2 Active Consensus)\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (16/16 Observed)\n- `er_status` (val=`1.00`): **36.0%** relative influence\n- `hemoglobin` (val=`13.90`): **24.4%** relative influence\n- `platelet_count` (val=`349.60`): **9.0%** relative influence\n- `pr_status` (val=`1.00`): **6.7%** relative influence\n- `smoking_pack_yrs` (val=`0.00`): **5.1%** relative influence",
+    "gradcam_caption": "**Faithful GCA Grad-CAM Target:** `Benign Neoplasm` (`gca_fusion -> head_gca_status` backpropagated to ResNet `layer4`)"
+  },
+  {
+    "name": "05_Normal_Lung_TriModal",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_05_Normal_Lung_TriModal.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.9390533566474915,
+      "Benign Neoplasm": 0.03399720788002014,
+      "Malignant Carcinoma": 0.02694939635694027
+    },
+    "site_probs": {
+      "Breast Tissue": 0.032276978299664694,
+      "Lung Tissue": 0.9243407287617491,
+      "Colorectal Tissue": 0.043382292938586274
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Lung` ($D_{cos}=0.0775$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=male, Age=48` \u2014 Valid clinical text (17 words, 6 medical terms detected).\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (16/16 fields observed).",
+    "diagnostic_card": "### \ud83d\udd2c Prediction Mode: Tri-Modal Gated Cross-Attention (Concordant)\n\n\u2705 **Non-Malignant Finding: Normal / Non-Neoplastic (Lung Tissue)**\n\n\u2022 **Disease Status Confidence:** **93.91%** (`Normal / Non-Neoplastic`)\n\u2022 **Carcinoma Subtyping Bypassed:** Non-malignant specimens are never forced into carcinoma classes.\n\u2022 **Cross-Modal Integrity:** Patient identity, site, and status verified concordant.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \ud83d\udfe2 `Executed` | Normal Tissue \u2014 Lung (93.9%) | Status 93.9% / Site 92.4% |\n| \ud83d\udd17 Early Concatenation | \ud83d\udfe2 `Executed` | Normal Tissue \u2014 Lung (95.1%) | Status 95.1% / Site 93.2% |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Normal Tissue \u2014 Lung (96.2%) | Status 96.2% / Site 93.4% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Normal / Non-Neoplastic (88.4%) \u2014 Site Risk: Lung (93.7%) | Status 88.4% / Site 93.7% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Normal / Non-Neoplastic (96.2%) \u2014 Site Risk: Colorectal (54.0%) | Status 96.2% / Site 54.0% |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Dynamic Sigmoid Attention Gates $g = \\sigma(\\text{GateNet}[X \\parallel Y])$\n\n- **Image \u2192 Text (g_IT):** **72.7%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Image (g_TI):** **72.9%** (\ud83d\udfe2 Active Consensus)\n- **Image \u2192 Tabular (g_IR):** **82.7%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Image (g_RI):** **82.7%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Tabular (g_TR):** **67.4%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Text (g_RT):** **64.6%** (\ud83d\udfe2 Active Consensus)\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (16/16 Observed)\n- `age` (val=`48.00`): **21.2%** relative influence\n- `ca125_level` (val=`8.30`): **12.4%** relative influence\n- `wbc_count` (val=`8.90`): **10.1%** relative influence\n- `ki67_index` (val=`8.80`): **7.5%** relative influence\n- `hemoglobin` (val=`14.40`): **6.5%** relative influence",
+    "gradcam_caption": "**Faithful GCA Grad-CAM Target:** `Normal / Non-Neoplastic` (`gca_fusion -> head_gca_status` backpropagated to ResNet `layer4`)"
+  },
+  {
+    "name": "06_ImageOnly_Colorectal",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_06_ImageOnly_Colorectal.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.03067202679812908,
+      "Benign Neoplasm": 0.0403958223760128,
+      "Malignant Carcinoma": 0.9289320707321167
+    },
+    "site_probs": {
+      "Breast Carcinoma": 0.02261372734460698,
+      "Lung Carcinoma": 0.014049177077002754,
+      "Colorectal Carcinoma": 0.9633370955783902
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Colorectal` ($D_{cos}=0.2275$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\uddbc\ufe0f Prediction Mode: Unimodal Histopathology Image Only\n\n\ud83d\uddbc\ufe0f **Image-Only Diagnosis: Malignant \u2014 Colorectal Carcinoma**\n\n\u2022 **Status Confidence:** **92.89%** | **Site/Subtype Confidence:** **96.33%**\n\u2022 **Multimodal Notice:** Clinical Text and Tabular Biomarkers are `MISSING`; GCA cross-attention was **not executed**.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\udd17 Early Concatenation | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Malignant \u2014 Colorectal Carcinoma (96.3%) | Status 92.9% / Site 96.3% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Inter-Modal Attention Gates\n*Not computed \u2014 dynamic bidirectional cross-attention requires all 3 validated modalities simultaneously.*",
+    "gradcam_caption": "**Faithful Unimodal Grad-CAM Target:** `Colorectal Carcinoma` (`head_image_site` -> ResNet `layer4`)"
+  },
+  {
+    "name": "07_Reject_PowerShell_Screenshot",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udd34 PRESENT_INVALID \u2014 [TERMINAL_SCREENSHOT] Terminal / Digital Interface Screenshot Rejected: 96.8% of image consists of unnatural monochromatic cobalt blue (e.g., Windows PowerShell or console UI). H&E histopathology does not emit pure cobalt light without red/eosin transmission.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Image (PRESENT_INVALID):** [TERMINAL_SCREENSHOT] Terminal / Digital Interface Screenshot Rejected: 96.8% of image consists of unnatural monochromatic cobalt blue (e.g., Windows PowerShell or console UI). H&E histopathology does not emit pure cobalt light without red/eosin transmission.\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "08_Reject_General_Landscape_Photo",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udd34 PRESENT_INVALID \u2014 [GENERAL_PHOTO] General Non-Medical Photograph Rejected: 53.1% of image contains dominant green wavelengths (e.g., foliage, grass, or natural scene). In H&E brightfield microscopy, green light is absorbed by both counterstains.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Image (PRESENT_INVALID):** [GENERAL_PHOTO] General Non-Medical Photograph Rejected: 53.1% of image contains dominant green wavelengths (e.g., foliage, grass, or natural scene). In H&E brightfield microscopy, green light is absorbed by both counterstains.\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "09_Reject_DarkMode_UI_Screenshot",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udd34 PRESENT_INVALID \u2014 [TERMINAL_SCREENSHOT] Dark-Mode UI / Unilluminated Scene Rejected: 86.1% dark slate/low-luminance pixels detected. Brightfield H&E microscopy requires transmitted slide illumination.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Image (PRESENT_INVALID):** [TERMINAL_SCREENSHOT] Dark-Mode UI / Unilluminated Scene Rejected: 86.1% dark slate/low-luminance pixels detected. Brightfield H&E microscopy requires transmitted slide illumination.\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "10_Reject_Blank_White_Slide",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udd34 PRESENT_INVALID \u2014 [BLANK_OR_UNINFORMATIVE] Blank / Empty Slide Detected: 100.0% of pixels are uninformative white background. Please upload a slide region containing biological tissue.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Image (PRESENT_INVALID):** [BLANK_OR_UNINFORMATIVE] Blank / Empty Slide Detected: 100.0% of pixels are uninformative white background. Please upload a slide region containing biological tissue.\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "11_Reject_Dark_Slate_Terminal_Block",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udd34 PRESENT_INVALID \u2014 [TERMINAL_SCREENSHOT] Dark-Mode UI / Unilluminated Scene Rejected: 100.0% dark slate/low-luminance pixels detected. Brightfield H&E microscopy requires transmitted slide illumination.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Image (PRESENT_INVALID):** [TERMINAL_SCREENSHOT] Dark-Mode UI / Unilluminated Scene Rejected: 100.0% dark slate/low-luminance pixels detected. Brightfield H&E microscopy requires transmitted slide illumination.\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "12_Reject_Blurred_Histology",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udd34 PRESENT_INVALID \u2014 [BLANK_OR_UNINFORMATIVE] Severely Blurred / Featureless Image Rejected: focus sharpness metric (1.85) is below minimum brightfield cellular resolution threshold (3.50).\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Image (PRESENT_INVALID):** [BLANK_OR_UNINFORMATIVE] Severely Blurred / Featureless Image Rejected: focus sharpness metric (1.85) is below minimum brightfield cellular resolution threshold (3.50).\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "13_Reject_LowRes_24x24",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udd34 PRESENT_INVALID \u2014 Image resolution (24x24) is too small for histopathology feature extraction (minimum 32x32).\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Image (PRESENT_INVALID):** Image resolution (24x24) is too small for histopathology feature extraction (minimum 32x32).\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "14_TextOnly_Negated_Benign",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {
+      "Risk Profile: Normal / Non-Neoplastic": 0.641923725605011,
+      "Risk Profile: Benign Neoplasm": 0.32165390253067017,
+      "Risk Profile: Malignant Carcinoma": 0.03642239794135094
+    },
+    "site_probs": {
+      "Site Alignment: Breast": 0.5617285966873169,
+      "Site Alignment: Lung": 0.14061498641967773,
+      "Site Alignment: Colorectal": 0.297656387090683
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \u26aa MISSING \u2014 No histopathology image uploaded.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=female, Age=42, \u26a0\ufe0f Negation detected` \u2014 Valid clinical text (17 words, 9 medical terms detected).\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udccb Prediction Mode: Clinical Risk & Organ Triage ONLY (BioBERT Clinical Narrative)\n\n**Triage Risk Alignment:** `Normal / Non-Neoplastic` (**64.2%**) | **Associated Organ Profile:** `Breast` (**56.2%**)\n\n\n> **Clinical Reality Guardrail:** *No histopathology tissue specimen (`Image = MISSING`). Demographics, serum tumor markers, CBC labs, or pre-biopsy clinical notes alone **cannot definitively confirm or rule out cancer**. Treat output strictly as referral triage pending biopsy histology.*",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\udd17 Early Concatenation | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Normal / Non-Neoplastic (64.2%) \u2014 Site Risk: Breast (56.2%) | Status 64.2% / Site 56.2% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Inter-Modal Attention Gates\n*Not computed \u2014 dynamic bidirectional cross-attention requires all 3 validated modalities simultaneously.*",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Not Applicable:** No valid histopathology image present."
+  },
+  {
+    "name": "15_TabularOnly_PreBiopsy_Masked_IHC",
+    "execution_state": "EXECUTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {
+      "Risk Profile: Normal / Non-Neoplastic": 0.010095479898154736,
+      "Risk Profile: Benign Neoplasm": 0.007492330856621265,
+      "Risk Profile: Malignant Carcinoma": 0.9824122786521912
+    },
+    "site_probs": {
+      "Site Alignment: Breast": 0.053364384919404984,
+      "Site Alignment: Lung": 0.27224457263946533,
+      "Site Alignment: Colorectal": 0.6743910312652588
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \u26aa MISSING \u2014 No histopathology image uploaded.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (10/16 fields observed).",
+    "diagnostic_card": "### \ud83d\udccb Prediction Mode: Clinical Risk & Organ Triage ONLY (16-Parameter Clinical Biomarkers)\n\n**Triage Risk Alignment:** `Malignant Carcinoma` (**98.2%**) | **Associated Organ Profile:** `Colorectal` (**67.4%**)\n\n\n> **Clinical Reality Guardrail:** *No histopathology tissue specimen (`Image = MISSING`). Demographics, serum tumor markers, CBC labs, or pre-biopsy clinical notes alone **cannot definitively confirm or rule out cancer**. Treat output strictly as referral triage pending biopsy histology.*",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\udd17 Early Concatenation | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (98.2%) \u2014 Site Risk: Colorectal (67.4%) | Status 98.2% / Site 67.4% |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Inter-Modal Attention Gates\n*Not computed \u2014 dynamic bidirectional cross-attention requires all 3 validated modalities simultaneously.*\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (10/16 Observed)\n- `wbc_count` (val=`13.60`): **22.9%** relative influence\n- `ca125_level` (val=`30.30`): **19.5%** relative influence\n- `smoking_pack_yrs` (val=`12.00`): **16.3%** relative influence\n- `ecog_score` (val=`1.00`): **13.2%** relative influence\n- `age` (val=`64.00`): **9.6%** relative influence\n- *Masked (`Not Tested / Unknown`, excluded from attribution):* `ki67_index, er_status, pr_status, her2_status, egfr_mutation, kras_mutation`",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Not Applicable:** No valid histopathology image present."
+  },
+  {
+    "name": "16_DualModal_Unsupported_ImgPlusText",
+    "execution_state": "DUAL_UNSUPP",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_16_DualModal_Unsupported_ImgPlusText.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.02461772970855236,
+      "Benign Neoplasm": 0.02785453014075756,
+      "Malignant Carcinoma": 0.9475278258323669
+    },
+    "site_probs": {
+      "Breast Carcinoma": 0.9211825806070655,
+      "Lung Carcinoma": 0.04370234753121051,
+      "Colorectal Carcinoma": 0.03511507186172399
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Breast` ($D_{cos}=0.1824$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=female, Age=56` \u2014 Valid clinical text (11 words, 4 medical terms detected).\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \u26a0\ufe0f Insufficient Modality Support for 3-Way GCA Fusion\n\n**Fusion Verdict:** Insufficient modality support for this prediction: 3-way GCA fusion requires all three validated streams (Image, Text, and Tabular).\n\n**Independent Active Pathways:**\n- Image: `Malignant \u2014 Breast Carcinoma (92.1%)`\n- Text Triage: `Triage Alignment: Malignant Carcinoma (88.9%) \u2014 Site Risk: Breast (91.5%)`\n\n**Concordance Check:** The two active modalities are mutually consistent.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \u26aa `Insufficient modality support (requires all 3 valid)` | \u2014 | \u2014 |\n| \ud83d\udd17 Early Concatenation | \u26aa `Insufficient modality support (requires all 3 valid)` | \u2014 | \u2014 |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Malignant \u2014 Breast Carcinoma (92.1%) | Status 94.8% / Site 92.1% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (88.9%) \u2014 Site Risk: Breast (91.5%) | Status 88.9% / Site 91.5% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \u26aa `MISSING / Not Executed` | \u2014 | \u2014 |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Inter-Modal Attention Gates\n*Not computed \u2014 dynamic bidirectional cross-attention requires all 3 validated modalities simultaneously.*",
+    "gradcam_caption": "**Faithful Unimodal Grad-CAM:** Generated strictly from ResNet Image Head (3-Way GCA inactive)."
+  },
+  {
+    "name": "17_CrossModal_Identity_And_Organ_Mismatch",
+    "execution_state": "DISCORDANT",
+    "gradcam_generated": true,
+    "expect_gradcam": true,
+    "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/gradcam_outputs/gradcam_17_CrossModal_Identity_And_Organ_Mismatch.png",
+    "status_probs": {
+      "Normal / Non-Neoplastic": 0.03067202679812908,
+      "Benign Neoplasm": 0.0403958223760128,
+      "Malignant Carcinoma": 0.9289320707321167
+    },
+    "site_probs": {
+      "Breast Carcinoma": 0.02261372734460698,
+      "Lung Carcinoma": 0.014049177077002754,
+      "Colorectal Carcinoma": 0.9633370955783902
+    },
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \ud83d\udfe2 PRESENT_VALID | Phikon: `Colorectal` ($D_{cos}=0.2275$) \u2014 Valid brightfield H&E histopathology patch verified.\n- **Clinical Narrative Text:** \ud83d\udfe2 PRESENT_VALID | Parsed: `Sex=female, Age=58` \u2014 Valid clinical text (9 words, 3 medical terms detected).\n- **Structured Biomarkers:** \ud83d\udfe2 PRESENT_VALID \u2014 Valid biomarker vector (16/16 fields observed).",
+    "diagnostic_card": "### \ud83d\udea8 CROSS-MODAL DISCORDANCE \u2014 MANUAL SPECIMEN VERIFICATION REQUIRED\n\n**Verification Status:** `PATIENT_IDENTITY_MISMATCH`\n\n**Conflicting Clinical Evidence Detected Across Modalities:**\n- PATIENT SEX MISMATCH: Clinical text states 'FEMALE', whereas Tabular profile states 'MALE'.\n- PATIENT AGE MISMATCH: Clinical text states age 58, while Tabular Age is 66 (difference: 8 years).\n- CLINICAL HISTORY CONFLICT: Narrative states 'non-smoker', while Tabular records 32 pack-years.\n- TEXT-KEYWORD ORGAN DISCORDANCE: Text explicitly mentions 'Breast', but Phikon Organ predicts 'Colorectal' (97.8%).\n- TEXT-KEYWORD ORGAN DISCORDANCE: Text explicitly mentions 'Breast', but Image (ResNet) predicts 'Colorectal' (96.3%).\n- TEXT-KEYWORD ORGAN DISCORDANCE: Text explicitly mentions 'Breast', but Tabular (Biomarkers) predicts 'Lung' (90.1%).\n- INTER-MODAL ORGAN DISCORDANCE (Max JS Div: 0.74): Conflicting site signals across [Phikon Organ: Colorectal (98%), Image (ResNet): Colorectal (96%), Text (BioBERT): Colorectal (57%), Tabular (Biomarkers): Lung (90%)]. Could indicate (a) specimen/patient record mix-up OR (b) metastatic tumor at a secondary organ biopsy site.\n- DISEASE STATUS DISCORDANCE: Modalities disagree on Malignancy vs Non-Malignant state [Image (ResNet): Malignant (93%), Text (BioBERT): Normal (71%), Tabular (Biomarkers): Malignant (97%)].\n\n**Clinical Decision Hold:** Automated GCA carcinoma synthesis is **suppressed** because active patient data streams contradict each other. Verify patient ID, biopsy site requisition (metastatic vs primary), and pathology report pairing.",
+    "ablation_table": "### \ud83d\udcca Executed Modality Pathway Audit\n| Pathway | Execution State | Predicted Outcome | Status / Site Confidence |\n| :--- | :--- | :--- | :--- |\n| \ud83d\udd2c GCA Multimodal Fusion | \ud83d\udfe1 `Held (Discordant Inputs)` | Suppressed for manual review | JS Div: 0.74 |\n| \ud83d\udd17 Early Concatenation | \ud83d\udfe2 `Executed` | Malignant \u2014 Colorectal Carcinoma (91.8%) | Status 92.5% / Site 91.8% |\n| \ud83d\uddbc\ufe0f Image-Only (ResNet-50) | \ud83d\udfe2 `Executed` | Malignant \u2014 Colorectal Carcinoma (96.3%) | Status 92.9% / Site 96.3% |\n| \ud83d\udcdd Text-Only (BioBERT Triage) | \ud83d\udfe2 `Executed` | Triage Alignment: Normal / Non-Neoplastic (70.7%) \u2014 Site Risk: Colorectal (57.1%) | Status 70.7% / Site 57.1% |\n| \ud83e\uddea Tabular-Only (Masked Biomarkers) | \ud83d\udfe2 `Executed` | Triage Alignment: Malignant Carcinoma (97.4%) \u2014 Site Risk: Lung (90.1%) | Status 97.4% / Site 90.1% |",
+    "gates_and_attribution": "### \ud83c\udf9b\ufe0f Dynamic Sigmoid Attention Gates $g = \\sigma(\\text{GateNet}[X \\parallel Y])$\n\n- **Image \u2192 Text (g_IT):** **34.7%** (\ud83d\udfe1 Attenuated / Suppressed)\n- **Text \u2192 Image (g_TI):** **44.7%** (\ud83d\udfe1 Attenuated / Suppressed)\n- **Image \u2192 Tabular (g_IR):** **82.5%** (\ud83d\udfe2 Active Consensus)\n- **Tabular \u2192 Image (g_RI):** **82.1%** (\ud83d\udfe2 Active Consensus)\n- **Text \u2192 Tabular (g_TR):** **28.7%** (\ud83d\udfe1 Attenuated / Suppressed)\n- **Tabular \u2192 Text (g_RT):** **27.2%** (\ud83d\udfe1 Attenuated / Suppressed)\n\n### \ud83e\uddec Observed Biomarker Gradient Attribution (16/16 Observed)\n- `smoking_pack_yrs` (val=`32.00`): **29.6%** relative influence\n- `ca19_9_level` (val=`27.00`): **15.2%** relative influence\n- `age` (val=`66.00`): **10.8%** relative influence\n- `platelet_count` (val=`247.00`): **8.8%** relative influence\n- `wbc_count` (val=`13.20`): **5.7%** relative influence",
+    "gradcam_caption": "**Grad-CAM Pathway:** Unimodal ResNet Image Head (GCA Suppressed due to Discordance) | Target (`head_image_site`): `Colorectal Carcinoma`"
+  },
+  {
+    "name": "18_Reject_Tabular_Biological_Impossibility",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \u26aa MISSING \u2014 No histopathology image uploaded.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \ud83d\udd34 PRESENT_INVALID \u2014 Physiologically impossible smoking history: 60 pack-years is incompatible with Age 20 years (exceeds max ~30 pack-years assuming 3 packs/day starting age 10).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Biomarkers (PRESENT_INVALID):** Physiologically impossible smoking history: 60 pack-years is incompatible with Age 20 years (exceeds max ~30 pack-years assuming 3 packs/day starting age 10).\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "19_Reject_Tabular_Unit_And_Zero_Error",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \u26aa MISSING \u2014 No histopathology image uploaded.\n- **Clinical Narrative Text:** \u26aa MISSING \u2014 No clinical narrative entered.\n- **Structured Biomarkers:** \ud83d\udd34 PRESENT_INVALID \u2014 Biological zero violation: 'age' cannot be 0.0 years in a live patient. | Physiological/unit range error for 'hemoglobin': 125.0 g/dL is outside valid [4.0, 22.0] g/dL (possible g/L vs g/dL unit confusion). | Physiological/unit range error for 'platelet_count': 250000.0 x10^3/uL is outside valid [10.0, 1500.0] x10^3/uL (possible /mm^3 vs x10^3/uL unit confusion).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Biomarkers (PRESENT_INVALID):** Biological zero violation: 'age' cannot be 0.0 years in a live patient. | Physiological/unit range error for 'hemoglobin': 125.0 g/dL is outside valid [4.0, 22.0] g/dL (possible g/L vs g/dL unit confusion). | Physiological/unit range error for 'platelet_count': 250000.0 x10^3/uL is outside valid [10.0, 1500.0] x10^3/uL (possible /mm^3 vs x10^3/uL unit confusion).\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  },
+  {
+    "name": "20_Reject_OffTopic_Text",
+    "execution_state": "HALTED",
+    "gradcam_generated": false,
+    "expect_gradcam": false,
+    "gradcam_path": null,
+    "status_probs": {},
+    "site_probs": {},
+    "modality_badge": "### \ud83d\udd0d Modality Availability & Sanity Status\n- **Histopathology Image:** \u26aa MISSING \u2014 No histopathology image uploaded.\n- **Clinical Narrative Text:** \ud83d\udd34 PRESENT_INVALID \u2014 Off-topic or non-clinical text rejected: no recognized medical, anatomical, or symptom vocabulary found. Cannot run BioBERT clinical reasoning on unrelated prose.\n- **Structured Biomarkers:** \u26aa MISSING \u2014 Structured biomarkers excluded ('Include Clinical & Biomarker Data' is unchecked; default slider values ignored).",
+    "diagnostic_card": "### \ud83d\udeab EXECUTION HALTED \u2014 INVALID INPUT MODALITY DETECTED\n\nMultimodal synthesis was **not executed** because one or more submitted inputs failed domain or physiological sanity verification:\n\n- **Clinical Text (PRESENT_INVALID):** Off-topic or non-clinical text rejected: no recognized medical, anatomical, or symptom vocabulary found. Cannot run BioBERT clinical reasoning on unrelated prose.\n\n*Correct or clear the flagged invalid modality before running inference.*",
+    "ablation_table": "\ud83d\udeab **Ablation Comparison Halted:** Fix or remove invalid inputs above.",
+    "gates_and_attribution": "\u26a0\ufe0f **Attribution Not Computed:** Halted on invalid input.",
+    "gradcam_caption": "\u26a0\ufe0f **Grad-CAM Suppressed:** Inference halted because input validation failed."
+  }
+]

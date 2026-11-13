@@ -1,0 +1,2330 @@
+[
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_000.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_000"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_001.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_001"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_002.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_002"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_003.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_003"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_004.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_004"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_005.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_005"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_006.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_006"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_007.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_007"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_008.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_008"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_009.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_009"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_010.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_010"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_011.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_011"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_012.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_012"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_013.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_013"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_014.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_014"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_015.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_015"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_016.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_016"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_017.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_017"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_018.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_018"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_019.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_019"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_020.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_020"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_021.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_021"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_022.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_022"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_023.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_023"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_024.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_024"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_025.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_025"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_026.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_026"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_027.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_027"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_028.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_028"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_029.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_029"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_030.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_030"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_031.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_031"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_032.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_032"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_033.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_033"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_034.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_034"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_035.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_035"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_036.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_036"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_037.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_037"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_038.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_038"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_039.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_039"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_040.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_040"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_041.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_041"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_042.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_042"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_043.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_043"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_044.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_044"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_045.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_045"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_046.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_046"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_047.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_047"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_048.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_048"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_049.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_049"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_050.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_050"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_051.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_051"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_052.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_052"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_053.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_053"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_054.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_054"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_055.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_055"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_056.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_056"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_057.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_057"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_058.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_058"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/idc_breast_malignant_059.png",
+    "category": "breast_malignant",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_malignant_059"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/wiki_br_m1_crop0.png",
+    "category": "breast_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_m1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/wiki_br_m1_crop1.png",
+    "category": "breast_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_m1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/wiki_br_m1_crop2.png",
+    "category": "breast_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_m1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/wiki_br_m1_full.png",
+    "category": "breast_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_m1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/wiki_br_m4_crop0.png",
+    "category": "breast_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_m4"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/wiki_br_m4_crop2.png",
+    "category": "breast_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_m4"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_malignant/wiki_br_m4_full.png",
+    "category": "breast_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_m4"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_000.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_000"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_001.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_001"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_002.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_002"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_003.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_003"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_004.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_004"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_005.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_005"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_006.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_006"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_007.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_007"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_008.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_008"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_009.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_009"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_010.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_010"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_011.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_011"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_012.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_012"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_013.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_013"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_014.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_014"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_015.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_015"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_016.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_016"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_017.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_017"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_018.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_018"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_019.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_019"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_020.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_020"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_021.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_021"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_022.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_022"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_023.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_023"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_024.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_024"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_025.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_025"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_026.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_026"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_027.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_027"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_028.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_028"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_029.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_029"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_030.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_030"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_031.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_031"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_032.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_032"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_033.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_033"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_034.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_034"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_035.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_035"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_036.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_036"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_037.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_037"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_038.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_038"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_039.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_039"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_040.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_040"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_041.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_041"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_042.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_042"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_043.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_043"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_044.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_044"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_045.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_045"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_046.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_046"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_047.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_047"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_048.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_048"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_049.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_049"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_050.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_050"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_051.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_051"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_052.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_052"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_053.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_053"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_054.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_054"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_055.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_055"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_056.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_056"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_057.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_057"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_058.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_058"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/idc_breast_benign_059.png",
+    "category": "breast_benign",
+    "source": "Breast_IDC",
+    "group_id": "idc_breast_benign_059"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/wiki_br_b1_crop0.png",
+    "category": "breast_benign",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_b1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/wiki_br_b1_crop1.png",
+    "category": "breast_benign",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_b1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/wiki_br_b1_crop2.png",
+    "category": "breast_benign",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_b1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/breast_benign/wiki_br_b1_full.png",
+    "category": "breast_benign",
+    "source": "Wikimedia",
+    "group_id": "wiki_br_b1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_000.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_000"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_001.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_001"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_002.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_002"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_003.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_003"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_004.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_004"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_005.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_005"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_006.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_006"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_007.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_007"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_008.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_008"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_009.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_009"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_010.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_010"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_011.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_011"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_012.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_012"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_013.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_013"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_014.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_014"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_015.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_015"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_016.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_016"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_017.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_017"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_018.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_018"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_019.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_019"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_020.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_020"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_021.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_021"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_022.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_022"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_023.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_023"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_024.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_024"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_025.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_025"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_026.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_026"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_027.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_027"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_028.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_028"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_029.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_029"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_030.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_030"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_031.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_031"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_032.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_032"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_033.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_033"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_aca_034.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_aca_034"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_000.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_000"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_001.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_001"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_002.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_002"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_003.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_003"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_004.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_004"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_005.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_005"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_006.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_006"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_007.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_007"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_008.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_008"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_009.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_009"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_010.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_010"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_011.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_011"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_012.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_012"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_013.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_013"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_014.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_014"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_015.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_015"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_016.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_016"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_017.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_017"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_018.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_018"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_019.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_019"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_020.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_020"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_021.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_021"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_022.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_022"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_023.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_023"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_024.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_024"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_025.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_025"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_026.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_026"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_027.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_027"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_028.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_028"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_029.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_029"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_030.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_030"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_031.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_031"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_032.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_032"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_033.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_033"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/lc25k_lung_scc_034.png",
+    "category": "lung_malignant",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_scc_034"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/wiki_lu_m1_full.png",
+    "category": "lung_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_lu_m1"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/wiki_lu_m2_full.png",
+    "category": "lung_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_lu_m2"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/wiki_lu_m3_crop0.png",
+    "category": "lung_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_lu_m3"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/wiki_lu_m3_crop1.png",
+    "category": "lung_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_lu_m3"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/wiki_lu_m3_crop2.png",
+    "category": "lung_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_lu_m3"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_malignant/wiki_lu_m3_full.png",
+    "category": "lung_malignant",
+    "source": "Wikimedia",
+    "group_id": "wiki_lu_m3"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_000.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_000"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_001.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_001"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_002.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_002"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_003.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_003"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_004.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_004"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_005.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_005"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_006.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_006"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_007.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_007"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_008.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_008"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_009.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_009"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_010.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_010"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_011.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_011"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_012.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_012"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_013.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_013"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_014.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_014"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_015.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_015"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_016.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_016"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_017.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_017"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_018.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_018"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_019.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_019"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_020.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_020"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_021.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_021"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_022.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_022"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_023.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_023"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_024.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_024"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_025.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_025"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_026.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_026"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_027.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_027"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_028.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_028"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_029.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_029"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_030.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_030"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_031.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_031"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_032.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_032"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_033.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_033"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_034.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_034"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_035.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_035"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_036.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_036"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_037.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_037"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_038.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_038"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_039.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_039"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_040.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_040"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_041.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_041"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_042.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_042"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_043.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_043"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_044.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_044"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_045.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_045"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_046.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_046"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_047.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_047"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_048.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_048"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/lung_normal/lc25k_lung_normal_049.png",
+    "category": "lung_normal",
+    "source": "LC25000",
+    "group_id": "lc25k_lung_normal_049"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_000.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_000"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_001.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_001"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_002.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_002"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_003.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_003"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_004.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_004"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_005.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_005"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_006.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_006"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_007.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_007"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_008.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_008"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_009.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_009"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_010.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_010"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_011.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_011"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_012.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_012"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_013.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_013"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_014.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_014"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_015.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_015"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_016.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_016"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_017.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_017"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_018.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_018"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_019.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_019"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_020.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_020"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_021.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_021"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_022.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_022"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_023.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_023"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_024.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_024"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_025.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_025"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_026.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_026"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_027.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_027"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_028.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_028"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_029.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_029"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_030.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_030"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_031.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_031"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_032.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_032"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_033.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_033"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_034.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_034"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_035.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_035"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_036.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_036"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_037.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_037"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_038.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_038"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_039.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_039"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_040.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_040"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_041.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_041"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_042.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_042"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_043.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_043"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_044.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_044"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_045.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_045"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_046.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_046"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_047.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_047"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_048.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_048"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_049.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_049"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_050.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_050"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_051.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_051"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_052.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_052"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_053.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_053"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_054.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_054"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_055.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_055"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_056.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_056"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_057.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_057"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_058.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_058"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_malignant/nct_colorectal_malignant_059.png",
+    "category": "colorectal_malignant",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_malignant_059"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_000.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_000"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_001.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_001"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_002.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_002"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_003.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_003"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_004.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_004"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_005.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_005"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_006.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_006"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_007.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_007"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_008.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_008"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_009.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_009"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_010.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_010"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_011.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_011"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_012.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_012"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_013.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_013"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_014.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_014"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_015.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_015"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_016.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_016"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_017.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_017"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_018.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_018"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_019.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_019"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_020.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_020"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_021.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_021"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_022.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_022"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_023.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_023"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_024.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_024"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_025.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_025"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_026.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_026"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_027.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_027"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_028.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_028"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_029.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_029"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_030.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_030"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_031.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_031"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_032.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_032"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_033.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_033"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_034.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_034"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_035.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_035"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_036.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_036"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_037.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_037"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_038.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_038"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_039.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_039"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_040.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_040"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_041.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_041"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_042.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_042"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_043.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_043"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_044.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_044"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_045.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_045"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_046.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_046"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_047.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_047"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_048.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_048"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_049.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_049"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_050.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_050"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_051.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_051"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_052.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_052"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_053.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_053"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_054.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_054"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_055.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_055"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_056.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_056"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_057.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_057"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_058.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_058"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/colorectal_normal/nct_colorectal_normal_059.png",
+    "category": "colorectal_normal",
+    "source": "NCT_CRC_HE",
+    "group_id": "nct_colorectal_normal_059"
+  },
+  {
+    "path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/expanded_cohort/ood_calibration/wiki_ood_brain_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia",
+    "group_id": "wiki_ood_brain"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_116736922_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:Histopathology of tall cell and hobnail variants of papillary thyroid carcinoma.jpg",
+    "group_id": "wiki_ood_calibration_116736922"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_30309559_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:Papillary thyroid carcinoma oncocytic variant -- high mag.jpg",
+    "group_id": "wiki_ood_calibration_30309559"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_68388124_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:Poorly cohesive gastric adenocarcinoma, low mag.jpg",
+    "group_id": "wiki_ood_calibration_68388124"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_70199839_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:Poorly differentiated gastric adenocarcinoma, low mag.2.jpg",
+    "group_id": "wiki_ood_calibration_70199839"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_75886827_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:GBM nested epithelial.jpg",
+    "group_id": "wiki_ood_calibration_75886827"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_100824972_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:Histopathology of glioblastoma, high magnification, annotated.jpg",
+    "group_id": "wiki_ood_calibration_100824972"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_109246988_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:Histopathology of high grade urothelial carcinoma.jpg",
+    "group_id": "wiki_ood_calibration_109246988"
+  },
+  {
+    "path": "data/expanded_cohort/ood_calibration/wiki_ood_calibration_114951839_full.png",
+    "category": "ood_calibration",
+    "source": "Wikimedia:File:Histopathology of urothelial carcinoma invading the detrusor muscle.jpg",
+    "group_id": "wiki_ood_calibration_114951839"
+  },
+  {
+    "path": "data/expanded_cohort/colorectal_malignant/wiki_colorectal_malignant_69487613_full.png",
+    "category": "colorectal_malignant",
+    "source": "Wikimedia:File:Colon adenocarcinoma - biopsy, high mag.jpg",
+    "group_id": "wiki_colorectal_malignant_69487613"
+  },
+  {
+    "path": "data/expanded_cohort/colorectal_malignant/wiki_colorectal_malignant_69487607_full.png",
+    "category": "colorectal_malignant",
+    "source": "Wikimedia:File:Colon adenocarcinoma - biopsy, intermed. mag.1.jpg",
+    "group_id": "wiki_colorectal_malignant_69487607"
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "file": "data/external_validation/ext_colon_malignant.jpg",
+    "filename": "ext_colon_malignant.jpg",
+    "expected_organ": "Colorectal",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "source_title": "File:Adenocarcinoma of the colon-histology.JPG",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Adenocarcinoma_of_the_colon-histology.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY-SA 3.0",
+    "downloaded_size": [
+      960,
+      720
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_breast_benign.jpg",
+    "filename": "ext_breast_benign.jpg",
+    "expected_organ": "Breast",
+    "expected_status": "Benign",
+    "in_supported_scope": true,
+    "source_title": "File:Histopathology of fibroadenoma with proliferating stroma.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Histopathology_of_fibroadenoma_with_proliferating_stroma.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "downloaded_size": [
+      960,
+      709
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_breast_malignant.jpg",
+    "filename": "ext_breast_malignant.jpg",
+    "expected_organ": "Breast",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "source_title": "File:Histopathology of invasive ductal carcinoma, high magnification.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Histopathology_of_invasive_ductal_carcinoma%2C_high_magnification.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "downloaded_size": [
+      960,
+      718
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_lung_adenocarcinoma.png",
+    "filename": "ext_lung_adenocarcinoma.png",
+    "expected_organ": "Lung",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "source_title": "File:Histopathology of lung adenocarcinoma with acinar pattern.png",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Histopathology_of_lung_adenocarcinoma_with_acinar_pattern.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY 4.0",
+    "downloaded_size": [
+      702,
+      705
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_ood_prostate.jpg",
+    "filename": "ext_ood_prostate.jpg",
+    "expected_organ": "OOD_Prostate",
+    "expected_status": "Malignant_Unsupported_Organ",
+    "in_supported_scope": false,
+    "source_title": "File:Histopathology of prostatic adenocarcinoma with circumferential perineural invasion.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Histopathology_of_prostatic_adenocarcinoma_with_circumferential_perineural_invasion.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "downloaded_size": [
+      960,
+      709
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_ood_kidney.jpg",
+    "filename": "ext_ood_kidney.jpg",
+    "expected_organ": "OOD_Kidney",
+    "expected_status": "Normal_Unsupported_Organ",
+    "in_supported_scope": false,
+    "source_title": "File:Histopathology of renal autolysis.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Histopathology_of_renal_autolysis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "downloaded_size": [
+      960,
+      718
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_ood_liver.jpg",
+    "filename": "ext_ood_liver.jpg",
+    "expected_organ": "OOD_Liver",
+    "expected_status": "Pathology_Unsupported_Organ",
+    "in_supported_scope": false,
+    "source_title": "File:Histopathology of shock liver.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Histopathology_of_shock_liver.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "downloaded_size": [
+      960,
+      718
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_lung_squamous_ca.jpg",
+    "filename": "ext_lung_squamous_ca.jpg",
+    "expected_organ": "Lung",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "source_title": "File:Histopathology of squamous-cell carcinoma of the lung.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Histopathology_of_squamous-cell_carcinoma_of_the_lung.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "downloaded_size": [
+      960,
+      709
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_colon_normal.jpg",
+    "filename": "ext_colon_normal.jpg",
+    "expected_organ": "Colorectal",
+    "expected_status": "Normal",
+    "in_supported_scope": true,
+    "source_title": "File:Normal colonic mucosa.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Normal_colonic_mucosa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY-SA 2.0",
+    "downloaded_size": [
+      960,
+      418
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_ood_blood_smear.jpg",
+    "filename": "ext_ood_blood_smear.jpg",
+    "expected_organ": "OOD_BloodSmear",
+    "expected_status": "Cytology_Non_Histo",
+    "in_supported_scope": false,
+    "source_title": "File:WBC (neutrophil) at centre, numerous erythrocytes and platelets (dot like bodies) in Wright's stained peripheral blood smear (PBS) microscopy.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/WBC_%28neutrophil%29_at_centre%2C_numerous_erythrocytes_and_platelets_%28dot_like_bodies%29_in_Wright%27s_stained_peripheral_blood_smear_%28PBS%29_microscopy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY-SA 4.0",
+    "downloaded_size": [
+      960,
+      720
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_lung_emphysema_non_ca.jpg",
+    "filename": "ext_lung_emphysema_non_ca.jpg",
+    "expected_organ": "Lung",
+    "expected_status": "Normal_or_NonNeoplastic",
+    "in_supported_scope": true,
+    "source_title": "File:Emphysema H and E.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Emphysema_H_and_E.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY 2.0",
+    "downloaded_size": [
+      528,
+      393
+    ]
+  },
+  {
+    "file": "data/external_validation/ext_non_histo_landscape.jpg",
+    "filename": "ext_non_histo_landscape.jpg",
+    "expected_organ": "NonMedical_Photo",
+    "expected_status": "Rejected",
+    "in_supported_scope": false,
+    "source_title": "File:Yosemite 20 bg 090404.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Yosemite_20_bg_090404.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "Public domain",
+    "downloaded_size": [
+      960,
+      720
+    ]
+  }
+]

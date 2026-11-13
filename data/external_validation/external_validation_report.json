@@ -1,0 +1,611 @@
+[
+  {
+    "filename": "ext_colon_malignant.jpg",
+    "source_title": "File:Adenocarcinoma of the colon-histology.JPG",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Adenocarcinoma_of_the_colon-histology.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY-SA 3.0",
+    "expected_organ": "Colorectal",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0,
+      "black_ratio": 0.1044,
+      "tissue_fraction": 0.2675,
+      "he_fraction": 0.8863,
+      "forbidden_fraction": 0.2156,
+      "unnatural_blue_ratio": 0.0031,
+      "green_dominant_ratio": 0.0606,
+      "dark_slate_ratio": 0.1519,
+      "flat_ratio": 0.0776,
+      "laplacian_var": 1770.6,
+      "mean_gradient": 0.0279
+    },
+    "phikon_pred": "Uncertain (Breast?)",
+    "phikon_d_cos": 0.4588,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\u2705 **Image-Only Non-Malignant Finding: Normal / Non-Neoplastic (Lung)**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.7623888254165649,
+        "Benign Neoplasm": 0.09052930772304535,
+        "Malignant Carcinoma": 0.14708182215690613
+      },
+      "site_probs": {
+        "Breast Tissue": 0.26968917107124335,
+        "Lung Tissue": 0.5216780575623121,
+        "Colorectal Tissue": 0.20863277136644465
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_colon_malignant_jpg.png"
+    },
+    "level2_trimodal": {
+      "headline": "**Verification Status:** `INTER_MODAL_ORGAN_DISCORDANCE`",
+      "discordant": true,
+      "halted": false,
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.7623888254165649,
+        "Benign Neoplasm": 0.09052930772304535,
+        "Malignant Carcinoma": 0.14708182215690613
+      },
+      "site_probs": {
+        "Breast Tissue": 0.26968917107124335,
+        "Lung Tissue": 0.5216780575623121,
+        "Colorectal Tissue": 0.20863277136644465
+      },
+      "gradcam_generated": true
+    },
+    "level1_summary": "\u26a0\ufe0f **Organ:** Uncertain (Breast?) / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_breast_benign.jpg",
+    "source_title": "File:Histopathology of fibroadenoma with proliferating stroma.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Histopathology_of_fibroadenoma_with_proliferating_stroma.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "expected_organ": "Breast",
+    "expected_status": "Benign",
+    "in_supported_scope": true,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0,
+      "black_ratio": 0.0,
+      "tissue_fraction": 0.8841,
+      "he_fraction": 0.9999,
+      "forbidden_fraction": 0.0009,
+      "unnatural_blue_ratio": 0.0,
+      "green_dominant_ratio": 0.0002,
+      "dark_slate_ratio": 0.0007,
+      "flat_ratio": 0.0087,
+      "laplacian_var": 3938.62,
+      "mean_gradient": 0.0375
+    },
+    "phikon_pred": "Breast",
+    "phikon_d_cos": 0.4883,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\u26a0\ufe0f **Image-Only Status Uncertain (57.5% < 60%) \u2014 Subtype Suppressed**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.3403507471084595,
+        "Benign Neoplasm": 0.08478241413831711,
+        "Malignant Carcinoma": 0.5748668313026428
+      },
+      "site_probs": {
+        "Breast": 0.3530688522717064,
+        "Lung": 0.5114162310132596,
+        "Colorectal": 0.1355149167150338
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_breast_benign_jpg.png"
+    },
+    "level2_trimodal": {
+      "headline": "**Verification Status:** `DISEASE_STATUS_DISCORDANCE`",
+      "discordant": true,
+      "halted": false,
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.3403507471084595,
+        "Benign Neoplasm": 0.08478241413831711,
+        "Malignant Carcinoma": 0.5748668313026428
+      },
+      "site_probs": {
+        "Breast Tissue": 0.3530688522717064,
+        "Lung Tissue": 0.5114162310132596,
+        "Colorectal Tissue": 0.1355149167150338
+      },
+      "gradcam_generated": true
+    },
+    "level1_summary": "\ud83c\udfdb\ufe0f **Organ of Origin:** **Breast** / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_breast_malignant.jpg",
+    "source_title": "File:Histopathology of invasive ductal carcinoma, high magnification.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Histopathology_of_invasive_ductal_carcinoma%2C_high_magnification.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "expected_organ": "Breast",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0,
+      "black_ratio": 0.0,
+      "tissue_fraction": 0.6622,
+      "he_fraction": 0.9882,
+      "forbidden_fraction": 0.0011,
+      "unnatural_blue_ratio": 0.0,
+      "green_dominant_ratio": 0.0004,
+      "dark_slate_ratio": 0.0008,
+      "flat_ratio": 0.1281,
+      "laplacian_var": 1269.29,
+      "mean_gradient": 0.0197
+    },
+    "phikon_pred": "Lung",
+    "phikon_d_cos": 0.4515,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\u2705 **Image-Only Non-Malignant Finding: Normal / Non-Neoplastic (Lung)**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.9416004419326782,
+        "Benign Neoplasm": 0.027258707210421562,
+        "Malignant Carcinoma": 0.03114083595573902
+      },
+      "site_probs": {
+        "Breast Tissue": 0.12280047878096605,
+        "Lung Tissue": 0.6745720773431619,
+        "Colorectal Tissue": 0.2026274438758721
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_breast_malignant_jpg.png"
+    },
+    "level2_trimodal": {
+      "headline": "**Verification Status:** `INTER_MODAL_ORGAN_DISCORDANCE`",
+      "discordant": true,
+      "halted": false,
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.9416004419326782,
+        "Benign Neoplasm": 0.027258707210421562,
+        "Malignant Carcinoma": 0.03114083595573902
+      },
+      "site_probs": {
+        "Breast Tissue": 0.12280047878096605,
+        "Lung Tissue": 0.6745720773431619,
+        "Colorectal Tissue": 0.2026274438758721
+      },
+      "gradcam_generated": true
+    },
+    "level1_summary": "\ud83c\udfdb\ufe0f **Organ of Origin:** **Lung** / \ud83d\udfe2 **Status:** **Normal / Non-neoplastic**"
+  },
+  {
+    "filename": "ext_lung_adenocarcinoma.png",
+    "source_title": "File:Histopathology of lung adenocarcinoma with acinar pattern.png",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Histopathology_of_lung_adenocarcinoma_with_acinar_pattern.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY 4.0",
+    "expected_organ": "Lung",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0354,
+      "black_ratio": 0.0003,
+      "tissue_fraction": 0.7942,
+      "he_fraction": 0.9966,
+      "forbidden_fraction": 0.049,
+      "unnatural_blue_ratio": 0.0015,
+      "green_dominant_ratio": 0.0072,
+      "dark_slate_ratio": 0.0402,
+      "flat_ratio": 0.0852,
+      "laplacian_var": 13388.01,
+      "mean_gradient": 0.0728
+    },
+    "phikon_pred": "Lung",
+    "phikon_d_cos": 0.4827,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\ud83d\uddbc\ufe0f **Image-Only Diagnosis: Malignant \u2014 Lung Carcinoma**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.04738299921154976,
+        "Benign Neoplasm": 0.050066590309143066,
+        "Malignant Carcinoma": 0.9025503396987915
+      },
+      "site_probs": {
+        "Breast Carcinoma": 0.1755759124923297,
+        "Lung Carcinoma": 0.6770990686649649,
+        "Colorectal Carcinoma": 0.1473250188427054
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_lung_adenocarcinoma_png.png"
+    },
+    "level2_trimodal": {
+      "headline": "\ud83c\udfc6 **GCA Multimodal Diagnosis: Malignant \u2014 Lung Carcinoma**",
+      "discordant": false,
+      "halted": false,
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.02249697968363762,
+        "Benign Neoplasm": 0.027968039736151695,
+        "Malignant Carcinoma": 0.9495350122451782
+      },
+      "site_probs": {
+        "Breast Carcinoma": 0.07190885432282934,
+        "Lung Carcinoma": 0.7264870482882344,
+        "Colorectal Carcinoma": 0.20160409738893628
+      },
+      "gradcam_generated": true
+    },
+    "level1_summary": "\ud83c\udfdb\ufe0f **Organ of Origin:** **Lung** / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_ood_prostate.jpg",
+    "source_title": "File:Histopathology of prostatic adenocarcinoma with circumferential perineural invasion.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Histopathology_of_prostatic_adenocarcinoma_with_circumferential_perineural_invasion.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "expected_organ": "OOD_Prostate",
+    "expected_status": "Malignant_Unsupported_Organ",
+    "in_supported_scope": false,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0518,
+      "black_ratio": 0.0,
+      "tissue_fraction": 0.9393,
+      "he_fraction": 0.9999,
+      "forbidden_fraction": 0.0231,
+      "unnatural_blue_ratio": 0.0,
+      "green_dominant_ratio": 0.0095,
+      "dark_slate_ratio": 0.0136,
+      "flat_ratio": 0.0182,
+      "laplacian_var": 4273.56,
+      "mean_gradient": 0.0408
+    },
+    "phikon_pred": "Unknown / Out-of-Distribution",
+    "phikon_d_cos": 0.5396,
+    "phikon_ood": true,
+    "level2_image_only": {
+      "verdict": "OOD_REJECTED",
+      "status_probs": {},
+      "site_probs": {},
+      "gradcam_generated": false,
+      "gradcam_path": null
+    },
+    "level2_trimodal": null,
+    "level1_summary": "\u26a0\ufe0f **Organ:** Unsupported Organ / Morphological Outlier / \ud83d\udeab **Status: BLOCKED (Unsupported Organ)**"
+  },
+  {
+    "filename": "ext_ood_kidney.jpg",
+    "source_title": "File:Histopathology of renal autolysis.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Histopathology_of_renal_autolysis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "expected_organ": "OOD_Kidney",
+    "expected_status": "Normal_Unsupported_Organ",
+    "in_supported_scope": false,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0038,
+      "black_ratio": 0.0,
+      "tissue_fraction": 0.7417,
+      "he_fraction": 0.9996,
+      "forbidden_fraction": 0.0165,
+      "unnatural_blue_ratio": 0.0001,
+      "green_dominant_ratio": 0.0144,
+      "dark_slate_ratio": 0.002,
+      "flat_ratio": 0.0262,
+      "laplacian_var": 8658.16,
+      "mean_gradient": 0.0697
+    },
+    "phikon_pred": "Lung",
+    "phikon_d_cos": 0.501,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\ud83d\uddbc\ufe0f **Image-Only Diagnosis: Malignant \u2014 Lung Carcinoma**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.04054320603609085,
+        "Benign Neoplasm": 0.03131740912795067,
+        "Malignant Carcinoma": 0.9281393885612488
+      },
+      "site_probs": {
+        "Breast Carcinoma": 0.18541697211702873,
+        "Lung Carcinoma": 0.6563942412234197,
+        "Colorectal Carcinoma": 0.1581887866595514
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_ood_kidney_jpg.png"
+    },
+    "level2_trimodal": null,
+    "level1_summary": "\ud83c\udfdb\ufe0f **Organ of Origin:** **Lung** / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_ood_liver.jpg",
+    "source_title": "File:Histopathology of shock liver.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Histopathology_of_shock_liver.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "expected_organ": "OOD_Liver",
+    "expected_status": "Pathology_Unsupported_Organ",
+    "in_supported_scope": false,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0019,
+      "black_ratio": 0.0,
+      "tissue_fraction": 0.991,
+      "he_fraction": 0.9998,
+      "forbidden_fraction": 0.0133,
+      "unnatural_blue_ratio": 0.0,
+      "green_dominant_ratio": 0.0001,
+      "dark_slate_ratio": 0.0132,
+      "flat_ratio": 0.0001,
+      "laplacian_var": 29952.99,
+      "mean_gradient": 0.165
+    },
+    "phikon_pred": "Unknown / Out-of-Distribution",
+    "phikon_d_cos": 0.579,
+    "phikon_ood": true,
+    "level2_image_only": {
+      "verdict": "OOD_REJECTED",
+      "status_probs": {},
+      "site_probs": {},
+      "gradcam_generated": false,
+      "gradcam_path": null
+    },
+    "level2_trimodal": null,
+    "level1_summary": "\u26a0\ufe0f **Organ:** Unsupported Organ / Morphological Outlier / \ud83d\udeab **Status: BLOCKED (Unsupported Organ)**"
+  },
+  {
+    "filename": "ext_lung_squamous_ca.jpg",
+    "source_title": "File:Histopathology of squamous-cell carcinoma of the lung.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Histopathology_of_squamous-cell_carcinoma_of_the_lung.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC0",
+    "expected_organ": "Lung",
+    "expected_status": "Malignant",
+    "in_supported_scope": true,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.1705,
+      "black_ratio": 0.0,
+      "tissue_fraction": 0.8061,
+      "he_fraction": 1.0,
+      "forbidden_fraction": 0.0154,
+      "unnatural_blue_ratio": 0.0,
+      "green_dominant_ratio": 0.0153,
+      "dark_slate_ratio": 0.0,
+      "flat_ratio": 0.0814,
+      "laplacian_var": 5436.95,
+      "mean_gradient": 0.0413
+    },
+    "phikon_pred": "Lung",
+    "phikon_d_cos": 0.4638,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\ud83d\uddbc\ufe0f **Image-Only Diagnosis: Malignant \u2014 Lung Carcinoma**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.038253046572208405,
+        "Benign Neoplasm": 0.05719778314232826,
+        "Malignant Carcinoma": 0.9045491814613342
+      },
+      "site_probs": {
+        "Breast Carcinoma": 0.38400711466558657,
+        "Lung Carcinoma": 0.4770988015162,
+        "Colorectal Carcinoma": 0.13889408381821358
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_lung_squamous_ca_jpg.png"
+    },
+    "level2_trimodal": {
+      "headline": "\ud83c\udfc6 **GCA Multimodal Diagnosis: Malignant \u2014 Lung Carcinoma**",
+      "discordant": false,
+      "halted": false,
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.023563820868730545,
+        "Benign Neoplasm": 0.02749856561422348,
+        "Malignant Carcinoma": 0.9489376544952393
+      },
+      "site_probs": {
+        "Breast Carcinoma": 0.11410549018232007,
+        "Lung Carcinoma": 0.7134091503359237,
+        "Colorectal Carcinoma": 0.17248535948175633
+      },
+      "gradcam_generated": true
+    },
+    "level1_summary": "\ud83c\udfdb\ufe0f **Organ of Origin:** **Lung** / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_colon_normal.jpg",
+    "source_title": "File:Normal colonic mucosa.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Normal_colonic_mucosa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY-SA 2.0",
+    "expected_organ": "Colorectal",
+    "expected_status": "Normal",
+    "in_supported_scope": true,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0027,
+      "black_ratio": 0.0001,
+      "tissue_fraction": 0.6278,
+      "he_fraction": 0.999,
+      "forbidden_fraction": 0.0288,
+      "unnatural_blue_ratio": 0.0,
+      "green_dominant_ratio": 0.0244,
+      "dark_slate_ratio": 0.0044,
+      "flat_ratio": 0.0022,
+      "laplacian_var": 9063.28,
+      "mean_gradient": 0.074
+    },
+    "phikon_pred": "Uncertain (Lung?)",
+    "phikon_d_cos": 0.4737,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\u26a0\ufe0f **Image-Only Status Uncertain (41.6% < 60%) \u2014 Subtype Suppressed**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.3912647068500519,
+        "Benign Neoplasm": 0.1929907351732254,
+        "Malignant Carcinoma": 0.4157445430755615
+      },
+      "site_probs": {
+        "Breast": 0.21409778819776237,
+        "Lung": 0.43705744503939514,
+        "Colorectal": 0.34884476676284254
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_colon_normal_jpg.png"
+    },
+    "level2_trimodal": {
+      "headline": "\u2705 **Non-Malignant Finding: Normal / Non-Neoplastic (Colorectal Tissue)**",
+      "discordant": false,
+      "halted": false,
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.9019138813018799,
+        "Benign Neoplasm": 0.04867154359817505,
+        "Malignant Carcinoma": 0.049414582550525665
+      },
+      "site_probs": {
+        "Breast Tissue": 0.07477309091361335,
+        "Lung Tissue": 0.13714791339902652,
+        "Colorectal Tissue": 0.7880789956873602
+      },
+      "gradcam_generated": true
+    },
+    "level1_summary": "\u26a0\ufe0f **Organ:** Uncertain (Lung?) / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_ood_blood_smear.jpg",
+    "source_title": "File:WBC (neutrophil) at centre, numerous erythrocytes and platelets (dot like bodies) in Wright's stained peripheral blood smear (PBS) microscopy.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/WBC_%28neutrophil%29_at_centre%2C_numerous_erythrocytes_and_platelets_%28dot_like_bodies%29_in_Wright%27s_stained_peripheral_blood_smear_%28PBS%29_microscopy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY-SA 4.0",
+    "expected_organ": "OOD_BloodSmear",
+    "expected_status": "Cytology_Non_Histo",
+    "in_supported_scope": false,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.0,
+      "black_ratio": 0.0,
+      "tissue_fraction": 1.0,
+      "he_fraction": 1.0,
+      "forbidden_fraction": 0.0,
+      "unnatural_blue_ratio": 0.0,
+      "green_dominant_ratio": 0.0,
+      "dark_slate_ratio": 0.0,
+      "flat_ratio": 0.0512,
+      "laplacian_var": 291.46,
+      "mean_gradient": 0.0119
+    },
+    "phikon_pred": "Breast",
+    "phikon_d_cos": 0.4568,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\ud83d\uddbc\ufe0f **Image-Only Diagnosis: Malignant \u2014 Lung Carcinoma**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.2780299484729767,
+        "Benign Neoplasm": 0.09184964746236801,
+        "Malignant Carcinoma": 0.6301204562187195
+      },
+      "site_probs": {
+        "Breast Carcinoma": 0.36902714439453715,
+        "Lung Carcinoma": 0.5308567276844051,
+        "Colorectal Carcinoma": 0.10011612792105773
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_ood_blood_smear_jpg.png"
+    },
+    "level2_trimodal": null,
+    "level1_summary": "\ud83c\udfdb\ufe0f **Organ of Origin:** **Breast** / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_lung_emphysema_non_ca.jpg",
+    "source_title": "File:Emphysema H and E.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Emphysema_H_and_E.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "CC BY 2.0",
+    "expected_organ": "Lung",
+    "expected_status": "Normal_or_NonNeoplastic",
+    "in_supported_scope": true,
+    "domain_ok": true,
+    "domain_type": "histopathology",
+    "domain_metrics": {
+      "white_ratio": 0.2418,
+      "black_ratio": 0.0,
+      "tissue_fraction": 0.636,
+      "he_fraction": 0.9956,
+      "forbidden_fraction": 0.0937,
+      "unnatural_blue_ratio": 0.0008,
+      "green_dominant_ratio": 0.0675,
+      "dark_slate_ratio": 0.0253,
+      "flat_ratio": 0.1234,
+      "laplacian_var": 2857.54,
+      "mean_gradient": 0.0524
+    },
+    "phikon_pred": "Lung",
+    "phikon_d_cos": 0.2795,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "\u2705 **Image-Only Non-Malignant Finding: Normal / Non-Neoplastic (Lung)**",
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.6776292324066162,
+        "Benign Neoplasm": 0.07637833803892136,
+        "Malignant Carcinoma": 0.24599245190620422
+      },
+      "site_probs": {
+        "Breast Tissue": 0.0820113869655162,
+        "Lung Tissue": 0.8241740960116983,
+        "Colorectal Tissue": 0.09381451702278548
+      },
+      "gradcam_generated": true,
+      "gradcam_path": "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo/data/external_validation/gradcam_outputs/gradcam_img_ext_lung_emphysema_non_ca_jpg.png"
+    },
+    "level2_trimodal": {
+      "headline": "\u2705 **Non-Malignant Finding: Normal / Non-Neoplastic (Lung Tissue)**",
+      "discordant": false,
+      "halted": false,
+      "status_probs": {
+        "Normal / Non-Neoplastic": 0.9086108803749084,
+        "Benign Neoplasm": 0.03898623213171959,
+        "Malignant Carcinoma": 0.05240290239453316
+      },
+      "site_probs": {
+        "Breast Tissue": 0.040162539547604334,
+        "Lung Tissue": 0.8917387242556643,
+        "Colorectal Tissue": 0.06809873619673149
+      },
+      "gradcam_generated": true
+    },
+    "level1_summary": "\ud83c\udfdb\ufe0f **Organ of Origin:** **Lung** / \ud83d\udd34 **Status:** **Malignant**"
+  },
+  {
+    "filename": "ext_non_histo_landscape.jpg",
+    "source_title": "File:Yosemite 20 bg 090404.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Yosemite_20_bg_090404.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "license": "Public domain",
+    "expected_organ": "NonMedical_Photo",
+    "expected_status": "Rejected",
+    "in_supported_scope": false,
+    "domain_ok": false,
+    "domain_type": "general_photo",
+    "domain_metrics": {
+      "white_ratio": 0.0029,
+      "black_ratio": 0.0084,
+      "tissue_fraction": 0.7255,
+      "he_fraction": 0.6434,
+      "forbidden_fraction": 0.2977,
+      "unnatural_blue_ratio": 0.0054,
+      "green_dominant_ratio": 0.1657,
+      "dark_slate_ratio": 0.1265,
+      "flat_ratio": 0.1354,
+      "laplacian_var": 9603.08,
+      "mean_gradient": 0.0692
+    },
+    "phikon_pred": "Breast",
+    "phikon_d_cos": 0.423,
+    "phikon_ood": false,
+    "level2_image_only": {
+      "verdict": "REJECTED (general_photo)",
+      "status_probs": {},
+      "site_probs": {},
+      "gradcam_generated": false,
+      "gradcam_path": null
+    },
+    "level2_trimodal": null,
+    "level1_summary": "**Validation Verdict:** REJECTED AT INGESTION GATE / \ud83d\udeab **Status: BLOCKED**"
+  }
+]
