@@ -5,6 +5,10 @@ Hardware Target: HP Victus (Intel i5, 8GB RAM, NVIDIA RTX 2050 Laptop GPU)
 import os
 import torch
 
+# Ensure HuggingFace models load instantly from local cache without DNS/network timeout
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 IMAGE_DIR = os.path.join(DATA_DIR, "sample_images")

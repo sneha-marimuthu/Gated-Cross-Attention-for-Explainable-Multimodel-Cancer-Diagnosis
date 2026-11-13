@@ -13,8 +13,8 @@ import config
 class BioBERTTextEncoder(nn.Module):
     def __init__(self, model_name="dmis-lab/biobert-v1.1", freeze=True):
         super().__init__()
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.bert = AutoModel.from_pretrained(model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name, local_files_only=True)
+        self.bert = AutoModel.from_pretrained(model_name, local_files_only=True)
         
         if freeze:
             for p in self.bert.parameters():
