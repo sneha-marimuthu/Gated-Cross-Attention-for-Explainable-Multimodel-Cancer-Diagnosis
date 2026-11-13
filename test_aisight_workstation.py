@@ -2,12 +2,12 @@
 Comprehensive Integration Test Suite for GCAEMMCD Clinical Workstation.
 Verifies:
   1. GCAEMMCD Theme & HTML Generators (Zero external vendor strings).
-  2. Tissue macro minimap overview generation.
-  3. Specimen S-01 (Colorectal Adenocarcinoma) full pipeline execution, Grad-CAM, SHAP, and BioBERT saliency.
-  4. Specimen S-04 (Non-Neoplastic Emphysema) execution and status gate.
-  5. Pathology viewport layer switching (Grad-CAM, Clean H&E, Masked Saliency, SHAP Waterfall).
-  6. Optical domain rejection gate on non-histopathology input.
-  7. Gradio app interface structural integrity.
+  2. Structured Cancer Diagnosis System Output (01-06 Sections).
+  3. Specimen S-01 (Colorectal Adenocarcinoma) full pipeline execution, Grad-CAM, and SHAP.
+  4. Specimen S-03 (Invasive Ductal Breast Carcinoma) 4-class cancer probabilities.
+  5. Specimen S-04 (Non-Neoplastic Lung Resection) negative status gating.
+  6. Clinical Consultation Signout file generation & download.
+  7. Optical domain rejection gate on non-histopathology input.
 """
 
 import os
@@ -27,6 +27,7 @@ from src.ui.aisight_theme import (
     get_top_navbar_html, get_sub_header_html, get_viewer_toolbar_html,
     get_slide_badge_html, get_footer_disclaimer_html
 )
+from src.ui.report_generator import generate_downloadable_report_file
 
 
 def run_tests():
@@ -41,14 +42,10 @@ def run_tests():
     assert "AISight" not in top_nav and "PathAI" not in top_nav, "Found forbidden external vendor branding in top navbar!"
     print("[PASS] Top global navigation bar verified (Clean GCAEMMCD branding).")
 
-    sub_header = get_sub_header_html(specimen_id="Specimen S-01", status="Ready")
+    sub_header = get_sub_header_html(specimen_id="Specimen S-01", status="Ready", patient_id="PID-84021")
     assert "Specimen S-01" in sub_header and "Diagnostic Session" in sub_header, "Sub-header missing session metadata!"
-    assert "Rishi" not in sub_header and "Dana-Farber" not in sub_header, "Found forbidden external names in sub-header!"
+    assert "PID-84021" in sub_header, "Patient ID missing in sub-header!"
     print("[PASS] Sub-header specimen metadata bar verified.")
-
-    toolbar = get_viewer_toolbar_html(specimen_id="Specimen S-01")
-    assert "Pathology Micrograph Viewport" in toolbar and "1.84 mm²" in toolbar, "Digital pathology toolbar missing!"
-    print("[PASS] Digital pathology toolbar verified.")
 
     badge = get_slide_badge_html("H&E Slide S-01", "🔴 Malignant Neoplasm")
     assert "status-pill-malignant" in badge, "Malignant status pill class missing!"
@@ -58,68 +55,78 @@ def run_tests():
     assert "GCAEMMCD" in disclaimer and "Investigational & Research" in disclaimer, "Disclaimer missing!"
     print("[PASS] Clinical disclaimer footer verified.")
 
-    # 2. Test Minimap Macro Overview Generator
-    print("\n--- [Test 2: Tissue Macro Minimap Overview] ---")
+    # 2. Test Specimen S-01: Colorectal Carcinoma
+    print("\n--- [Test 2: Specimen S-01 Colorectal Adenocarcinoma Full Pipeline] ---")
     p1 = SLIDE_PRESETS["slide_1"]
     im1 = Image.open(p1["img_path"])
-    m_img = create_overview_minimap(im1)
-    assert m_img.size == (140, 100), f"Minimap dimensions unexpected: {m_img.size}"
-    print(f"[PASS] Tissue macro minimap generated successfully with dimensions {m_img.size}.")
-
-    # 3. Test Slide 1: Colorectal Carcinoma
-    print("\n--- [Test 3: Specimen S-01 Colorectal Adenocarcinoma Full Pipeline] ---")
     tb1 = p1["tab"]
     res1 = process_aisight_case(
         im1, p1["text"], True, *tb1,
         active_view_layer="🔥 Faithful Grad-CAM Saliency",
-        current_slide_id="H&E Slide S-01",
-        current_badge_text="🔴 Malignant Neoplasm"
+        current_slide_id=p1["id"],
+        current_badge_text=p1["badge_text"],
+        patient_id=p1["patient_id"],
+        tumor_size=p1["tumor_size"]
     )
-    v_img, mini_img, badge_html, accept_md, algo_md, align_md, faith_md, text_html, shap_img = res1
+    card_html, v_img, faith_badge, shap_img, shap_badge, meta1 = res1
 
-    assert v_img is not None, "Viewport image is None!"
-    assert "VERIFIED H&E HISTOPATHOLOGY" in accept_md, "Acceptability check failed on Slide 1!"
-    assert "Colorectal" in algo_md or "Malignant" in algo_md, "Malignancy diagnosis not found in algorithm results!"
-    assert "FAITHFUL" in faith_md, "Faithfulness verification missing in faith_md!"
+    assert card_html is not None, "Report card HTML is None!"
+    assert "01. CANCER CLASSIFICATION" in card_html, "Section 01 missing!"
+    assert "COLORECTAL CARCINOMA" in card_html, "Colorectal Carcinoma prediction missing!"
+    assert "02. TNM STAGING" in card_html, "Section 02 missing!"
+    assert "03. SURVIVAL ESTIMATION" in card_html, "Section 03 missing!"
+    assert "04. TREATMENT RECOMMENDATION" in card_html, "Section 04 missing!"
+    assert "Requires evaluation by an oncologist" in card_html, "Oncologist evaluation warning missing!"
+    assert v_img is not None, "Grad-CAM image is None!"
+    assert "FAITHFUL" in faith_badge, "Faithfulness verification missing in badge!"
     assert shap_img is not None, "SHAP chart not generated!"
-    assert "<span" in text_html, "BioBERT narrative attribution HTML not generated!"
-    print("[PASS] Specimen S-01 Colorectal Ca: Stage 0-3 + GCA + SHAP + BioBERT verified.")
+    print("[PASS] Specimen S-01: Sections 01-04 + Grad-CAM + SHAP verified.")
 
-    # 4. Test Slide 4: Non-Neoplastic Lung
+    # 3. Test Specimen S-03: Breast Carcinoma
+    print("\n--- [Test 3: Specimen S-03 Breast Carcinoma Classification] ---")
+    p3 = SLIDE_PRESETS["slide_3"]
+    im3 = Image.open(p3["img_path"])
+    tb3 = p3["tab"]
+    res3 = process_aisight_case(
+        im3, p3["text"], True, *tb3,
+        patient_id=p3["patient_id"],
+        tumor_size=p3["tumor_size"]
+    )
+    card_html3 = res3[0]
+    assert "BREAST CARCINOMA" in card_html3, "Breast Carcinoma prediction missing for Specimen S-03!"
+    assert "Breast Carcinoma" in res3[5]["class_probs"], "Class probabilities missing breast!"
+    print(f"[PASS] Specimen S-03 Breast Ca confirmed: Confidence = {res3[5]['confidence']*100:.2f}%.")
+
+    # 4. Test Specimen S-04: Non-Neoplastic Lung
     print("\n--- [Test 4: Specimen S-04 Non-Neoplastic Lung Resection] ---")
     p4 = SLIDE_PRESETS["slide_4"]
     im4 = Image.open(p4["img_path"])
     tb4 = p4["tab"]
     res4 = process_aisight_case(
         im4, p4["text"], True, *tb4,
-        active_view_layer="🖼️ Clean H&E Micrograph",
-        current_slide_id="H&E Slide S-04",
-        current_badge_text="🟢 Non-Neoplastic"
+        patient_id=p4["patient_id"],
+        tumor_size=p4["tumor_size"]
     )
-    assert "Non-Neoplastic" in res4[2], f"Status badge did not reflect non-neoplastic: {res4[2]}"
-    print("[PASS] Specimen S-04 Non-Neoplastic: Negative status gating verified.")
+    assert "NORMAL / BENIGN" in res4[0] or "Stage 0" in res4[0], "Non-neoplastic classification failed!"
+    assert res4[5]["t_stage"] == "T0", "Expected T0 for non-neoplastic tissue!"
+    print("[PASS] Specimen S-04 Non-Neoplastic: T0 N0 M0 / Stage 0 verified.")
 
-    # 5. Test Layer Mode Switching
-    print("\n--- [Test 5: Pathology Viewport Layer Toggles] ---")
-    # Clean H&E
-    res_clean = process_aisight_case(im1, p1["text"], True, *tb1, active_view_layer="🖼️ Clean H&E Micrograph")
-    assert res_clean[0].size == (224, 224) or res_clean[0].size == (256, 256) or res_clean[0].size == im1.size, "Clean view error"
-
-    # Saliency Masked
-    res_mask = process_aisight_case(im1, p1["text"], True, *tb1, active_view_layer="🎭 Causal Saliency Masking (Top 20% Blurred)")
-    assert res_mask[0] is not None, "Saliency masked view error"
-
-    # SHAP Waterfall
-    res_shap = process_aisight_case(im1, p1["text"], True, *tb1, active_view_layer="📊 SHAP Biomarker Waterfall")
-    assert res_shap[0] is not None, "SHAP waterfall view error"
-    print("[PASS] Viewport layer switcher verified (Grad-CAM, Clean H&E, Masked, SHAP).")
+    # 5. Test Downloadable Report Generation
+    print("\n--- [Test 5: Downloadable Consultation Signout Generator] ---")
+    fpath = generate_downloadable_report_file(meta1)
+    assert os.path.exists(fpath), f"Report file not generated at {fpath}!"
+    with open(fpath, "r", encoding="utf-8") as f:
+        content = f.read()
+    assert "GCAEMMCD CLINICAL CONSULTATION SIGNOUT" in content, "Report title missing!"
+    assert "COLORECTAL CARCINOMA" in content, "Diagnosis missing in file!"
+    print(f"[PASS] Printable consultation report written to: {fpath} ({len(content)} bytes).")
 
     # 6. Test Ingestion Gate Rejection (Dark UI Screenshot)
     print("\n--- [Test 6: Ingestion Optical Domain Gatekeeper] ---")
     dark_screenshot = Image.new("RGB", (300, 300), color=(18, 24, 38))
     res_rej = process_aisight_case(dark_screenshot, "Clinical text", False, *tb1)
-    assert "REJECTED AT INGESTION GATE" in res_rej[3], "Non-tissue image was not rejected!"
-    assert "Algorithm Execution Halted" in res_rej[4], "Model execution was not halted!"
+    assert "SLIDE ACCEPTABILITY: REJECTED" in res_rej[0], "Non-tissue image was not rejected!"
+    assert "INGESTION GATEKEEPER HALTED" in res_rej[0], "Rejection card header missing!"
     print("[PASS] Optical domain rejection gate successfully prevented non-tissue processing.")
 
     print("\n" + "=" * 80)

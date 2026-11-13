@@ -194,10 +194,11 @@ footer {
     display: flex !important;
     flex-direction: row !important;
     gap: 12px !important;
-    height: calc(100vh - 105px) !important;
-    max-height: calc(100vh - 105px) !important;
+    height: calc(100vh - 138px) !important;
+    max-height: calc(100vh - 138px) !important;
     min-height: 0 !important;
     margin-top: 2px !important;
+    margin-bottom: 4px !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
 }
@@ -207,8 +208,8 @@ footer {
     flex: 0 0 23% !important;
     min-width: 250px !important;
     max-width: 300px !important;
-    height: calc(100vh - 105px) !important;
-    max-height: calc(100vh - 105px) !important;
+    height: 100% !important;
+    max-height: 100% !important;
     min-height: 0 !important;
     overflow-y: scroll !important;
     overflow-x: hidden !important;
@@ -227,8 +228,8 @@ footer {
 .col-manual-input {
     flex: 0 0 38% !important;
     min-width: 350px !important;
-    height: calc(100vh - 105px) !important;
-    max-height: calc(100vh - 105px) !important;
+    height: 100% !important;
+    max-height: 100% !important;
     min-height: 0 !important;
     overflow-y: scroll !important;
     overflow-x: hidden !important;
@@ -247,8 +248,8 @@ footer {
 .col-diagnostic-output {
     flex: 0 0 39% !important;
     min-width: 370px !important;
-    height: calc(100vh - 105px) !important;
-    max-height: calc(100vh - 105px) !important;
+    height: 100% !important;
+    max-height: 100% !important;
     min-height: 0 !important;
     overflow-y: scroll !important;
     overflow-x: hidden !important;
@@ -267,22 +268,27 @@ footer {
 .col-sample-input::-webkit-scrollbar,
 .col-manual-input::-webkit-scrollbar,
 .col-diagnostic-output::-webkit-scrollbar {
-    width: 8px !important;
+    width: 9px !important;
     display: block !important;
 }
 .col-sample-input::-webkit-scrollbar-track,
 .col-manual-input::-webkit-scrollbar-track,
 .col-diagnostic-output::-webkit-scrollbar-track {
     background: #eff6ff !important;
-    border-radius: 4px !important;
+    border-radius: 5px !important;
+    border-left: 1px solid #bfdbfe !important;
 }
 .col-sample-input::-webkit-scrollbar-thumb,
 .col-manual-input::-webkit-scrollbar-thumb,
 .col-diagnostic-output::-webkit-scrollbar-thumb {
     background: #2563eb !important;
-    border-radius: 4px !important;
+    border-radius: 5px !important;
 }
 .col-sample-input::-webkit-scrollbar-thumb:hover,
+.col-manual-input::-webkit-scrollbar-thumb:hover,
+.col-diagnostic-output::-webkit-scrollbar-thumb:hover {
+    background: #1d4ed8 !important;
+}
 .col-manual-input::-webkit-scrollbar-thumb:hover,
 .col-diagnostic-output::-webkit-scrollbar-thumb:hover {
     background: #1d4ed8 !important;
@@ -615,6 +621,318 @@ input:focus, textarea:focus, select:focus {
     border-bottom: 1px solid #e2e8f0 !important;
     padding: 6px 10px !important;
 }
+
+/* -------------------------------------------------------------------------
+   5. CANCER DIAGNOSIS SYSTEM REPORT CARD (EXACT USER SPECIFICATION)
+   ------------------------------------------------------------------------- */
+.cancer-diag-card {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    overflow: hidden !important;
+    margin-bottom: 12px !important;
+}
+
+/* Header */
+.diag-card-header {
+    background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%) !important;
+    border-bottom: 2.5px solid #2563eb !important;
+    padding: 10px 14px !important;
+}
+.diag-card-top-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+.diag-card-brand-title {
+    font-size: 18px !important;
+    font-weight: 900 !important;
+    color: #1e3a8a !important;
+    letter-spacing: -0.3px !important;
+}
+.diag-card-pid-badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    color: #1e40af !important;
+    background: #eff6ff !important;
+    border: 1.5px solid #93c5fd !important;
+    padding: 3px 10px !important;
+    border-radius: 6px !important;
+}
+.diag-card-subtitle {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    color: #64748b !important;
+    letter-spacing: 0.6px !important;
+    margin-top: 3px !important;
+    text-transform: uppercase !important;
+}
+
+/* Section Framing */
+.diag-section {
+    padding: 12px 14px !important;
+    border-bottom: 1.5px solid #e2e8f0 !important;
+}
+.diag-section-header {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    color: #1e40af !important;
+    letter-spacing: 0.4px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* 01. Classification */
+.diag-cancer-box {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-left: 4px solid #2563eb !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    margin-bottom: 10px !important;
+}
+.diag-cancer-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 4px !important;
+}
+.diag-cancer-name {
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    color: #0f172a !important;
+}
+.diag-cancer-conf {
+    font-size: 14.5px !important;
+    font-weight: 800 !important;
+    color: #2563eb !important;
+}
+
+.diag-prob-label {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    color: #64748b !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    margin: 8px 0 6px 0 !important;
+}
+.diag-prob-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 6px !important;
+    font-size: 12px !important;
+}
+.diag-prob-name {
+    flex: 0 0 145px !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+}
+.diag-prob-track {
+    flex: 1 !important;
+    background: #e2e8f0 !important;
+    height: 10px !important;
+    border-radius: 5px !important;
+    overflow: hidden !important;
+}
+.diag-prob-fill {
+    height: 100% !important;
+    border-radius: 5px !important;
+    transition: width 0.3s ease !important;
+}
+.diag-prob-pct {
+    flex: 0 0 55px !important;
+    text-align: right !important;
+    font-weight: 700 !important;
+    font-size: 11.5px !important;
+    color: #0f172a !important;
+}
+
+/* 02. TNM Staging */
+.diag-tnm-table {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+    font-size: 12.5px !important;
+}
+.diag-tnm-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 3px 0 !important;
+    border-bottom: 1px dashed #f1f5f9 !important;
+}
+.diag-tnm-key {
+    color: #475569 !important;
+    font-weight: 600 !important;
+}
+.diag-tnm-val {
+    font-family: ui-monospace, monospace !important;
+    font-weight: 800 !important;
+    font-size: 13px !important;
+    background: #eff6ff !important;
+    color: #1d4ed8 !important;
+    border: 1px solid #bfdbfe !important;
+    padding: 1px 8px !important;
+    border-radius: 4px !important;
+}
+.diag-overall-stage {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    padding: 6px 10px !important;
+    margin: 8px 0 6px 0 !important;
+    font-size: 13px !important;
+}
+.diag-overall-stage strong {
+    color: #1d4ed8 !important;
+    font-weight: 800 !important;
+    font-size: 14.5px !important;
+}
+
+/* Interactive Accordion Details */
+details.diag-details {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    margin-top: 6px !important;
+    font-size: 12px !important;
+}
+details.diag-details summary {
+    cursor: pointer !important;
+    color: #2563eb !important;
+    font-weight: 700 !important;
+    padding: 6px 10px !important;
+    user-select: none !important;
+}
+details.diag-details summary:hover {
+    color: #1d4ed8 !important;
+    background: #eff6ff !important;
+}
+.diag-details-body {
+    padding: 8px 10px !important;
+    background: #f8fafc !important;
+    border-top: 1px solid #e2e8f0 !important;
+    color: #334155 !important;
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
+}
+
+/* 03. Survival Estimation */
+.diag-survival-row {
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    margin-bottom: 8px !important;
+}
+.diag-survival-num {
+    font-size: 18px !important;
+    font-weight: 900 !important;
+}
+.diag-survival-track {
+    background: #e2e8f0 !important;
+    height: 12px !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+}
+.diag-survival-fill {
+    height: 100% !important;
+    border-radius: 6px !important;
+    transition: width 0.4s ease !important;
+}
+.diag-survival-ticks {
+    display: flex !important;
+    justify-content: space-between !important;
+    font-size: 10px !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+    margin-top: 3px !important;
+    margin-bottom: 8px !important;
+}
+
+/* 04. Treatment Recommendations */
+.diag-treatment-title {
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    color: #475569 !important;
+    letter-spacing: 0.4px !important;
+    margin-bottom: 6px !important;
+}
+.diag-treatment-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+    margin-bottom: 8px !important;
+}
+.diag-treatment-card {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-left: 3.5px solid #2563eb !important;
+    padding: 7px 10px !important;
+    border-radius: 5px !important;
+}
+.diag-treatment-heading {
+    font-size: 12.5px !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin-bottom: 2px !important;
+}
+.diag-treatment-desc {
+    font-size: 11px !important;
+    color: #475569 !important;
+    line-height: 1.4 !important;
+}
+.diag-treatment-warning {
+    background: #fffbeb !important;
+    border: 1.5px solid #fde68a !important;
+    border-radius: 6px !important;
+    padding: 7px 10px !important;
+    color: #92400e !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-top: 8px !important;
+}
+
+/* 06. Model Information & Footer */
+.diag-model-specs {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 6px 10px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+}
+.diag-model-specs strong {
+    color: #1e40af !important;
+}
+.diag-disclaimer-box {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-left: 3px solid #f59e0b !important;
+    padding: 6px 10px !important;
+    border-radius: 4px !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
+}
 """
 
 AISIGHT_CUSTOM_CSS = GCAEMMCD_CUSTOM_CSS
@@ -736,7 +1054,7 @@ def get_slide_badge_html(slide_id="H&E Slide S-01", status_badge="🔴 Malignant
 
 def get_footer_disclaimer_html():
     return """
-    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; color: #64748b; text-align: center; padding: 6px 14px; font-size: 11px; font-weight: 500; margin-top: 8px;">
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; color: #64748b; text-align: center; padding: 4px 14px; font-size: 11px; font-weight: 500; height: 26px; line-height: 16px; box-sizing: border-box; margin-top: 4px;">
         GCAEMMCD Multimodal Cancer Diagnosis Decision Support System • For Investigational & Research Use Only • Zero-Leakage 5-Fold Cross-Validated
     </div>
     """

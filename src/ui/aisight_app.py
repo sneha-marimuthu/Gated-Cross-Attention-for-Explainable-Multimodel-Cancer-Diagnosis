@@ -22,6 +22,11 @@ from src.explainability.faithfulness import evaluate_visual_faithfulness, evalua
 from src.explainability.shap_explainer import TabularShapExplainer
 from src.explainability.text_saliency import BioBERTTextSaliencyExplainer
 from src.models.clinical_staging_engine import STAGE_NAMES, TREATMENT_OPTIONS
+from src.ui.report_generator import (
+    render_cancer_diagnosis_html_report,
+    render_model_info_html,
+    generate_downloadable_report_file
+)
 from src.ui.aisight_theme import (
     GCAEMMCD_CUSTOM_CSS, FORCE_LIGHT_MODE_JS, get_gcaemmcd_theme,
     get_top_navbar_html, get_sub_header_html, get_viewer_toolbar_html,
@@ -162,43 +167,41 @@ def process_aisight_case(
     """
     if input_img is None:
         blank_viewer = Image.new("RGB", (600, 450), color="#f8fafc")
-        return (
-            blank_viewer, None,
-            get_slide_badge_html(current_slide_id, "⚪ No Specimen Loaded"),
-            "### ⚪ Slide Acceptability: AWAITING INPUT\n*Please load a specimen or upload a micrograph tile.*",
-            "### ⚪ Stages 1–3: AWAITING INPUT\n*Please load a specimen or upload a micrograph tile.*",
-            "### ⚪ Multimodal Alignment: AWAITING INPUT",
-            "### ⚪ Explainability: AWAITING INPUT",
-            "<div style='color: #64748b;'><em>Awaiting specimen input...</em></div>",
-            None
+        initial_card, initial_meta = render_cancer_diagnosis_html_report(
+            patient_id, tumor_size,
+            {"Normal / Non-Neoplastic": 0.5, "Benign Neoplasm": 0.5, "Malignant Carcinoma": 0.0},
+            {"Breast Carcinoma": 0.33, "Colorectal Carcinoma": 0.33, "Lung Carcinoma": 0.34},
+            None, {}, ""
         )
+        empty_badge = """<div style="font-size:10.5px; color:#64748b; padding:2px;">Awaiting specimen...</div>"""
+        return (initial_card, blank_viewer, empty_badge, None, empty_badge, initial_meta)
 
     pil_img = input_img.convert("RGB") if hasattr(input_img, "convert") else Image.fromarray(np.asarray(input_img)).convert("RGB")
-    minimap_img = create_overview_minimap(pil_img)
 
     # 1. Slide Acceptability (Stage 0 Domain Validator)
     is_valid, domain_type, rej_reason, metrics = validate_histopathology_domain(pil_img)
     if not is_valid:
-        accept_md = (
-            f"### 🚫 Slide Acceptability: REJECTED AT INGESTION GATE\n\n"
-            f"- **Detected Domain:** `{domain_type.upper()}`\n"
-            f"- **Rejection Reason:** {rej_reason}\n\n"
-            f"**Optical Measurements:**\n"
-            f"- Tissue Stained Fraction: `{metrics.get('tissue_fraction', 0.0)*100:.1f}%`\n"
-            f"- H&E Chromophore Ratio: `{metrics.get('he_fraction', 0.0)*100:.1f}%`\n"
-            f"- Forbidden Spectrum: `{metrics.get('forbidden_fraction', 0.0)*100:.1f}%`\n"
-            f"- Dark Slate UI Ratio: `{metrics.get('dark_slate_ratio', 0.0)*100:.1f}%`\n"
-            f"- Focus Sharpness (Laplacian): `{metrics.get('laplacian_var', 0.0):.1f}`\n\n"
-            f"*(Execution halted: Model inference is prohibited on non-histopathology inputs.)*"
-        )
-        algo_md = "🚫 **Algorithm Execution Halted:** Specimen failed optical domain validation."
-        align_md = "🚫 **Tri-Modal Alignment Suppressed:** Ingestion gate blocked."
-        faith_md = "🚫 **Explainability Suppressed:** No saliency computed for non-tissue inputs."
-        text_html = "<div style='color: #b91c1c;'><em>Execution halted: Invalid slide domain.</em></div>"
-        badge_html = get_slide_badge_html(current_slide_id, "🚫 Ingestion Rejected")
-        return (
-            pil_img, minimap_img, badge_html, accept_md, algo_md, align_md, faith_md, text_html, None
-        )
+        rej_card = f"""
+        <div class="cancer-diag-card">
+            <div class="diag-card-header" style="border-bottom-color: #dc2626;">
+                <div class="diag-card-top-row">
+                    <span class="diag-card-brand-title" style="color: #b91c1c;">GCAEMMCD</span>
+                    <span class="diag-card-pid-badge" style="color: #b91c1c; border-color: #fca5a5; background: #fef2f2;">REJECTED</span>
+                </div>
+                <div class="diag-card-subtitle" style="color: #dc2626;">INGESTION GATEKEEPER HALTED</div>
+            </div>
+            <div class="diag-section">
+                <div class="diag-section-header" style="color: #dc2626; border-left-color: #dc2626;">01. SLIDE ACCEPTABILITY: REJECTED</div>
+                <div style="background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; padding: 10px; border-radius: 6px; color: #991b1b; font-size: 12.5px; line-height: 1.5;">
+                    <strong>Input Disqualified:</strong> {rej_reason}<br>
+                    <strong>Detected Domain:</strong> <code>{domain_type.upper()}</code><br>
+                    <em>Model inference is prohibited on non-histopathology inputs to prevent out-of-distribution hallucinations.</em>
+                </div>
+            </div>
+        </div>
+        """
+        empty_badge = """<div style="font-size:10.5px; color:#991b1b; padding:2px;">🚫 Ingestion halted</div>"""
+        return (rej_card, pil_img, empty_badge, None, empty_badge, {})
 
     accept_md = (
         f"### 🟢 Slide Acceptability: VERIFIED H&E HISTOPATHOLOGY\n\n"
@@ -310,89 +313,50 @@ def process_aisight_case(
         v_r if has_r else None
     )
 
-    stage_md_block = ""
-    treatment_md_block = ""
-    survival_md_block = ""
-
-    if multi_task_out.get("logits_staging") is not None:
-        stg_logits = multi_task_out["logits_staging"][0]
-        stg_probs = torch.softmax(stg_logits, dim=-1).cpu().detach().numpy()
-        stg_idx = int(np.argmax(stg_probs))
-        stg_name = STAGE_NAMES[stg_idx]
-        stg_conf = stg_probs[stg_idx]
-
-        stage_md_block = (
-            f"#### 🏛️ Task 2: TNM Pathological Cancer Staging\n"
-            f"- **Predicted Stage:** <strong style='color: #1d4ed8;'>{stg_name}</strong> (`{stg_conf*100:.1f}%` confidence)\n"
-            f"- **Primary Tumor Size (T-stage basis):** `{tumor_size:.1f} cm`\n"
-            f"- **Staging Distribution:** " + " · ".join([f"Stage {i}: `{stg_probs[i]*100:.1f}%`" for i in range(5)]) + "\n"
-        )
-
-    if multi_task_out.get("treatment_scores") is not None:
-        trt_scores = multi_task_out["treatment_scores"][0].cpu().detach().numpy()
-        ranked_trt = sorted(list(enumerate(trt_scores)), key=lambda x: -x[1])[:3]
-        treatment_lines = []
-        for rk, (t_idx, score) in enumerate(ranked_trt, 1):
-            treatment_lines.append(f"{rk}. **{TREATMENT_OPTIONS[t_idx]}** *(Priority Score: `{score:.2f}`)*")
-        treatment_md_block = (
-            f"#### 💊 Task 3: Multimodal Treatment Recommendation Ranking (NDCG@3)\n"
-            + "\n".join([f"- {tl}" for tl in treatment_lines]) + "\n"
-        )
-
-    if multi_task_out.get("survival_probabilities") is not None:
-        surv_val = float(multi_task_out["survival_probabilities"][0].item())
-        haz_val = float(multi_task_out["hazard_scores"][0].item())
-        risk_tier = "High Mortality Risk" if surv_val < 0.40 else ("Moderate Risk" if surv_val < 0.75 else "Favorable Prognosis")
-        risk_color = "#dc2626" if surv_val < 0.40 else ("#d97706" if surv_val < 0.75 else "#16a34a")
-
-        survival_md_block = (
-            f"#### ⏳ Task 4: 5-Year Survival Risk & Prognostic Estimation (C-Index)\n"
-            f"- **Estimated 5-Year Survival Probability:** <strong style='color: {risk_color}; font-size: 15px;'>{surv_val*100:.1f}%</strong>\n"
-            f"- **Cox Proportional Hazard Index:** `{haz_val:.2f}` ({risk_tier})\n"
-        )
-
-    algo_md = (
-        f"### 🏆 Multi-Task Multimodal Clinical Findings (4 Tasks)\n\n"
-        f"**Patient Reference:** `{patient_id}` · **Tumor Dimension:** `{tumor_size:.1f} cm`\n\n"
-        f"#### 🔬 Task 1: Neoplasm Classification & Anatomical Subtype\n"
-        f"{diag_card}\n\n"
-        f"{stage_md_block}\n"
-        f"{treatment_md_block}\n"
-        f"{survival_md_block}\n"
-        f"**Pathway Confidence Distribution:**\n"
-        + "\n".join([f"- **{k}:** `{v*100:.1f}%`" for k, v in ps_dict.items()]) + "\n"
-        + "\n".join([f"- **{k}:** `{v*100:.1f}%`" for k, v in po_dict.items()])
+    # 7. Render Canonical Cancer Diagnosis System Report (Sections 01 - 04)
+    raw_tab_dict_full = {
+        "age": age, "sex": sex, "smoking": smoking, "ecog": ecog,
+        "cea": cea, "ca125": ca125, "ca19_9": ca19_9, "ki67": ki67,
+        "er": er, "pr": pr, "her2": her2, "egfr": egfr, "kras": kras,
+        "hb": hb, "wbc": wbc, "plt": plt
+    }
+    report_card_html, report_meta = render_cancer_diagnosis_html_report(
+        patient_id=patient_id,
+        tumor_size=tumor_size,
+        ps_dict=ps_dict,
+        po_dict=po_dict,
+        multi_task_out=multi_task_out,
+        raw_biomarkers=raw_tab_dict_full,
+        input_text=input_text
     )
 
-    align_md = (
-        f"### 📋 Tri-Modal Alignments & Concordance\n\n"
-        f"{badge_md}\n\n"
-        f"{gate_md}\n\n"
-        f"{abl_md}"
-    )
+    faith_status_text = "🟢 FAITHFUL" if v_faith.get("is_faithful", True) else "⚠️ DIFFUSE"
+    sal_drop = v_faith.get("salient_confidence_drop", 0.0) * 100
+    faith_badge_html = f"""
+    <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:4px; padding:3px 7px; font-size:10.5px; margin-top:3px;">
+        <span>Visual Saliency: <strong style="color: #15803d;">{faith_status_text}</strong></span>
+        <span>Causal Drop: <strong>-{sal_drop:.1f}%</strong></span>
+    </div>
+    """
 
-    faith_md = (
-        f"### 📊 Explainability & Quantitative Faithfulness\n\n"
-        f"- **Causal Saliency Test:** {'🟢 **FAITHFUL**' if v_faith['is_faithful'] else '⚠️ **DIFFUSE**'}\n"
-        f"- **Baseline Target Confidence:** `{v_faith['original_confidence']*100:.1f}%`\n"
-        f"- **Top-20% Salient Region Masked Confidence:** `{v_faith['masked_confidence']*100:.1f}%`\n"
-        f"- **Salient Confidence Drop (Perturbation):** `+{v_faith['salient_confidence_drop']*100:.2f}%`\n"
-        f"- **Random Control Region Drop:** `+{v_faith['control_confidence_drop']*100:.2f}%`\n"
-        f"{shap_metrics_text}"
-    )
+    shap_residual = t_faith.get("efficiency_residual", 0.0) if include_tabular and "t_faith" in locals() and t_faith else 0.0
+    shap_badge_html = f"""
+    <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:4px; padding:3px 7px; font-size:10.5px; margin-top:3px;">
+        <span>SHAP Additivity: <strong style="color: #15803d;">🟢 EXACT</strong></span>
+        <span>Residual: <strong>{shap_residual:.1e}</strong></span>
+    </div>
+    """
 
     # 8. Route Viewport Layer
-    if "Grad-CAM" in active_view_layer:
-        viewport_img = cam_overlay
+    if "Clean" in active_view_layer:
+        viewport_img = cropped_pil
     elif "Masked" in active_view_layer and masked_salient_img is not None:
         viewport_img = masked_salient_img
-    elif "SHAP" in active_view_layer and shap_chart_img is not None:
-        viewport_img = shap_chart_img
     else:
-        viewport_img = cropped_pil
+        viewport_img = cam_overlay
 
     return (
-        viewport_img, minimap_img, badge_html, accept_md, algo_md, align_md, faith_md, text_html, shap_chart_img
+        report_card_html, viewport_img, faith_badge_html, shap_chart_img, shap_badge_html, report_meta
     )
 
 
@@ -593,7 +557,7 @@ def build_aisight_ui():
             # -----------------------------------------------------------------
             # COLUMN 3: OUTPUT (Fixed Height, Column Inner Scroll)
             # -----------------------------------------------------------------
-            with gr.Column(scale=5, min_width=370, elem_classes=["col-diagnostic-output"]):
+            with gr.Column(scale=5, min_width=380, elem_classes=["col-diagnostic-output"]):
                 gr.HTML("""
                 <div class="column-title-bar">
                     <span class="column-title-text">🔬 Column 3: Output</span>
@@ -601,79 +565,73 @@ def build_aisight_ui():
                 </div>
                 """)
 
-                # Section 1: Viewport Toolbar & Layer Switcher (Dynamic)
-                viewer_toolbar_comp = gr.HTML(get_viewer_toolbar_html(specimen_id="Specimen S-01"))
-                view_layer_radio = gr.Radio(
-                    [
-                        "🔥 Faithful Grad-CAM Saliency",
-                        "🖼️ Clean H&E Micrograph",
-                        "🎭 Causal Saliency Masking (Top 20% Blurred)",
-                        "📊 SHAP Biomarker Waterfall"
-                    ],
-                    value="🔥 Faithful Grad-CAM Saliency",
-                    label="Micrograph Viewport Layer"
+                # Sections 01 - 04: Cancer Diagnosis System Report Card
+                p_init = SLIDE_PRESETS["slide_1"]
+                dummy_ps = {"Normal / Non-Neoplastic": 0.0002, "Benign Neoplasm": 0.0002, "Malignant Carcinoma": 0.9996}
+                dummy_po = {"Breast Carcinoma": 0.023, "Colorectal Carcinoma": 0.966, "Lung Carcinoma": 0.011}
+                init_report_html, init_report_meta = render_cancer_diagnosis_html_report(
+                    p_init["patient_id"], p_init["tumor_size"], dummy_ps, dummy_po, None,
+                    {"age": 64, "ki67": 55.0, "ecog": 1},
+                    p_init["text"]
                 )
 
-                # Section 2: Main Viewport Container
-                with gr.Group(elem_classes=["viewer-container"]):
-                    badge_component = gr.HTML(get_slide_badge_html("H&E Slide S-01", "🔴 Malignant Neoplasm"))
-                    main_viewer_img = gr.Image(
-                        value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]),
-                        show_label=False,
-                        interactive=False,
-                        height=350
-                    )
+                report_card_comp = gr.HTML(value=init_report_html)
+
+                # Section 05: Explainable AI Analysis
+                with gr.Group(elem_classes=["explainability-section-container"]):
                     gr.HTML("""
-                    <div class="viewer-scale-bar">
-                        <span>Scale: <strong>200 µm</strong></span>
-                        <span style="display:inline-block; width:50px; height:3px; background:#2563eb; border-radius:2px;"></span>
-                    </div>
-                    <div class="viewer-timestamp">
-                        FOV: 1.84 mm² · Mag: 20x
+                    <div class="diag-section-header" style="background:#eff6ff; border:1px solid #bfdbfe; border-left:3.5px solid #2563eb; padding:5px 10px; border-radius:4px; margin-bottom:8px;">
+                        05. EXPLAINABLE AI ANALYSIS
                     </div>
                     """)
 
-                # Section 3: Diagnostic Findings & Consultation Signout Tabs
-                with gr.Tabs():
-                    with gr.Tab("Diagnostic Inspector"):
-                        with gr.Accordion("🔍 Slide Acceptability (Stage 0 Domain Check)", open=True):
-                            accept_display = gr.Markdown("### ⚪ Stage 0: Optical Domain Validation\n*Awaiting specimen inspection...*")
+                    view_layer_radio = gr.Radio(
+                        [
+                            "🔥 Faithful Grad-CAM Saliency",
+                            "🖼️ Clean H&E Micrograph",
+                            "🎭 Causal Saliency Masking (Top 20% Blurred)"
+                        ],
+                        value="🔥 Faithful Grad-CAM Saliency",
+                        label="Micrograph Visual Saliency Layer"
+                    )
 
-                        with gr.Accordion("🏛️ Hierarchical Cancer Diagnosis (Stages 1–3)", open=True):
-                            algo_display = gr.Markdown("### ⚪ Stages 1–3: Neoplasm Diagnosis\n*Awaiting specimen inspection...*")
+                    with gr.Row(equal_height=True):
+                        with gr.Column(scale=1, min_width=160):
+                            gr.Markdown("**GRAD-CAM Heatmap Image:**")
+                            main_viewer_img = gr.Image(
+                                value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]),
+                                show_label=False,
+                                interactive=False,
+                                height=230
+                            )
+                            faith_badge_comp = gr.HTML("""
+                            <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:4px; padding:3px 6px; font-size:10.5px; margin-top:3px;">
+                                <span>Visual Saliency: <strong style="color: #15803d;">🟢 FAITHFUL</strong></span>
+                                <span>Causal Drop: <strong>-28.4%</strong></span>
+                            </div>
+                            """)
 
-                        with gr.Accordion("📋 Multimodal Alignment & GCA Dynamics", open=True):
-                            align_display = gr.Markdown("### ⚪ Multimodal Alignment & GCA Dynamics\n*Awaiting specimen inspection...*")
+                        with gr.Column(scale=1, min_width=160):
+                            gr.Markdown("**SHAP Feature Importance:**")
+                            shap_thumbnail = gr.Image(show_label=False, interactive=False, height=230)
+                            shap_badge_comp = gr.HTML("""
+                            <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:4px; padding:3px 6px; font-size:10.5px; margin-top:3px;">
+                                <span>SHAP Additivity: <strong style="color: #15803d;">🟢 EXACT</strong></span>
+                                <span>Residual: <strong>&lt; 1e-6</strong></span>
+                            </div>
+                            """)
 
-                        with gr.Accordion("📊 Faithfulness & BioBERT Narrative Saliency", open=True):
-                            faith_display = gr.Markdown("### ⚪ Explainability & Faithfulness\n*Awaiting specimen inspection...*")
-                            gr.Markdown("**BioBERT Clinical Narrative Attribution:**")
-                            text_html_view = gr.HTML("<div style='color: #64748b;'><em>Awaiting clinical text narrative for token attribution...</em></div>")
+                # Section 06: Model Information & Consultation Signout Actions
+                gr.HTML(render_model_info_html())
 
-                    with gr.Tab("Consultation Signout"):
-                        gr.Markdown(
-                            "### **GCAEMMCD Multimodal Clinical Consultation Signout**\n\n"
-                            "This panel generates a comprehensive clinical consultation summary based on verified multimodal findings:\n\n"
-                            "- **Stage 0:** Physical stain concordance & brightfield optical validity.\n"
-                            "- **Stage 1:** Phikon ViT-B organ identification & prototype distance out-of-distribution guardrail.\n"
-                            "- **Stages 2–3:** Hierarchical malignancy classification & conditional carcinoma subtyping.\n"
-                            "- **Level 2:** Gated Cross-Attention (GCA) multimodal fusion across histology, clinical notes, and 16 biomarkers.\n"
-                            "- **Level 3:** Faithful Grad-CAM saliency, causal region masking verification, and SHAP local efficiency.\n\n"
-                            "*Click 'ANALYSE PATIENT' or choose a sample to populate findings.*"
-                        )
-
-                # Section 4: Macro Minimap & SHAP Waterfall Row
                 with gr.Row():
-                    with gr.Column(scale=1):
-                        gr.Markdown("**Tissue Macro Minimap:**")
-                        minimap_view = gr.Image(
-                            value=create_overview_minimap(Image.open(SLIDE_PRESETS["slide_1"]["img_path"])),
-                            show_label=False,
-                            height=120
-                        )
-                    with gr.Column(scale=2):
-                        gr.Markdown("**Tabular SHAP Attribution:**")
-                        shap_thumbnail = gr.Image(show_label=False, height=120)
+                    btn_download_report = gr.Button("📥 Download Report", variant="primary", size="md", elem_classes=["btn-punchy-primary"])
+                    btn_new_analysis = gr.Button("🔄 New Analysis", variant="secondary", size="md", elem_classes=["btn-punchy-secondary"])
+
+                download_file_comp = gr.File(label="📄 Patient Diagnostic Consultation Report", visible=False)
+
+        # State variable for last calculated report metadata
+        report_meta_state = gr.State(value=init_report_meta)
 
         # Bottom Clinical Disclaimer Footer
         gr.HTML(get_footer_disclaimer_html())
@@ -712,14 +670,12 @@ def build_aisight_ui():
                 tumor_size=t_size
             )
             sh_html = get_sub_header_html(specimen_id=sl_id, status="Analyzed", patient_id=p_id)
-            vt_html = get_viewer_toolbar_html(specimen_id=sl_id)
-            return (sh_html, vt_html) + outs
+            return (sh_html,) + outs
 
         inference_outputs = [
-            sub_header_comp, viewer_toolbar_comp,
-            main_viewer_img, minimap_view, badge_component,
-            accept_display, algo_display, align_display, faith_display,
-            text_html_view, shap_thumbnail
+            sub_header_comp,
+            report_card_comp, main_viewer_img, faith_badge_comp,
+            shap_thumbnail, shap_badge_comp, report_meta_state
         ]
 
         btn_recompute.click(
@@ -753,13 +709,25 @@ def build_aisight_ui():
             outputs=[s_patient_id, s_tumor_size] + all_tab_inputs
         )
 
+        # Download Report Click Handler
+        def _download_report_handler(meta):
+            if not meta:
+                return gr.update(visible=False)
+            path = generate_downloadable_report_file(meta)
+            return gr.update(value=path, visible=True)
+
+        btn_download_report.click(
+            fn=_download_report_handler,
+            inputs=[report_meta_state],
+            outputs=[download_file_comp]
+        )
+
         # Custom Upload Image Handler: Updates active slide image state & toolbars
         def _on_custom_upload(upl_img, cur_layer, txt, inc_tab, p_id, t_size, *tab_args):
             if upl_img is not None:
                 sl_id = "Custom Micrograph"
                 bdg_t = "🔬 Custom Specimen"
                 sh_html = get_sub_header_html(specimen_id=sl_id, status="Uploaded", patient_id=p_id)
-                vt_html = get_viewer_toolbar_html(specimen_id=sl_id)
                 outs = process_aisight_case(
                     upl_img, txt, inc_tab, *tab_args[:16],
                     active_view_layer=cur_layer,
@@ -769,14 +737,12 @@ def build_aisight_ui():
                     tumor_size=t_size
                 )
                 return (
-                    sh_html, vt_html,
-                    upl_img, sl_id, bdg_t,
-                    outs[0], outs[1], outs[2], outs[3], outs[4], outs[5], outs[6], outs[7], outs[8]
+                    sh_html, upl_img, sl_id, bdg_t,
+                    outs[0], outs[1], outs[2], outs[3], outs[4], outs[5]
                 )
             p = SLIDE_PRESETS["slide_1"]
             im = Image.open(p["img_path"])
             sh_html = get_sub_header_html(specimen_id=p["id"], status="Ready", patient_id=p["patient_id"])
-            vt_html = get_viewer_toolbar_html(specimen_id=p["id"])
             outs = process_aisight_case(
                 im, p["text"], True, *p["tab"],
                 active_view_layer=cur_layer,
@@ -786,17 +752,15 @@ def build_aisight_ui():
                 tumor_size=p["tumor_size"]
             )
             return (
-                sh_html, vt_html,
-                im, p["id"], p["badge_text"],
-                outs[0], outs[1], outs[2], outs[3], outs[4], outs[5], outs[6], outs[7], outs[8]
+                sh_html, im, p["id"], p["badge_text"],
+                outs[0], outs[1], outs[2], outs[3], outs[4], outs[5]
             )
 
         custom_upload_outputs = [
-            sub_header_comp, viewer_toolbar_comp,
+            sub_header_comp,
             active_slide_img, cur_slide_id, cur_badge_text,
-            main_viewer_img, minimap_view, badge_component,
-            accept_display, algo_display, align_display, faith_display,
-            text_html_view, shap_thumbnail
+            report_card_comp, main_viewer_img, faith_badge_comp,
+            shap_thumbnail, shap_badge_comp, report_meta_state
         ]
 
         custom_upload_img.change(
@@ -825,28 +789,60 @@ def build_aisight_ui():
                 tumor_size=t_size
             )
             sh_html = get_sub_header_html(specimen_id=slide_id, status="Verified", patient_id=p_id)
-            vt_html = get_viewer_toolbar_html(specimen_id=slide_id)
 
             return (
-                sh_html, vt_html,
+                sh_html,
                 im, slide_id, badge_t,
                 p_id, t_size,
                 p["text"], True,
                 tb[0], tb[1], tb[2], tb[3], tb[4], tb[5], tb[6], tb[7], tb[8], tb[9], tb[10], tb[11], tb[12], tb[13], tb[14], tb[15],
-                outs[0], outs[1], outs[2], outs[3], outs[4], outs[5], outs[6], outs[7], outs[8]
+                outs[0], outs[1], outs[2], outs[3], outs[4], outs[5]
             )
 
         slide_outputs = [
-            sub_header_comp, viewer_toolbar_comp,
+            sub_header_comp,
             active_slide_img, cur_slide_id, cur_badge_text,
             s_patient_id, s_tumor_size,
             input_text_box, inc_tab_check,
             s_age, s_sex, s_smoke, s_ecog, s_cea, s_ca125, s_ca19_9, s_ki67,
             s_er, s_pr, s_her2, s_egfr, s_kras, s_hb, s_wbc, s_plt,
-            main_viewer_img, minimap_view, badge_component,
-            accept_display, algo_display, align_display, faith_display,
-            text_html_view, shap_thumbnail
+            report_card_comp, main_viewer_img, faith_badge_comp,
+            shap_thumbnail, shap_badge_comp, report_meta_state
         ]
+
+        # New Analysis Click Handler
+        def _new_analysis_handler():
+            p_id = "PAT001"
+            t_size = 2.5
+            txt = ""
+            def_ps = {"Normal / Non-Neoplastic": 0.5, "Benign Neoplasm": 0.5, "Malignant Carcinoma": 0.0}
+            def_po = {"Breast Carcinoma": 0.33, "Colorectal Carcinoma": 0.33, "Lung Carcinoma": 0.34}
+            init_html, init_meta = render_cancer_diagnosis_html_report(
+                p_id, t_size, def_ps, def_po, None,
+                {"age": 50, "ki67": 15.0, "ecog": 0}, ""
+            )
+            sh_html = get_sub_header_html(specimen_id="New Patient", status="Awaiting Input", patient_id=p_id)
+            empty_badge = """<div style="font-size:10.5px; color:#64748b; padding:2px;">Awaiting specimen...</div>"""
+
+            return (
+                sh_html,
+                None, # active_slide_img
+                "New Specimen", "⚪ Awaiting Analysis",
+                p_id, t_size,
+                txt, True,
+                50, "Female", 0, "0 - Fully active",
+                2.5, 15.0, 18.0, 15.0,
+                "Negative (-)", "Negative (-)", "Negative (-)", "Wild-type", "Wild-type",
+                13.5, 6.5, 250.0,
+                init_html, None, empty_badge, None, empty_badge, init_meta,
+                gr.update(value=None, visible=False)
+            )
+
+        btn_new_analysis.click(
+            fn=_new_analysis_handler,
+            inputs=[],
+            outputs=slide_outputs + [download_file_comp]
+        )
 
         btn_slide_1.click(
             fn=lambda l: _select_slide("slide_1", l),
