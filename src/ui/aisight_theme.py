@@ -9,10 +9,10 @@ Implements a punchy, ultra-clean light medical workstation design system:
       * Warm Amber (#f59e0b) for benign lesion badges
   - Zero Dark Mode:
       * JavaScript MutationObserver permanently purges the 'dark' class
-      * Universal CSS overrides force light backgrounds on all inputs, radios, sliders, and accordions
+      * Universal CSS overrides force light backgrounds and dark readable text (#0f172a) everywhere
   - 3-Column Fixed-Height Architecture with Column Inner Scroll:
       * Dynamic layout: flex-based responsive width proportions
-      * Fixed height: calc(100vh - 120px) with independent column vertical scrolling (no page jumping)
+      * Fixed height: calc(100vh - 110px) with independent column vertical scrolling (no page jumping)
       * Custom punchy scrollbars
 """
 
@@ -21,13 +21,19 @@ import gradio as gr
 # Force Light Mode JavaScript to permanently neutralize system dark mode
 FORCE_LIGHT_MODE_JS = """
 () => {
-    try {
-        document.documentElement.classList.remove('dark');
-        if (document.body) document.body.classList.remove('dark');
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        localStorage.setItem('color-theme', 'light');
-    } catch(e) {}
+    function enforceLight() {
+        try {
+            document.documentElement.classList.remove('dark');
+            if (document.body) document.body.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.style.colorScheme = 'light';
+            localStorage.setItem('theme', 'light');
+            localStorage.setItem('color-theme', 'light');
+        } catch(e) {}
+    }
+    enforceLight();
+    const observer = new MutationObserver(() => enforceLight());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
 }
 """
 
@@ -50,7 +56,7 @@ body, .gradio-container {
     overflow-x: hidden !important;
 }
 
-/* Force light backgrounds across all native Gradio elements in dark environments */
+/* Force light backgrounds & dark text across ALL Gradio elements */
 .dark, [data-theme="dark"],
 .dark body, .dark .gradio-container,
 .dark .gr-panel, .dark .gr-box, .dark .gr-form,
@@ -63,6 +69,24 @@ body, .gradio-container {
     background: #ffffff !important;
     color: #0f172a !important;
     border-color: #e2e8f0 !important;
+}
+
+/* Typography & Prose: 100% Dark High-Contrast Slate Text */
+.prose, .prose *, .prose p, .prose span, .prose li, .prose strong, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5,
+.markdown, .markdown *, .gr-accordion, .gr-accordion *,
+.dark .prose, .dark .prose *, .dark .markdown, .dark .markdown *,
+.dark .gr-accordion, .dark .gr-accordion *,
+.dark p, .dark span, .dark li, .dark strong, .dark em, .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #0f172a !important;
+}
+
+/* Highlighted code snippets */
+code {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 1px 4px !important;
+    border-radius: 4px !important;
 }
 
 /* Suppress default Gradio footer */
@@ -166,7 +190,7 @@ footer {
     box-sizing: border-box !important;
 }
 
-/* Column 1: Sample Input (22% to 25% width) */
+/* Column 1: Sample Input (23% width) */
 .col-sample-input {
     flex: 0 0 23% !important;
     min-width: 250px !important;
@@ -182,7 +206,7 @@ footer {
     box-sizing: border-box !important;
 }
 
-/* Column 2: Manual Input (38% to 40% width) */
+/* Column 2: Manual Input (38% width) */
 .col-manual-input {
     flex: 0 0 38% !important;
     min-width: 350px !important;
@@ -197,7 +221,7 @@ footer {
     box-sizing: border-box !important;
 }
 
-/* Column 3: Output (37% to 40% width) */
+/* Column 3: Output (39% width) */
 .col-diagnostic-output {
     flex: 0 0 39% !important;
     min-width: 370px !important;
@@ -286,7 +310,7 @@ footer {
 /* Specimen Selection Cards */
 .specimen-preset-card {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1.5px solid #e2e8f0 !important;
     border-radius: 6px !important;
     padding: 7px 9px !important;
     margin-bottom: 7px !important;
@@ -299,9 +323,22 @@ footer {
 }
 .specimen-preset-card.active-selected {
     border-color: #2563eb !important;
-    border-left: 3.5px solid #2563eb !important;
+    border-left: 4px solid #2563eb !important;
     background-color: #eff6ff !important;
     box-shadow: 0 0 0 1px #2563eb !important;
+}
+
+/* Specimen Patient Tag Chip */
+.specimen-patient-tag {
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 4px !important;
+    padding: 1px 5px !important;
+    display: inline-block !important;
+    margin-top: 3px !important;
 }
 
 /* Punchy Status Badges */
@@ -363,6 +400,36 @@ footer {
     gap: 6px !important;
 }
 
+/* Section Header matching User Cancer Diagnosis Specification */
+.input-section-header {
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    color: #1e40af !important;
+    background: #eff6ff !important;
+    border: 1px solid #bfdbfe !important;
+    border-left: 3.5px solid #2563eb !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    margin-bottom: 8px !important;
+    letter-spacing: 0.3px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* Clinical Reference Range Chip */
+.clinical-ref-chip {
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    color: #0369a1 !important;
+    background: #e0f2fe !important;
+    border: 1px solid #bae6fd !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+    display: inline-block !important;
+    margin-bottom: 4px !important;
+}
+
 /* Punchy Primary CTA Button (Blue Gradient with White Text) */
 .btn-punchy-primary, button.primary {
     background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
@@ -398,28 +465,36 @@ footer {
 }
 
 /* Punchy Radio Options (Force White/Light Palette, ZERO Dark Boxes) */
-.gr-radio, .gr-radio-group {
-    background: #f8fafc !important;
+fieldset, .gr-radio, .gr-radio-group, div[data-testid="radio-group"],
+.gradio-radio, div.radio-group,
+.dark fieldset, .dark .gr-radio, .dark .gr-radio-group, .dark div[data-testid="radio-group"] {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
     border-radius: 6px !important;
-    padding: 4px !important;
+    padding: 3px !important;
 }
-.gr-radio label, .gr-radio-group label {
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+fieldset label, div[data-testid="radio-group"] label, .gradio-radio label,
+.dark fieldset label, .dark div[data-testid="radio-group"] label {
+    background-color: #f8fafc !important;
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
     border-radius: 4px !important;
     margin: 2px !important;
-    padding: 4px 8px !important;
+    padding: 3px 7px !important;
     color: #1e293b !important;
     font-weight: 600 !important;
-    font-size: 12px !important;
+    font-size: 11.5px !important;
 }
-.gr-radio label:hover, .gr-radio-group label:hover {
+fieldset label:hover, div[data-testid="radio-group"] label:hover {
     border-color: #3b82f6 !important;
-    background: #eff6ff !important;
+    background-color: #eff6ff !important;
+    color: #1d4ed8 !important;
 }
-.gr-radio label.selected, .gr-radio-group label.selected,
-.gr-radio label:has(input:checked), .gr-radio-group label:has(input:checked) {
+fieldset label.selected, fieldset label:has(input:checked),
+div[data-testid="radio-group"] label.selected, div[data-testid="radio-group"] label:has(input:checked),
+.dark fieldset label.selected, .dark fieldset label:has(input:checked) {
+    background-color: #eff6ff !important;
     background: #eff6ff !important;
     border-color: #2563eb !important;
     color: #1d4ed8 !important;
@@ -434,7 +509,7 @@ input, textarea, select {
     border: 1px solid #cbd5e1 !important;
     border-radius: 4px !important;
 }
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
     border-color: #2563eb !important;
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15) !important;
 }
@@ -505,7 +580,7 @@ input:focus, textarea:focus {
     margin-bottom: 8px !important;
 }
 .gr-accordion-header {
-    background: #f8fafc !important;
+    background: #eff6ff !important;
     color: #1e3a8a !important;
     font-weight: 700 !important;
     font-size: 12.5px !important;
@@ -526,14 +601,32 @@ def get_gcaemmcd_theme():
     ).set(
         body_background_fill="#f8fafc",
         body_background_fill_dark="#f8fafc",
+        body_text_color="#0f172a",
+        body_text_color_dark="#0f172a",
+        body_text_color_subdued="#334155",
+        body_text_color_subdued_dark="#334155",
         background_fill_primary="#ffffff",
         background_fill_primary_dark="#ffffff",
         background_fill_secondary="#f1f5f9",
         background_fill_secondary_dark="#f1f5f9",
         block_background_fill="#ffffff",
         block_background_fill_dark="#ffffff",
+        block_label_text_color="#0f172a",
+        block_label_text_color_dark="#0f172a",
+        block_title_text_color="#0f172a",
+        block_title_text_color_dark="#0f172a",
         input_background_fill="#ffffff",
         input_background_fill_dark="#ffffff",
+        input_border_color="#cbd5e1",
+        input_border_color_dark="#cbd5e1",
+        checkbox_label_background_fill="#ffffff",
+        checkbox_label_background_fill_dark="#ffffff",
+        checkbox_label_background_fill_selected="#eff6ff",
+        checkbox_label_background_fill_selected_dark="#eff6ff",
+        checkbox_label_text_color="#0f172a",
+        checkbox_label_text_color_dark="#0f172a",
+        checkbox_label_text_color_selected="#1d4ed8",
+        checkbox_label_text_color_selected_dark="#1d4ed8",
         button_secondary_background_fill="#ffffff",
         button_secondary_background_fill_dark="#ffffff",
         button_secondary_text_color="#1d4ed8",
@@ -565,12 +658,13 @@ def get_top_navbar_html():
     """
 
 
-def get_sub_header_html(specimen_id="Specimen S-01", status="Ready"):
+def get_sub_header_html(specimen_id="Specimen S-01", status="Ready", patient_id="PID-84021"):
     return f"""
     <div class="gca-sub-header">
         <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
             <div style="font-weight: 800; color: #0f172a;">
                 Diagnostic Session › <span class="gca-meta-pill">{specimen_id}</span>
+                <span style="margin-left: 8px; font-size: 11.5px; color: #1e40af; background: #eff6ff; border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 4px;">Patient: <strong>{patient_id}</strong></span>
             </div>
             <div><span style="color: #64748b;">Active Modalities:</span> <strong style="color: #1e40af;">H&E Tile + Clinical Narrative + 16 Biomarkers</strong></div>
             <div><span style="color: #64748b;">Pipeline Status:</span> <span style="color: #15803d; font-weight: 800;">● {status}</span></div>
