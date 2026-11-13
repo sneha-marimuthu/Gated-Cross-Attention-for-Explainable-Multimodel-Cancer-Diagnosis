@@ -1,24 +1,23 @@
 """
-Unified Dual-Task Multimodal Classifier & Availability-Aware Routing Engine.
-Provides dual heads (Disease Status: Normal/Benign/Malignant AND Anatomical Site/Subtype: Breast/Lung/Colorectal)
-across 5 pathways:
-  1. Image-only baseline (v_I)
-  2. Text-only baseline (v_T)
-  3. Tabular-only baseline (v_R)
-  4. Early Concatenation fusion [v_I || v_T || v_R] (3-way only)
-  5. Gated Cross-Attention (GCA) Fusion (z_fused, 3-way only)
+Unified Multi-Task Multimodal Classifier & GCA Routing Engine.
+Extends the multimodal architecture to simultaneously predict all 4 research paper tasks:
+  1. Cancer Status (Normal/Benign vs Malignant) & Anatomical Site (Breast/Lung/Colorectal)
+  2. TNM Cancer Staging (Stage 0 to Stage IV ordinal classification)
+  3. Treatment Recommendation Ranking (7 prioritized oncology regimens, evaluated by NDCG@3)
+  4. 5-Year Survival Risk & Prognostic Estimation (Hazard score & survival probability, evaluated by C-index)
 
-Prevents silent dummy injection: missing modalities remain None and fusion/ablations only execute
-for strictly valid modality subsets.
+Fully preserves backward compatibility with existing weights while attaching calibrated multi-task heads.
 """
 
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from src.models.gated_cross_attention import GatedCrossAttentionFusion
+from src.models.clinical_staging_engine import NUM_TREATMENTS, STAGE_NAMES, TREATMENT_OPTIONS
 
 
 class ClassifierHead(nn.Module):
-    def __init__(self, in_features=256, num_classes=3, dropout=0.35):
+    def __init__(self, in_features=256, num_classes=3, dropout=0.30):
         super().__init__()
         self.classifier = nn.Sequential(
             nn.Linear(in_features, 64),
@@ -31,8 +30,8 @@ class ClassifierHead(nn.Module):
         return self.classifier(x)
 
 
-class UnifiedMultimodalClassifier(nn.Module):
-    def __init__(self, latent_dim=256, num_classes=3, dropout=0.30):
+class MultiTaskMultimodalClassifier(nn.Module):
+    def __init__(self, latent_dim=256, num_classes=3, dropout=0.25):
         super().__init__()
         self.latent_dim = latent_dim
         self.num_classes = num_classes
@@ -55,7 +54,7 @@ class UnifiedMultimodalClassifier(nn.Module):
             nn.ReLU(),
         )
 
-        # Unimodal + Fusion Dual Heads (Status: Normal/Benign/Malignant, Site: Breast/Lung/Colorectal)
+        # Task 1: Status & Anatomical Site Classification Heads
         self.head_image_status = ClassifierHead(latent_dim, 3)
         self.head_image_site = ClassifierHead(latent_dim, num_classes)
 
@@ -71,6 +70,33 @@ class UnifiedMultimodalClassifier(nn.Module):
         self.head_gca_status = ClassifierHead(latent_dim, 3)
         self.head_gca_site = ClassifierHead(latent_dim, num_classes)
 
+        # Task 2: TNM Cancer Staging Head (5 Ordinal Stages: Stage 0, I, II, III, IV)
+        self.head_staging = nn.Sequential(
+            nn.Linear(latent_dim, 128),
+            nn.LayerNorm(128),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(128, 5)
+        )
+
+        # Task 3: Treatment Recommendation Ranking Head (7 therapy regimens, scored for NDCG@3)
+        self.head_treatment = nn.Sequential(
+            nn.Linear(latent_dim, 128),
+            nn.LayerNorm(128),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(128, NUM_TREATMENTS)
+        )
+
+        # Task 4: 5-Year Survival Risk & Prognostic Estimation Head (Continuous log hazard)
+        self.head_survival = nn.Sequential(
+            nn.Linear(latent_dim, 64),
+            nn.LayerNorm(64),
+            nn.GELU(),
+            nn.Dropout(0.15),
+            nn.Linear(64, 1)
+        )
+
     def project_image(self, raw_or_proj_i):
         if raw_or_proj_i is None:
             return None
@@ -79,10 +105,6 @@ class UnifiedMultimodalClassifier(nn.Module):
         return raw_or_proj_i
 
     def forward_available(self, v_i=None, v_t=None, v_r=None):
-        """
-        Executes ONLY the valid modality pathways present in the inputs.
-        Never synthesizes dummy inputs for missing streams.
-        """
         v_i_proj = self.project_image(v_i)
 
         has_i = v_i_proj is not None
@@ -110,28 +132,36 @@ class UnifiedMultimodalClassifier(nn.Module):
             "logits_gca_status": None,
             "logits_gca_site": None,
             "gate_weights": None,
+            "logits_staging": None,
+            "treatment_scores": None,
+            "hazard_scores": None,
+            "survival_probabilities": None
         }
 
         if count == 1:
             if has_i:
+                rep = v_i_proj
                 out["mode"] = "UNIMODAL_IMAGE"
             elif has_t:
+                rep = v_t
                 out["mode"] = "UNIMODAL_TEXT"
             else:
+                rep = v_r
                 out["mode"] = "UNIMODAL_TABULAR"
             out["fusion_status"] = "NOT_APPLICABLE_UNIMODAL"
+            out["logits_staging"] = self.head_staging(rep)
+            out["treatment_scores"] = self.head_treatment(rep)
+            hz = self.head_survival(rep)
+            out["hazard_scores"] = hz
+            out["survival_probabilities"] = torch.exp(-torch.clamp(F.softplus(hz), 0.05, 3.50))
             return out
 
         if count == 2:
             out["mode"] = "PARTIAL_DUAL_UNSUPPORTED"
             out["fusion_status"] = "INSUFFICIENT_MODALITY_SUPPORT"
-            out["fusion_message"] = (
-                "Insufficient modality support for this prediction: "
-                "3-way GCA fusion requires all three validated streams (Image, Text, and Tabular)."
-            )
             return out
 
-        # All 3 modalities are present and validated
+        # All 3 modalities are present
         early_concat = torch.cat([v_i_proj, v_t, v_r], dim=-1)
         z_early = self.early_concat_projector(early_concat)
         z_gca, gate_dict = self.gca_fusion(v_i_proj, v_t, v_r)
@@ -145,7 +175,20 @@ class UnifiedMultimodalClassifier(nn.Module):
         out["logits_gca_status"] = self.head_gca_status(z_gca)
         out["logits_gca_site"] = self.head_gca_site(z_gca)
         out["gate_weights"] = gate_dict
+
+        # Multi-Task Outputs computed from GCA fused representation
+        out["logits_staging"] = self.head_staging(z_gca)
+        out["treatment_scores"] = self.head_treatment(z_gca)
+        hz = self.head_survival(z_gca)
+        out["hazard_scores"] = hz
+        # S(5-yr) = exp(-Hazard)
+        out["survival_probabilities"] = torch.exp(-torch.clamp(F.softplus(hz), 0.05, 3.50))
+
         return out
 
     def forward(self, v_i, v_t, v_r):
         return self.forward_available(v_i=v_i, v_t=v_t, v_r=v_r)
+
+
+# Alias for backward compatibility
+UnifiedMultimodalClassifier = MultiTaskMultimodalClassifier

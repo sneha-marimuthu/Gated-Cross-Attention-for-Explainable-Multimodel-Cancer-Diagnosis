@@ -44,6 +44,7 @@ from src.ui.aisight_theme import (
     get_top_navbar_html, get_sub_header_html,
     get_viewer_toolbar_html, get_slide_badge_html, get_footer_disclaimer_html
 )
+from src.models.clinical_staging_engine import STAGE_NAMES, TREATMENT_OPTIONS
 
 # Initialize Explainability Engines
 print("[*] Booting GCAEMMCD Workstation Backend...")
@@ -212,6 +213,30 @@ def process_aisight_case(
     # 4. Compute Visual Explainability & Causal Masking
     cropped_pil = crop_eyepiece_vignette(pil_img)
     t_batch = preprocess_multicrop(cropped_pil).to(config.DEVICE)
+    raw_views, _ = img_extractor(t_batch)
+    has_i = True
+    has_t = bool(input_text and input_text.strip())
+    has_r = bool(include_tabular)
+
+    v_t = text_proj(text_extractor(input_text, device=config.DEVICE)) if has_t else None
+    if has_r:
+        raw_tab_dict_pre = {
+            "age": age, "sex": _map_radio_binary(sex, "Female"),
+            "smoking_pack_yrs": smoking, "ecog_score": _map_radio_int(ecog),
+            "cea_level": cea, "ca125_level": ca125, "ca19_9_level": ca19_9, "ki67_index": ki67,
+            "er_status": _map_radio_binary(er, "Positive (+)"),
+            "pr_status": _map_radio_binary(pr, "Positive (+)"),
+            "her2_status": _map_radio_binary(her2, "Positive (+)"),
+            "egfr_mutation": _map_radio_binary(egfr, "Mutant"),
+            "kras_mutation": _map_radio_binary(kras, "Mutant"),
+            "hemoglobin": hb, "wbc_count": wbc, "platelet_count": plt
+        }
+        from src.data.multimodal_dataset import validate_tabular_biomarkers, encode_biomarkers_with_mask
+        _, _, _, _, raw_vec_16_pre, mask_pre = validate_tabular_biomarkers(raw_tab_dict_pre)
+        vec_32_pre = encode_biomarkers_with_mask(raw_vec_16_pre, mask_pre)
+        v_r = tab_mlp(torch.tensor(vec_32_pre, dtype=torch.float32).unsqueeze(0).to(config.DEVICE))
+    else:
+        v_r = None
     raw_hm, _, _ = gradcam.generate_heatmap(t_batch[:1], pathway="image", head_type="site", target_class=target_site_idx)
 
     v_faith = evaluate_visual_faithfulness(
@@ -252,10 +277,61 @@ def process_aisight_case(
             f"- **Top-3 Biomarker Ablation Drop:** `+{t_faith['tabular_confidence_drop']*100:.2f}%`\n"
         )
 
-    # 7. Format Inspector Panels
+    # 7. Format Inspector Panels (Complete 4-Task Research Architecture)
+    # Compute Task 2 (TNM Staging), Task 3 (Treatment Ranking), and Task 4 (5-Year Survival)
+    multi_task_out = classifier(
+        raw_views.mean(dim=0, keepdim=True) if has_i else None,
+        v_t if has_t else None,
+        v_r if has_r else None
+    )
+
+    stage_md_block = ""
+    treatment_md_block = ""
+    survival_md_block = ""
+
+    if multi_task_out.get("logits_staging") is not None:
+        stg_logits = multi_task_out["logits_staging"][0]
+        stg_probs = torch.softmax(stg_logits, dim=-1).cpu().detach().numpy()
+        stg_idx = int(np.argmax(stg_probs))
+        stg_name = STAGE_NAMES[stg_idx]
+        stg_conf = stg_probs[stg_idx]
+
+        stage_md_block = (
+            f"#### 🏛️ Task 2: TNM Pathological Cancer Staging\n"
+            f"- **Predicted Stage:** <strong style='color: #1d4ed8;'>{stg_name}</strong> (`{stg_conf*100:.1f}%` confidence)\n"
+            f"- **Staging Distribution:** " + " · ".join([f"Stage {i}: `{stg_probs[i]*100:.1f}%`" for i in range(5)]) + "\n"
+        )
+
+    if multi_task_out.get("treatment_scores") is not None:
+        trt_scores = multi_task_out["treatment_scores"][0].cpu().detach().numpy()
+        ranked_trt = sorted(list(enumerate(trt_scores)), key=lambda x: -x[1])[:3]
+        treatment_lines = []
+        for rk, (t_idx, score) in enumerate(ranked_trt, 1):
+            treatment_lines.append(f"{rk}. **{TREATMENT_OPTIONS[t_idx]}** *(Priority Score: `{score:.2f}`)*")
+        treatment_md_block = (
+            f"#### 💊 Task 3: Multimodal Treatment Recommendation Ranking (NDCG@3)\n"
+            + "\n".join([f"- {tl}" for tl in treatment_lines]) + "\n"
+        )
+
+    if multi_task_out.get("survival_probabilities") is not None:
+        surv_val = float(multi_task_out["survival_probabilities"][0].item())
+        haz_val = float(multi_task_out["hazard_scores"][0].item())
+        risk_tier = "High Mortality Risk" if surv_val < 0.40 else ("Moderate Risk" if surv_val < 0.75 else "Favorable Prognosis")
+        risk_color = "#dc2626" if surv_val < 0.40 else ("#d97706" if surv_val < 0.75 else "#16a34a")
+
+        survival_md_block = (
+            f"#### ⏳ Task 4: 5-Year Survival Risk & Prognostic Estimation (C-Index)\n"
+            f"- **Estimated 5-Year Survival Probability:** <strong style='color: {risk_color}; font-size: 15px;'>{surv_val*100:.1f}%</strong>\n"
+            f"- **Cox Proportional Hazard Index:** `{haz_val:.2f}` ({risk_tier})\n"
+        )
+
     algo_md = (
-        f"### 🏛️ Multimodal Diagnostic Findings\n\n"
+        f"### 🏆 Multi-Task Multimodal Clinical Findings (4 Tasks)\n\n"
+        f"#### 🔬 Task 1: Neoplasm Classification & Anatomical Subtype\n"
         f"{diag_card}\n\n"
+        f"{stage_md_block}\n"
+        f"{treatment_md_block}\n"
+        f"{survival_md_block}\n"
         f"**Pathway Confidence Distribution:**\n"
         + "\n".join([f"- **{k}:** `{v*100:.1f}%`" for k, v in ps_dict.items()]) + "\n"
         + "\n".join([f"- **{k}:** `{v*100:.1f}%`" for k, v in po_dict.items()])
