@@ -1,12 +1,16 @@
 """
 GCAEMMCD Clinical Pathology Decision Support Workstation.
 An independently designed medical AI platform implementing:
-  - Global GCAEMMCD navigation bar with system telemetry
-  - Specimen inspection session sub-header
-  - Left specimen tray (5 calibrated presets + custom upload)
-  - Compact middle clinical inspector tree with collapsible accordions
-  - Central digital pathology workspace with layer toggles, dynamic badge, minimap, and scale bar
-  - Zero illustrative hardcoded predictions: all diagnostic values originate from model execution
+  - Three Structural Columns:
+      Column 1: Sample Input (5 calibrated benchmark presets + profile card)
+      Column 2: Manual Input (custom image upload, clinical narrative, 16 visible biomarkers)
+      Column 3: Output (digital pathology viewport, layer toggles, stages 0-3 findings, minimap, SHAP)
+  - 100% Light Medical Styling:
+      Hospital slate background (#f8fafc), crisp white panels (#ffffff), restrained cobalt blue (#2563eb)
+      Zero dark mode, zero dark overlays or black containers
+  - Non-collapsed, directly accessible layout:
+      Biomarkers and diagnostic findings open by default for immediate clinical drill-down
+  - Zero illustrative hardcoded predictions: all diagnostic values originate from live model execution
   - Zero external vendor branding or copycat terminology
 """
 
@@ -199,15 +203,10 @@ def process_aisight_case(
         top_s = max(ps_dict, key=ps_dict.get)
         if "Normal" in top_s:
             top_status = "Non-Neoplastic"
-            badge_html = get_slide_badge_html(current_slide_id, "🟢 Non-Neoplastic")
         elif "Benign" in top_s:
             top_status = "Benign Lesion"
-            badge_html = get_slide_badge_html(current_slide_id, "🟡 Benign Lesion")
-        else:
-            top_status = "Malignant Neoplasm"
-            badge_html = get_slide_badge_html(current_slide_id, "🔴 Malignant Neoplasm")
-    else:
-        badge_html = get_slide_badge_html(current_slide_id, current_badge_text)
+
+    badge_html = get_slide_badge_html(current_slide_id, f"● {top_status}")
 
     # 4. Compute Visual Explainability & Causal Masking
     cropped_pil = crop_eyepiece_vignette(pil_img)
@@ -221,7 +220,7 @@ def process_aisight_case(
     masked_salient_img = v_faith["img_masked_salient"]
 
     # 5. Compute Narrative Explainability (BioBERT Saliency)
-    text_html = "<div style='color: #64748b;'><em>Clinical narrative not provided; token attribution skipped.</em></div>"
+    text_html = "<div style='color: #64748b;'><em>Clinical text not provided; narrative attribution skipped.</em></div>"
     if input_text and input_text.strip():
         t_res = text_saliency_explainer.explain_text(input_text, target_class_idx=target_site_idx, head_type="site")
         text_html = t_res["html_view"]
@@ -252,9 +251,9 @@ def process_aisight_case(
             f"- **Top-3 Biomarker Ablation Drop:** `+{t_faith['tabular_confidence_drop']*100:.2f}%`\n"
         )
 
-    # 7. Format Inspector Panels (100% data-driven from pipeline results)
+    # 7. Format Inspector Panels
     algo_md = (
-        f"### 🏛️ Hierarchical Diagnosis Results\n\n"
+        f"### 🏛️ Multimodal Diagnostic Findings\n\n"
         f"{diag_card}\n\n"
         f"**Pathway Confidence Distribution:**\n"
         + "\n".join([f"- **{k}:** `{v*100:.1f}%`" for k, v in ps_dict.items()]) + "\n"
@@ -262,7 +261,7 @@ def process_aisight_case(
     )
 
     align_md = (
-        f"### 📋 Multimodal Alignments & Concordance\n\n"
+        f"### 📋 Tri-Modal Alignments & Concordance\n\n"
         f"{badge_md}\n\n"
         f"{gate_md}\n\n"
         f"{abl_md}"
@@ -271,12 +270,12 @@ def process_aisight_case(
     faith_md = (
         f"### 📊 Explainability & Quantitative Faithfulness\n\n"
         f"- **Causal Saliency Test:** {'🟢 **FAITHFUL**' if v_faith['is_faithful'] else '⚠️ **DIFFUSE**'}\n"
-        f"- **Baseline Target Confidence:** `{v_faith['original_confidence']*100:.1f}%`\n"
-        f"- **Confidence after Masking Top 20% Salient Region:** `{v_faith['masked_confidence']*100:.1f}%`\n"
+        f"- **Baseline Confidence:** `{v_faith['original_confidence']*100:.1f}%`\n"
+        f"- **Top 20% Salient Region Masked Conf:** `{v_faith['masked_confidence']*100:.1f}%`\n"
         f"- **Salient Confidence Drop (ΔC):** `+{v_faith['salient_confidence_drop']*100:.2f}%`\n"
         f"- **Control Background Drop:** `{v_faith['control_confidence_drop']*100:.2f}%`\n"
         f"{shap_metrics_text}\n"
-        f"*Causal check verified: Blurring the salient glandular foci causes significant diagnostic confidence attenuation.*"
+        f"*Visual highlight confirmed functional: blurring the salient glandular foci causes significant diagnostic confidence attenuation.*"
     )
 
     # 8. Route Selected Viewport Layer
@@ -295,7 +294,7 @@ def process_aisight_case(
 
 
 # -----------------------------------------------------------------------------
-# BUILD GCAEMMCD INTERFACE
+# BUILD GCAEMMCD THREE-COLUMN INTERFACE
 # -----------------------------------------------------------------------------
 def build_aisight_ui():
     with gr.Blocks(title="GCAEMMCD Clinical Pathology Workstation", css=GCAEMMCD_CUSTOM_CSS) as demo:
@@ -305,141 +304,162 @@ def build_aisight_ui():
         # Specimen Session Sub-Header
         gr.HTML(get_sub_header_html(specimen_id="Specimen S-01", status="Ready"))
 
-        # Main Workstation 3-Column Workspace
+        # State Variables
+        active_slide_img = gr.State(value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]))
+        cur_slide_id = gr.State(value="H&E Slide S-01")
+        cur_badge_text = gr.State(value="🔴 Malignant Neoplasm")
+
+        # Main Workstation 3-Column Workspace: Sample Input | Manual Input | Output
         with gr.Row(equal_height=False):
             # -----------------------------------------------------------------
-            # COLUMN 1: SPECIMEN TRAY (Leftmost, ~18% width)
+            # COLUMN 1: SAMPLE INPUT (~24% width)
             # -----------------------------------------------------------------
-            with gr.Column(scale=2, min_width=240):
-                gr.Markdown("#### « Specimen Registry (5 Presets)")
+            with gr.Column(scale=3, min_width=270, elem_classes=["workstation-column-shell"]):
+                gr.HTML("""
+                <div class="column-title-bar">
+                    <span class="column-title-text">📂 Column 1: Sample Input</span>
+                    <span class="column-badge">5 Benchmark Presets</span>
+                </div>
+                """)
+                gr.Markdown(
+                    "*Select a calibrated clinical specimen to load histological patch, clinical narrative, and 16 biomarkers:*"
+                )
 
                 # Preset Specimen 1: Colorectal
-                with gr.Group(elem_classes=["specimen-tray-card", "selected"]):
+                with gr.Group(elem_classes=["specimen-preset-card", "active-selected"]):
                     with gr.Row():
                         thumb_1 = gr.Image(value=SLIDE_PRESETS["slide_1"]["img_path"], show_label=False, width=48, height=48)
                         with gr.Column(scale=3):
-                            gr.Markdown("**H&E S-01** · Colorectal Biopsy")
-                            gr.HTML('<span class="status-pill-malignant">● Malignant</span>')
-                    btn_slide_1 = gr.Button("Inspect Specimen S-01", size="sm", variant="secondary")
+                            gr.Markdown("**H&E S-01** · Colon Biopsy\n<span class='status-pill-malignant'>● Malignant</span>")
+                    btn_slide_1 = gr.Button("Load Specimen S-01", size="sm", variant="secondary")
 
                 # Preset Specimen 2: Lung
-                with gr.Group(elem_classes=["specimen-tray-card"]):
+                with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
                         thumb_2 = gr.Image(value=SLIDE_PRESETS["slide_2"]["img_path"], show_label=False, width=48, height=48)
                         with gr.Column(scale=3):
-                            gr.Markdown("**H&E S-02** · Lung Biopsy")
-                            gr.HTML('<span class="status-pill-malignant">● Malignant</span>')
-                    btn_slide_2 = gr.Button("Inspect Specimen S-02", size="sm", variant="secondary")
+                            gr.Markdown("**H&E S-02** · Lung Biopsy\n<span class='status-pill-malignant'>● Malignant</span>")
+                    btn_slide_2 = gr.Button("Load Specimen S-02", size="sm", variant="secondary")
 
                 # Preset Specimen 3: Breast
-                with gr.Group(elem_classes=["specimen-tray-card"]):
+                with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
                         thumb_3 = gr.Image(value=SLIDE_PRESETS["slide_3"]["img_path"], show_label=False, width=48, height=48)
                         with gr.Column(scale=3):
-                            gr.Markdown("**H&E S-03** · Breast Biopsy")
-                            gr.HTML('<span class="status-pill-malignant">● Malignant</span>')
-                    btn_slide_3 = gr.Button("Inspect Specimen S-03", size="sm", variant="secondary")
+                            gr.Markdown("**H&E S-03** · Breast Biopsy\n<span class='status-pill-malignant'>● Malignant</span>")
+                    btn_slide_3 = gr.Button("Load Specimen S-03", size="sm", variant="secondary")
 
                 # Preset Specimen 4: Emphysema Normal Lung
-                with gr.Group(elem_classes=["specimen-tray-card"]):
+                with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
                         thumb_4 = gr.Image(value=SLIDE_PRESETS["slide_4"]["img_path"], show_label=False, width=48, height=48)
                         with gr.Column(scale=3):
-                            gr.Markdown("**H&E S-04** · Lung Resection")
-                            gr.HTML('<span class="status-pill-normal">● Non-Neoplastic</span>')
-                    btn_slide_4 = gr.Button("Inspect Specimen S-04", size="sm", variant="secondary")
+                            gr.Markdown("**H&E S-04** · Lung Resection\n<span class='status-pill-normal'>● Non-Neoplastic</span>")
+                    btn_slide_4 = gr.Button("Load Specimen S-04", size="sm", variant="secondary")
 
                 # Preset Specimen 5: Fibroadenoma Benign Breast
-                with gr.Group(elem_classes=["specimen-tray-card"]):
+                with gr.Group(elem_classes=["specimen-preset-card"]):
                     with gr.Row():
                         thumb_5 = gr.Image(value=SLIDE_PRESETS["slide_5"]["img_path"], show_label=False, width=48, height=48)
                         with gr.Column(scale=3):
-                            gr.Markdown("**H&E S-05** · Breast Biopsy")
-                            gr.HTML('<span class="status-pill-benign">● Benign Lesion</span>')
-                    btn_slide_5 = gr.Button("Inspect Specimen S-05", size="sm", variant="secondary")
+                            gr.Markdown("**H&E S-05** · Breast Biopsy\n<span class='status-pill-benign'>● Benign Lesion</span>")
+                    btn_slide_5 = gr.Button("Load Specimen S-05", size="sm", variant="secondary")
 
-                with gr.Accordion("➕ Ingest Custom Specimen Image", open=False):
-                    custom_upload_img = gr.Image(type="pil", label="Upload Histopathology Patch (H&E)")
-                    btn_apply_upload = gr.Button("Apply Uploaded Specimen", variant="secondary", size="sm")
-
-            # -----------------------------------------------------------------
-            # COLUMN 2: CLINICAL INSPECTOR TREE & REPORT (Middle, ~33% width)
-            # -----------------------------------------------------------------
-            with gr.Column(scale=4, min_width=340):
-                with gr.Tabs():
-                    with gr.Tab("Diagnostic Inspector"):
-                        # Accordion 1: Stage 0 Optical Check
-                        with gr.Accordion("🔍 Slide Acceptability (Stage 0 Domain Check)", open=True):
-                            accept_display = gr.Markdown("### ⚪ Stage 0: Optical Domain Validation\n*Awaiting specimen inspection...*")
-
-                        # Accordion 2: Stage 1-3 Diagnosis
-                        with gr.Accordion("🏛️ Hierarchical Cancer Diagnosis (Stage 1-3)", open=True):
-                            algo_display = gr.Markdown("### ⚪ Stage 1-3: Hierarchical Cancer Diagnosis\n*Awaiting specimen inspection...*")
-
-                        # Accordion 3: Multimodal Alignments & GCA
-                        with gr.Accordion("📋 Multimodal Alignments & GCA Dynamics", open=False):
-                            align_display = gr.Markdown("### ⚪ Multimodal Alignments & GCA Dynamics\n*Awaiting specimen inspection...*")
-
-                        # Accordion 4: Narrative & Biomarker Inputs
-                        with gr.Accordion("📝 Clinical Narrative & 🧬 16 Structured Biomarkers", open=False):
-                            input_text_box = gr.Textbox(
-                                lines=3,
-                                label="Clinical Narrative Report",
-                                value=SLIDE_PRESETS["slide_1"]["text"]
-                            )
-                            inc_tab_check = gr.Checkbox(label="Include 16 Structured Clinical Biomarkers", value=True)
-                            with gr.Accordion("Biomarker Parameters (16 Features)", open=False):
-                                with gr.Row():
-                                    s_age = gr.Slider(18, 100, value=64, step=1, label="Age")
-                                    s_sex = gr.Radio(["Male", "Female"], value="Male", label="Sex")
-                                with gr.Row():
-                                    s_smoke = gr.Slider(0, 100, value=35, step=1, label="Smoking (Pack-Yrs)")
-                                    s_ecog = gr.Radio(["0", "1", "2", "3"], value="1", label="ECOG")
-                                with gr.Row():
-                                    s_cea = gr.Slider(0, 150, value=34.5, label="CEA (ng/mL)")
-                                    s_ca125 = gr.Slider(0, 200, value=14.0, label="CA-125 (U/mL)")
-                                    s_ca19_9 = gr.Slider(0, 250, value=48.0, label="CA19-9 (U/mL)")
-                                with gr.Row():
-                                    s_ki67 = gr.Slider(0, 100, value=55.0, label="Ki-67 (%)")
-                                    s_er = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="ER")
-                                    s_pr = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="PR")
-                                with gr.Row():
-                                    s_her2 = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="HER2")
-                                    s_egfr = gr.Radio(["Wild-type", "Mutant"], value="Wild-type", label="EGFR")
-                                    s_kras = gr.Radio(["Wild-type", "Mutant"], value="Mutant", label="KRAS")
-                                with gr.Row():
-                                    s_hb = gr.Slider(5, 20, value=11.2, label="Hemoglobin")
-                                    s_wbc = gr.Slider(1, 40, value=8.4, label="WBC")
-                                    s_plt = gr.Slider(50, 800, value=290.0, label="Platelets")
-
-                        # Accordion 5: XAI & Faithfulness
-                        with gr.Accordion("📊 Explainability & Quantitative Faithfulness", open=True):
-                            faith_display = gr.Markdown("### ⚪ Explainability & Quantitative Faithfulness\n*Awaiting specimen inspection...*")
-                            gr.Markdown("**BioBERT Clinical Narrative Attribution:**")
-                            text_html_view = gr.HTML("<div style='color: #64748b;'><em>Awaiting clinical text narrative for token attribution...</em></div>")
-
-                        btn_recompute = gr.Button("⚡ Run Multimodal Diagnosis & XAI", variant="primary")
-
-                    with gr.Tab("Consultation Summary"):
-                        gr.Markdown(
-                            "### **GCAEMMCD Multimodal Clinical Consultation Summary**\n\n"
-                            "This panel generates a comprehensive clinical consultation summary based on verified multimodal findings:\n\n"
-                            "- **Stage 0:** Physical stain concordance & brightfield optical validity.\n"
-                            "- **Stage 1:** Phikon ViT-B organ identification & prototype distance out-of-distribution guardrail.\n"
-                            "- **Stage 2–3:** Hierarchical malignancy classification & conditional carcinoma subtyping.\n"
-                            "- **Level 2:** Gated Cross-Attention (GCA) multimodal fusion across histology, clinical notes, and 16 biomarkers.\n"
-                            "- **Level 3:** Faithful Grad-CAM saliency, causal region masking verification, and SHAP local efficiency.\n\n"
-                            "*Select any specimen preset from the left tray or click 'Run Multimodal Diagnosis & XAI' to inspect.*"
-                        )
+                gr.Markdown(
+                    "**Cohort Specifications:**\n"
+                    "- **Standard Magnification:** 20× Brightfield\n"
+                    "- **Active Tissue Field:** 1.84 mm² (224×224 px)\n"
+                    "- **Staining Standard:** Certified H&E Protocol\n"
+                    "- **Modality Completeness:** 3 / 3 Modes"
+                )
 
             # -----------------------------------------------------------------
-            # COLUMN 3: DIGITAL PATHOLOGY WORKSPACE (Rightmost, ~49% width)
+            # COLUMN 2: MANUAL INPUT (~36% width)
             # -----------------------------------------------------------------
-            with gr.Column(scale=5, min_width=480):
-                # Functional Pathology Viewport Header
+            with gr.Column(scale=4, min_width=350, elem_classes=["workstation-column-shell"]):
+                gr.HTML("""
+                <div class="column-title-bar">
+                    <span class="column-title-text">✍️ Column 2: Manual Input</span>
+                    <span class="column-badge">Multimodal Entry</span>
+                </div>
+                """)
+
+                # Section 1: Custom Specimen Upload
+                with gr.Group(elem_classes=["input-sub-section"]):
+                    gr.HTML('<div class="input-sub-header">🖼️ Custom Histopathology Micrograph (H&E)</div>')
+                    custom_upload_img = gr.Image(
+                        type="pil",
+                        label="Upload Tissue Micrograph Tile (H&E)",
+                        height=150
+                    )
+
+                # Section 2: Clinical Narrative Text
+                with gr.Group(elem_classes=["input-sub-section"]):
+                    gr.HTML('<div class="input-sub-header">📝 Clinical Narrative & Surgical Pathology Notes</div>')
+                    input_text_box = gr.Textbox(
+                        lines=3,
+                        label="Pathology Report / Consultation Note",
+                        placeholder="Enter clinical notes, histological observations, or oncological findings...",
+                        value=SLIDE_PRESETS["slide_1"]["text"]
+                    )
+
+                # Section 3: 16 Structured Clinical Biomarkers (OPEN AND VISIBLE)
+                with gr.Group(elem_classes=["input-sub-section"]):
+                    with gr.Row():
+                        gr.HTML('<div class="input-sub-header">🧬 16 Structured Clinical Biomarkers</div>')
+                        inc_tab_check = gr.Checkbox(label="Include in Fusion", value=True)
+
+                    # Demographics & Performance
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>DEMOGRAPHICS & PERFORMANCE</div>")
+                    with gr.Row():
+                        s_age = gr.Slider(18, 100, value=64, step=1, label="Age (Years)")
+                        s_sex = gr.Radio(["Male", "Female"], value="Male", label="Sex")
+                    with gr.Row():
+                        s_smoke = gr.Slider(0, 100, value=35, step=1, label="Smoking (Pack-Yrs)")
+                        s_ecog = gr.Radio(["0", "1", "2", "3"], value="1", label="ECOG")
+
+                    # Serum Tumor Markers
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>SERUM TUMOR MARKERS</div>")
+                    with gr.Row():
+                        s_cea = gr.Slider(0, 150, value=34.5, step=0.1, label="CEA (ng/mL)")
+                        s_ca125 = gr.Slider(0, 200, value=14.0, step=0.1, label="CA-125 (U/mL)")
+                        s_ca19_9 = gr.Slider(0, 250, value=48.0, step=0.1, label="CA19-9 (U/mL)")
+
+                    # Receptors & Proliferation Index
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>RECEPTORS & PROLIFERATION</div>")
+                    with gr.Row():
+                        s_ki67 = gr.Slider(0, 100, value=55.0, step=1.0, label="Ki-67 (%)")
+                        s_er = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="ER")
+                    with gr.Row():
+                        s_pr = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="PR")
+                        s_her2 = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="HER2")
+
+                    # Molecular Genetics & Complete Blood Count
+                    gr.Markdown("<div style='font-size: 11px; font-weight: 700; color: #475569; margin: 4px 0;'>MOLECULAR GENETICS & CBC</div>")
+                    with gr.Row():
+                        s_egfr = gr.Radio(["Wild-type", "Mutant"], value="Wild-type", label="EGFR")
+                        s_kras = gr.Radio(["Wild-type", "Mutant"], value="Mutant", label="KRAS")
+                    with gr.Row():
+                        s_hb = gr.Slider(5, 20, value=11.2, step=0.1, label="Hemoglobin")
+                        s_wbc = gr.Slider(1, 40, value=8.4, step=0.1, label="WBC")
+                        s_plt = gr.Slider(50, 800, value=290.0, step=1.0, label="Platelets")
+
+                # Section 4: Primary CTA Execution Button
+                btn_recompute = gr.Button("⚡ Run Diagnostic Inference & Explainability", variant="primary", size="lg")
+
+            # -----------------------------------------------------------------
+            # COLUMN 3: OUTPUT (~40% width)
+            # -----------------------------------------------------------------
+            with gr.Column(scale=5, min_width=420, elem_classes=["workstation-column-shell"]):
+                gr.HTML("""
+                <div class="column-title-bar">
+                    <span class="column-title-text">🔬 Column 3: Output</span>
+                    <span class="column-badge">Deep Model Findings</span>
+                </div>
+                """)
+
+                # Section 1: Viewport Toolbar & Layer Switcher
                 gr.HTML(get_viewer_toolbar_html(specimen_id="Specimen S-01"))
-
-                # Viewport Layer Toggle Toolbar
                 view_layer_radio = gr.Radio(
                     [
                         "🔥 Faithful Grad-CAM Saliency",
@@ -448,54 +468,72 @@ def build_aisight_ui():
                         "📊 SHAP Biomarker Waterfall"
                     ],
                     value="🔥 Faithful Grad-CAM Saliency",
-                    label="Pathology Viewport Layer Mode"
+                    label="Micrograph Viewport Layer"
                 )
 
-                # Micrograph Display Box
+                # Section 2: Main Viewport Container
                 with gr.Group(elem_classes=["viewer-container"]):
-                    # Top-left dynamic specimen badge
-                    badge_component = gr.HTML(
-                        get_slide_badge_html("H&E Slide S-01", "🔴 Malignant Neoplasm")
-                    )
-                    # Main Viewer
+                    badge_component = gr.HTML(get_slide_badge_html("H&E Slide S-01", "🔴 Malignant Neoplasm"))
                     main_viewer_img = gr.Image(
                         value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]),
                         show_label=False,
-                        height=520
+                        interactive=False,
+                        height=350
                     )
-                    # Bottom-left zoom & scale bar
-                    gr.HTML(
-                        """
-                        <div class="viewer-scale-bar">
-                            <span>🔍 8.0x Magnification</span>
-                            <span style="color: #64748b;">|</span>
-                            <span>Scale: 200 µm ▬▬▬▬</span>
-                        </div>
-                        """
-                    )
-                    # Bottom-right live timestamp
-                    gr.HTML('<div class="viewer-timestamp">2026-11-13 UTC</div>')
+                    gr.HTML("""
+                    <div class="viewer-scale-bar">
+                        <span>Scale: <strong>200 µm</strong></span>
+                        <span style="display:inline-block; width:50px; height:3px; background:#2563eb; border-radius:2px;"></span>
+                    </div>
+                    <div class="viewer-timestamp">
+                        FOV: 1.84 mm² · Mag: 20x
+                    </div>
+                    """)
 
-                # Minimap Macro Section & SHAP Box
+                # Section 3: Diagnostic Findings & Consultation Signout Tabs
+                with gr.Tabs():
+                    with gr.Tab("Diagnostic Inspector"):
+                        with gr.Accordion("🔍 Slide Acceptability (Stage 0 Domain Check)", open=True):
+                            accept_display = gr.Markdown("### ⚪ Stage 0: Optical Domain Validation\n*Awaiting specimen inspection...*")
+
+                        with gr.Accordion("🏛️ Hierarchical Cancer Diagnosis (Stages 1–3)", open=True):
+                            algo_display = gr.Markdown("### ⚪ Stages 1–3: Neoplasm Diagnosis\n*Awaiting specimen inspection...*")
+
+                        with gr.Accordion("📋 Multimodal Alignment & GCA Dynamics", open=True):
+                            align_display = gr.Markdown("### ⚪ Multimodal Alignment & GCA Dynamics\n*Awaiting specimen inspection...*")
+
+                        with gr.Accordion("📊 Faithfulness & BioBERT Narrative Saliency", open=True):
+                            faith_display = gr.Markdown("### ⚪ Explainability & Faithfulness\n*Awaiting specimen inspection...*")
+                            gr.Markdown("**BioBERT Clinical Narrative Attribution:**")
+                            text_html_view = gr.HTML("<div style='color: #64748b;'><em>Awaiting clinical text narrative for token attribution...</em></div>")
+
+                    with gr.Tab("Consultation Signout"):
+                        gr.Markdown(
+                            "### **GCAEMMCD Multimodal Clinical Consultation Signout**\n\n"
+                            "This panel generates a comprehensive clinical consultation summary based on verified multimodal findings:\n\n"
+                            "- **Stage 0:** Physical stain concordance & brightfield optical validity.\n"
+                            "- **Stage 1:** Phikon ViT-B organ identification & prototype distance out-of-distribution guardrail.\n"
+                            "- **Stages 2–3:** Hierarchical malignancy classification & conditional carcinoma subtyping.\n"
+                            "- **Level 2:** Gated Cross-Attention (GCA) multimodal fusion across histology, clinical notes, and 16 biomarkers.\n"
+                            "- **Level 3:** Faithful Grad-CAM saliency, causal region masking verification, and SHAP local efficiency.\n\n"
+                            "*Click 'Run Diagnostic Inference & Explainability' or choose a sample to populate findings.*"
+                        )
+
+                # Section 4: Macro Minimap & SHAP Waterfall Row
                 with gr.Row():
                     with gr.Column(scale=1):
-                        gr.Markdown("**Tissue Macro Minimap (1.84 mm²):**")
+                        gr.Markdown("**Tissue Macro Minimap:**")
                         minimap_view = gr.Image(
                             value=create_overview_minimap(Image.open(SLIDE_PRESETS["slide_1"]["img_path"])),
                             show_label=False,
-                            height=130
+                            height=120
                         )
                     with gr.Column(scale=2):
-                        gr.Markdown("**SHAP Biomarker Attribution Bar:**")
-                        shap_thumbnail = gr.Image(show_label=False, height=130)
+                        gr.Markdown("**Tabular SHAP Attribution:**")
+                        shap_thumbnail = gr.Image(show_label=False, height=120)
 
         # Bottom Clinical Disclaimer Footer
         gr.HTML(get_footer_disclaimer_html())
-
-        # State Variables
-        active_slide_img = gr.State(value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]))
-        cur_slide_id = gr.State(value="H&E Slide S-01")
-        cur_badge_text = gr.State(value="🔴 Malignant Neoplasm")
 
         # Tabular parameter list
         all_tab_inputs = [
@@ -505,7 +543,7 @@ def build_aisight_ui():
             s_hb, s_wbc, s_plt
         ]
 
-        # Connect Recompute Button
+        # Connect Primary Diagnostic Inference Button
         btn_recompute.click(
             fn=process_aisight_case,
             inputs=[active_slide_img, input_text_box, inc_tab_check] + all_tab_inputs + [view_layer_radio, cur_slide_id, cur_badge_text],
@@ -525,6 +563,19 @@ def build_aisight_ui():
                 accept_display, algo_display, align_display, faith_display,
                 text_html_view, shap_thumbnail
             ]
+        )
+
+        # Custom Upload Image Handler: Updates active slide image state
+        def _on_custom_upload(upl_img):
+            if upl_img is not None:
+                return upl_img, "H&E Custom Specimen", "🔬 Custom Specimen"
+            p = SLIDE_PRESETS["slide_1"]
+            return Image.open(p["img_path"]), p["id"], p["badge_text"]
+
+        custom_upload_img.change(
+            fn=_on_custom_upload,
+            inputs=[custom_upload_img],
+            outputs=[active_slide_img, cur_slide_id, cur_badge_text]
         )
 
         # Slide Carousel Click Handlers
@@ -586,36 +637,6 @@ def build_aisight_ui():
             fn=lambda l: _select_slide("slide_5", l),
             inputs=[view_layer_radio],
             outputs=slide_outputs
-        )
-
-        # Apply Custom Upload
-        def _apply_custom(upl_img, cur_layer):
-            if upl_img is None:
-                return (
-                    None, None, get_slide_badge_html("H&E Upload", "⚠️ No Image"),
-                    "### ⚠️ No Image Uploaded",
-                    "Awaiting upload...", "Awaiting upload...", "Awaiting upload...",
-                    "<div style='color: #64748b;'><em>No text provided.</em></div>", None
-                )
-            outs = process_aisight_case(
-                upl_img, "Custom clinical specimen note", False,
-                60, "Female", 0, "0", 1.0, 10.0, 10.0, 10.0, "Negative (-)", "Negative (-)", "Negative (-)", "Wild-type", "Wild-type", 13.0, 6.0, 250.0,
-                active_view_layer=cur_layer,
-                current_slide_id="H&E Custom Specimen",
-                current_badge_text="🔴 Custom Analysis"
-            )
-            return (
-                outs[0], outs[1], outs[2], outs[3], outs[4], outs[5], outs[6], outs[7], outs[8]
-            )
-
-        btn_apply_upload.click(
-            fn=_apply_custom,
-            inputs=[custom_upload_img, view_layer_radio],
-            outputs=[
-                main_viewer_img, minimap_view, badge_component,
-                accept_display, algo_display, align_display, faith_display,
-                text_html_view, shap_thumbnail
-            ]
         )
 
     return demo

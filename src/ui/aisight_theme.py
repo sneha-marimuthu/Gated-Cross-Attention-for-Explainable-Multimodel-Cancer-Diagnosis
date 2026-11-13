@@ -1,50 +1,60 @@
 """
 GCAEMMCD Clinical Pathology Decision Support Workstation Theme & Styling.
-Implements a clean, high-density medical workstation design system:
-  - Clinical slate background (#f8fafc) with crisp white (#ffffff) panels
-  - Subtle 1px structural borders (#e2e8f0) and restrained medical blue accents (#2563eb)
-  - Compact typography and high information density
-  - Vertical specimen navigation tray
-  - Collapsible clinical inspector tree
-  - Central digital pathology workspace with overlay badge, scale bar, minimap, and layer toggles
-  - 100% original GCAEMMCD branding (zero external vendor trademarks or copycat elements)
+Implements a clean, bright, high-density medical workstation design system:
+  - 100% Light Medical Palette (Hospital Slate #f8fafc, Crisp White #ffffff, Subtle Borders #e2e8f0)
+  - Zero dark mode or black boxes: all badges, toolbars, and containers use clean light colors
+  - Three distinct structural columns: Sample Input, Manual Input, and Diagnostic Output
+  - Restrained clinical blue accents (#2563eb, #1d4ed8) and pastel status indicators
+  - Full override against system dark mode to ensure high readability
+  - 100% original GCAEMMCD identity with zero vendor trademarks
 """
 
 GCAEMMCD_CUSTOM_CSS = """
-/* Global Reset and Medical Typography */
-body, .gradio-container {
-    background-color: #f1f5f9 !important;
+/* Global Reset and Light Medical Typography */
+:root, body, .gradio-container, .dark, [data-theme="dark"] {
+    color-scheme: light !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* Force light mode background across all Gradio sub-elements */
+.dark, .dark div, .dark span, .dark p, .dark label, .dark button, .dark input, .dark textarea,
+.dark .gr-panel, .dark .gr-box, .dark .gr-group, .dark .gr-accordion {
+    background-color: inherit !important;
     color: #0f172a !important;
 }
 
-/* Suppress default Gradio footer and header padding */
-footer {
-    display: none !important;
-}
+/* Container constraints */
 .gradio-container {
     max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    padding: 0 16px !important;
+    margin: 0 auto !important;
+}
+
+/* Suppress default Gradio footer */
+footer {
+    display: none !important;
 }
 
 /* Top GCAEMMCD Global Workstation Header */
 .gca-top-bar {
     background-color: #ffffff;
     border-bottom: 1px solid #e2e8f0;
-    padding: 10px 24px;
+    padding: 10px 20px;
+    margin: 0 -16px 8px -16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 .gca-brand {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 800;
-    color: #0f172a;
+    color: #1e3a8a;
     letter-spacing: -0.4px;
 }
 .gca-logo-icon {
@@ -85,57 +95,80 @@ footer {
 
 /* Specimen Session Sub-Header */
 .gca-sub-header {
-    background-color: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 8px 24px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
     color: #475569;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 .gca-meta-pill {
-    background-color: #ffffff;
-    border: 1px solid #cbd5e1;
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
     padding: 2px 8px;
     border-radius: 4px;
     font-weight: 700;
-    color: #0f172a;
+    color: #1d4ed8;
 }
 .gca-meta-label {
     color: #64748b;
     margin-right: 4px;
 }
 
-/* Pathology Viewport Header */
-.gca-viewport-bar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 7px 14px;
+/* Three Columns Card Shells */
+.workstation-column-shell {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+}
+.column-title-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 12px;
-    color: #475569;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+}
+.column-title-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e3a8a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.column-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 2px 6px;
 }
 
-/* Left Specimen Tray Cards */
-.specimen-tray-card {
+/* Specimen Selection Cards */
+.specimen-preset-card {
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     padding: 8px 10px !important;
     margin-bottom: 8px !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.15s ease !important;
 }
-.specimen-tray-card:hover {
+.specimen-preset-card:hover {
     border-color: #3b82f6 !important;
-    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.12) !important;
+    background-color: #f8fafc !important;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.08) !important;
 }
-.specimen-tray-card.selected {
+.specimen-preset-card.active-selected {
     border-color: #2563eb !important;
     background-color: #eff6ff !important;
     box-shadow: 0 0 0 1px #2563eb !important;
@@ -148,7 +181,7 @@ footer {
     gap: 4px;
     background-color: #fee2e2;
     color: #991b1b;
-    border: 1px solid #fecaca;
+    border: 1px solid #fca5a5;
     padding: 2px 8px;
     border-radius: 12px;
     font-size: 11px;
@@ -160,7 +193,7 @@ footer {
     gap: 4px;
     background-color: #dcfce7;
     color: #166534;
-    border: 1px solid #bbf7d0;
+    border: 1px solid #86efac;
     padding: 2px 8px;
     border-radius: 12px;
     font-size: 11px;
@@ -172,46 +205,80 @@ footer {
     gap: 4px;
     background-color: #fef9c3;
     color: #854d0e;
-    border: 1px solid #fef08a;
+    border: 1px solid #fde047;
     padding: 2px 8px;
     border-radius: 12px;
     font-size: 11px;
     font-weight: 700;
 }
 
-/* Main Viewport Container */
+/* Input Group Framing */
+.input-sub-section {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.input-sub-header {
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Pathology Viewport Header */
+.gca-viewport-bar {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #475569;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: -1px;
+}
+
+/* Main Viewport Container & Overlays - 100% LIGHT PALETTE */
 .viewer-container {
     background-color: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
     border-radius: 8px !important;
     overflow: hidden !important;
     position: relative !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
 }
 .viewer-slide-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 10px;
+    left: 10px;
     z-index: 20;
-    background-color: rgba(15, 23, 42, 0.88);
-    backdrop-filter: blur(6px);
-    color: #ffffff;
-    padding: 6px 12px;
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    padding: 5px 10px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 .viewer-scale-bar {
     position: absolute;
-    bottom: 12px;
-    left: 12px;
+    bottom: 10px;
+    left: 10px;
     z-index: 20;
-    background-color: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(6px);
+    background-color: rgba(255, 255, 255, 0.96);
     border: 1px solid #cbd5e1;
     padding: 4px 10px;
     border-radius: 6px;
@@ -221,33 +288,34 @@ footer {
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 .viewer-timestamp {
     position: absolute;
-    bottom: 12px;
-    right: 12px;
+    bottom: 10px;
+    right: 10px;
     z-index: 20;
-    background-color: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(6px);
-    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 1px solid #cbd5e1;
+    color: #475569;
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 11px;
     font-family: monospace;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-/* Translucent Clinical Disclaimer Footer */
+/* Light Clinical Disclaimer Footer */
 .gca-footer-disclaimer {
-    background-color: rgba(15, 23, 42, 0.92);
-    backdrop-filter: blur(6px);
-    color: #94a3b8;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    color: #64748b;
     text-align: center;
     padding: 8px 16px;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.2px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: 14px;
 }
 """
@@ -262,7 +330,7 @@ def get_top_navbar_html():
         <div style="display: flex; align-items: center; gap: 16px;">
             <div class="gca-brand">
                 <span class="gca-logo-icon">🧬</span>
-                <span>GCAEMMCD<span style="font-size: 13px; font-weight: 500; color: #64748b; margin-left: 8px;">Clinical Pathology Workstation</span></span>
+                <span>GCAEMMCD<span style="font-size: 13px; font-weight: 600; color: #64748b; margin-left: 8px;">Clinical Pathology Workstation</span></span>
             </div>
             <div class="gca-engine-badge">
                 <span style="color: #64748b;">Architecture:</span>
@@ -270,8 +338,8 @@ def get_top_navbar_html():
             </div>
         </div>
         <div class="gca-telemetry">
-            <div><span>Hardware Target:</span> <strong>NVIDIA RTX 2050 (CUDA)</strong></div>
-            <div><span>Models:</span> <strong>ResNet-50 · Phikon ViT-B · BioBERT v1.1</strong></div>
+            <div><span>Hardware:</span> <strong>NVIDIA RTX 2050 (CUDA)</strong></div>
+            <div><span>Backbones:</span> <strong>ResNet-50 · Phikon ViT-B · BioBERT v1.1</strong></div>
             <span class="gca-status-pill-active">● Models Calibrated</span>
         </div>
     </div>
