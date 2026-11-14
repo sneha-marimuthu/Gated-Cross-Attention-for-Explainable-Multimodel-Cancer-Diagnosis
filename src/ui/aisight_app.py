@@ -380,9 +380,9 @@ def build_aisight_ui():
         # Main Workstation 3-Column Workspace: Sample Input | Manual Input | Output
         with gr.Row(equal_height=False, elem_classes=["workstation-row-container"]):
             # -----------------------------------------------------------------
-            # COLUMN 1: SAMPLE INPUT (Fixed Height, Column Inner Scroll)
+            # COLUMN 1: SAMPLE INPUT (Responsive CSS Grid, Sticky Presets)
             # -----------------------------------------------------------------
-            with gr.Column(scale=3, min_width=250, elem_classes=["col-sample-input"]):
+            with gr.Column(scale=3, min_width=0, elem_classes=["col-sample-input"]):
                 gr.HTML("""
                 <div class="column-title-bar">
                     <span class="column-title-text">📂 Column 1: Sample Input</span>
@@ -447,11 +447,11 @@ def build_aisight_ui():
                 )
 
             # -----------------------------------------------------------------
-            # COLUMN 2: MANUAL INPUT (Fixed Height, Column Inner Scroll)
+            # COLUMN 2: MANUAL INPUT (Responsive Grid, Natural Height Flow)
             # Exactly formatted matching User Diagnosis System Box Layout:
             # 1. PATIENT INFORMATION | 2. HISTOPATHOLOGY IMAGE | 3. CLINICAL REPORT | 4. CLINICAL PARAMETERS | ANALYSE PATIENT
             # -----------------------------------------------------------------
-            with gr.Column(scale=5, min_width=350, elem_classes=["col-manual-input"]):
+            with gr.Column(scale=5, min_width=0, elem_classes=["col-manual-input"]):
                 gr.HTML("""
                 <div class="column-title-bar">
                     <span class="column-title-text">🩺 CANCER DIAGNOSIS SYSTEM · MULTIMODAL INPUT</span>
@@ -555,9 +555,9 @@ def build_aisight_ui():
                     btn_reset_tab = gr.Button("↺ Reset to Preset Defaults", variant="secondary", size="sm", elem_classes=["btn-punchy-secondary"])
 
             # -----------------------------------------------------------------
-            # COLUMN 3: OUTPUT (Fixed Height, Column Inner Scroll)
+            # COLUMN 3: OUTPUT (Responsive Grid, Natural Height Flow)
             # -----------------------------------------------------------------
-            with gr.Column(scale=5, min_width=380, elem_classes=["col-diagnostic-output"]):
+            with gr.Column(scale=5, min_width=0, elem_classes=["col-diagnostic-output"]):
                 gr.HTML("""
                 <div class="column-title-bar">
                     <span class="column-title-text">🔬 Column 3: Output</span>
@@ -596,7 +596,7 @@ def build_aisight_ui():
                     )
 
                     with gr.Row(equal_height=True):
-                        with gr.Column(scale=1, min_width=160):
+                        with gr.Column(scale=1, min_width=0):
                             gr.Markdown("**GRAD-CAM Heatmap Image:**")
                             main_viewer_img = gr.Image(
                                 value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]),
@@ -611,7 +611,7 @@ def build_aisight_ui():
                             </div>
                             """)
 
-                        with gr.Column(scale=1, min_width=160):
+                        with gr.Column(scale=1, min_width=0):
                             gr.Markdown("**SHAP Feature Importance:**")
                             shap_thumbnail = gr.Image(show_label=False, interactive=False, height=230)
                             shap_badge_comp = gr.HTML("""

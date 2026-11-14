@@ -47,9 +47,11 @@ GCAEMMCD_CUSTOM_CSS = """
 }
 
 html, body {
-    height: 100% !important;
-    max-height: 100vh !important;
-    overflow: hidden !important;
+    min-height: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -59,11 +61,13 @@ body, .gradio-container {
     color: #0f172a !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
     max-width: 100% !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-    padding: 0 14px !important;
+    min-height: 100vh !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 0 16px 20px 16px !important;
     margin: 0 !important;
-    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
     box-sizing: border-box !important;
 }
 
@@ -112,14 +116,17 @@ footer {
     background-color: #ffffff !important;
     border-bottom: 2.5px solid #2563eb !important;
     padding: 8px 18px !important;
-    margin: 0 -14px 6px -14px !important;
+    margin: 0 -16px 8px -16px !important;
     display: flex !important;
+    flex-wrap: wrap !important;
     justify-content: space-between !important;
     align-items: center !important;
+    gap: 10px !important;
     box-shadow: 0 2px 4px rgba(37, 99, 235, 0.05) !important;
 }
 .gca-brand {
     display: flex !important;
+    flex-wrap: wrap !important;
     align-items: center !important;
     gap: 10px !important;
     font-size: 18px !important;
@@ -170,10 +177,12 @@ footer {
     border-left: 4px solid #10b981 !important;
     border-radius: 6px !important;
     padding: 6px 14px !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     display: flex !important;
+    flex-wrap: wrap !important;
     justify-content: space-between !important;
     align-items: center !important;
+    gap: 8px !important;
     font-size: 12px !important;
     color: #334155 !important;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
@@ -188,80 +197,151 @@ footer {
 }
 
 /* -------------------------------------------------------------------------
-   3. THREE COLUMNS WORKSPACE: FIXED HEIGHT & COLUMN INNER SCROLL
+   3. RESPONSIVE THREE-COLUMN WORKSPACE WITH FLUID GRID & BREAKPOINTS
    ------------------------------------------------------------------------- */
 .workstation-row-container {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 12px !important;
-    height: calc(100vh - 138px) !important;
-    max-height: calc(100vh - 138px) !important;
-    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(210px, 1fr) minmax(320px, 1.7fr) minmax(360px, 1.9fr) !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
     margin-top: 2px !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 14px !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
-/* Column 1: Sample Input (Fixed Height, Independent Inner Scroll) */
-.col-sample-input {
-    flex: 0 0 23% !important;
-    min-width: 250px !important;
-    max-width: 300px !important;
-    height: 100% !important;
-    max-height: 100% !important;
-    min-height: 0 !important;
-    overflow-y: scroll !important;
-    overflow-x: hidden !important;
-    overscroll-behavior: contain !important;
-    scrollbar-width: thin !important;
-    scrollbar-color: #2563eb #eff6ff !important;
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    padding: 12px !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
-    box-sizing: border-box !important;
-}
-
-/* Column 2: Manual Input (Fixed Height, Independent Inner Scroll) */
-.col-manual-input {
-    flex: 0 0 38% !important;
-    min-width: 350px !important;
-    height: 100% !important;
-    max-height: 100% !important;
-    min-height: 0 !important;
-    overflow-y: scroll !important;
-    overflow-x: hidden !important;
-    overscroll-behavior: contain !important;
-    scrollbar-width: thin !important;
-    scrollbar-color: #2563eb #eff6ff !important;
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    padding: 12px !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
-    box-sizing: border-box !important;
-}
-
-/* Column 3: Output (Fixed Height, Independent Inner Scroll) */
+/* Column Base Styling: Fluid widths, natural height expansion, no hard clipping */
+.col-sample-input,
+.col-manual-input,
 .col-diagnostic-output {
-    flex: 0 0 39% !important;
-    min-width: 370px !important;
-    height: 100% !important;
-    max-height: 100% !important;
-    min-height: 0 !important;
-    overflow-y: scroll !important;
-    overflow-x: hidden !important;
-    overscroll-behavior: contain !important;
-    scrollbar-width: thin !important;
-    scrollbar-color: #2563eb #eff6ff !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
-    padding: 12px !important;
+    padding: 14px !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
     box-sizing: border-box !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #2563eb #eff6ff !important;
+}
+
+/* Large Desktop (>= 1240px): 3-Column Layout with sticky presets & smooth page flow */
+@media (min-width: 1240px) {
+    .workstation-row-container {
+        display: grid !important;
+        grid-template-columns: minmax(210px, 1fr) minmax(320px, 1.7fr) minmax(360px, 1.9fr) !important;
+        gap: 14px !important;
+    }
+    .col-sample-input {
+        position: sticky !important;
+        top: 10px !important;
+        max-height: calc(100vh - 80px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+    .col-manual-input {
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        overflow-x: hidden !important;
+    }
+    .col-diagnostic-output {
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        overflow-x: hidden !important;
+    }
+}
+
+/* Medium Screens (880px to 1239px): 2-Column Responsive Layout */
+@media (max-width: 1239px) and (min-width: 880px) {
+    .workstation-row-container {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        grid-template-areas:
+            "col-presets col-presets"
+            "col-manual col-output" !important;
+        gap: 14px !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+    .col-sample-input {
+        grid-area: col-presets !important;
+        width: 100% !important;
+        max-height: 290px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+    .col-manual-input {
+        grid-area: col-manual !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    .col-diagnostic-output {
+        grid-area: col-output !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Small Screens / Tablets (< 880px): Single-Column Stacked Layout */
+@media (max-width: 879px) {
+    .workstation-row-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    .col-sample-input,
+    .col-manual-input,
+    .col-diagnostic-output {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    .col-sample-input {
+        max-height: 320px !important;
+        overflow-y: auto !important;
+    }
+}
+
+/* Prevent nested inputs/rows from horizontal clipping */
+.col-manual-input .row,
+.col-manual-input div[class*="row"],
+.col-diagnostic-output .row,
+.col-diagnostic-output div[class*="row"] {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+.col-manual-input input,
+.col-manual-input textarea,
+.col-manual-input .gr-form,
+.col-manual-input .gr-box,
+.col-manual-input .gr-group,
+.col-diagnostic-output .gr-form,
+.col-diagnostic-output .gr-box,
+.col-diagnostic-output .gr-group {
+    min-width: 0 !important;
+    max-width: 100% !important;
 }
 
 /* Sleek High-Contrast WebKit Scrollbars (Chrome, Safari, Edge) */
@@ -288,26 +368,6 @@ footer {
 .col-manual-input::-webkit-scrollbar-thumb:hover,
 .col-diagnostic-output::-webkit-scrollbar-thumb:hover {
     background: #1d4ed8 !important;
-}
-.col-manual-input::-webkit-scrollbar-thumb:hover,
-.col-diagnostic-output::-webkit-scrollbar-thumb:hover {
-    background: #1d4ed8 !important;
-}
-
-/* Dynamic screen sizing: Wrap columns gracefully on small/tablet viewports */
-@media (max-width: 1024px) {
-    .workstation-row-container {
-        flex-direction: column !important;
-        height: auto !important;
-        max-height: none !important;
-    }
-    .col-sample-input,
-    .col-manual-input,
-    .col-diagnostic-output {
-        flex: 1 1 100% !important;
-        max-width: 100% !important;
-        height: 600px !important;
-    }
 }
 
 /* -------------------------------------------------------------------------
