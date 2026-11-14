@@ -11,6 +11,14 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+try:
+    import spaces
+    @spaces.GPU
+    def _zero_gpu_guard():
+        pass
+except Exception:
+    pass
+
 from src.ui.aisight_app import build_aisight_ui
 
 demo = build_aisight_ui()

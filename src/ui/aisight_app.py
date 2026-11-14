@@ -15,6 +15,13 @@ import gradio as gr
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+try:
+    import spaces
+    gpu_decorator = spaces.GPU
+except Exception:
+    def gpu_decorator(func):
+        return func
+
 import config
 from src.data.multimodal_dataset import validate_tabular_biomarkers, encode_biomarkers_with_mask
 from src.data.image_transforms import crop_eyepiece_vignette, preprocess_multicrop
@@ -144,6 +151,7 @@ def create_overview_minimap(pil_img):
     return Image.fromarray(arr)
 
 
+@gpu_decorator
 def process_aisight_case(
     input_img, input_text, include_tabular,
     age, sex, smoking, ecog, cea, ca125, ca19_9, ki67,
