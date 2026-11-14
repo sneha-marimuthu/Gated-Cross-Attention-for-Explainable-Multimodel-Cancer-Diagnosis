@@ -1,3 +1,15 @@
+---
+title: GCAEMMCD Cancer Diagnosis
+emoji: 🔬
+colorFrom: blue
+colorTo: indigo
+sdk: gradio
+sdk_version: 4.44.1
+app_file: app.py
+pinned: false
+license: apache-2.0
+---
+
 # GCAEMMCD: Hierarchical Explainable Histopathology Diagnostic System
 ## Architectural Audit, Calibration & Hierarchical Redesign
 
