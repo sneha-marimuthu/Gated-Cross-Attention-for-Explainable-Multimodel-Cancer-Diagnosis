@@ -18,7 +18,7 @@ Implements a punchy, ultra-clean light medical workstation design system:
 
 import gradio as gr
 
-# Force Light Mode JavaScript to permanently neutralize system dark mode
+# Force Light Mode & Workstation Column Resizers JavaScript
 FORCE_LIGHT_MODE_JS = """
 () => {
     function enforceLight() {
@@ -31,8 +31,166 @@ FORCE_LIGHT_MODE_JS = """
             localStorage.setItem('color-theme', 'light');
         } catch(e) {}
     }
+
+    function initWorkstationResizers() {
+        try {
+            if (document.getElementById('col-resizer-1') && document.getElementById('col-resizer-2')) {
+                return;
+            }
+            const container = document.querySelector('.workstation-row-container');
+            if (!container) return;
+            const col1 = container.querySelector('.col-sample-input');
+            const col2 = container.querySelector('.col-manual-input');
+            const col3 = container.querySelector('.col-diagnostic-output');
+            if (!col1 || !col2 || !col3) return;
+
+            // Restore previously saved widths if present
+            try {
+                const savedW1 = sessionStorage.getItem('gca_col1_width');
+                if (savedW1) {
+                    col1.style.setProperty('width', savedW1 + 'px', 'important');
+                    col1.style.setProperty('flex', '0 0 ' + savedW1 + 'px', 'important');
+                }
+                const savedW2 = sessionStorage.getItem('gca_col2_width');
+                if (savedW2) {
+                    col2.style.setProperty('width', savedW2 + 'px', 'important');
+                    col2.style.setProperty('flex', '0 0 ' + savedW2 + 'px', 'important');
+                }
+            } catch(e) {}
+
+            // Resizer 1 (Between Column 1 and Column 2)
+            if (!document.getElementById('col-resizer-1')) {
+                const resizer1 = document.createElement('div');
+                resizer1.id = 'col-resizer-1';
+                resizer1.className = 'col-width-resizer col-resizer-1';
+                resizer1.setAttribute('title', 'Drag to adjust column width · Double-click to reset');
+                resizer1.innerHTML = '<div class="resizer-handle-grip"><span></span><span></span><span></span></div>';
+                col1.after(resizer1);
+
+                function onMouseDown1(e) {
+                    e.preventDefault();
+                    const startX = e.clientX || (e.touches && e.touches[0].clientX);
+                    const startW = col1.getBoundingClientRect().width;
+                    resizer1.classList.add('is-dragging');
+                    document.body.style.cursor = 'col-resize';
+                    document.body.style.userSelect = 'none';
+
+                    function onMouseMove(ev) {
+                        const clientX = ev.clientX || (ev.touches && ev.touches[0].clientX);
+                        if (!clientX) return;
+                        const delta = clientX - startX;
+                        const containerW = container.getBoundingClientRect().width;
+                        const maxW = Math.min(500, containerW * 0.45);
+                        const newW = Math.max(170, Math.min(maxW, startW + delta));
+                        col1.style.setProperty('width', newW + 'px', 'important');
+                        col1.style.setProperty('flex', '0 0 ' + newW + 'px', 'important');
+                    }
+
+                    function onMouseUp() {
+                        resizer1.classList.remove('is-dragging');
+                        document.body.style.cursor = '';
+                        document.body.style.userSelect = '';
+                        document.removeEventListener('mousemove', onMouseMove);
+                        document.removeEventListener('mouseup', onMouseUp);
+                        document.removeEventListener('touchmove', onMouseMove);
+                        document.removeEventListener('touchend', onMouseUp);
+                        try {
+                            sessionStorage.setItem('gca_col1_width', Math.round(col1.getBoundingClientRect().width));
+                        } catch(e) {}
+                    }
+
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                    document.addEventListener('touchmove', onMouseMove, {passive: false});
+                    document.addEventListener('touchend', onMouseUp);
+                }
+
+                resizer1.addEventListener('mousedown', onMouseDown1);
+                resizer1.addEventListener('touchstart', onMouseDown1, {passive: false});
+                resizer1.addEventListener('dblclick', () => {
+                    col1.style.removeProperty('width');
+                    col1.style.removeProperty('flex');
+                    try { sessionStorage.removeItem('gca_col1_width'); } catch(e) {}
+                });
+            }
+
+            // Resizer 2 (Between Column 2 and Column 3)
+            if (!document.getElementById('col-resizer-2')) {
+                const resizer2 = document.createElement('div');
+                resizer2.id = 'col-resizer-2';
+                resizer2.className = 'col-width-resizer col-resizer-2';
+                resizer2.setAttribute('title', 'Drag to adjust column width · Double-click to reset');
+                resizer2.innerHTML = '<div class="resizer-handle-grip"><span></span><span></span><span></span></div>';
+                col2.after(resizer2);
+
+                function onMouseDown2(e) {
+                    e.preventDefault();
+                    const startX = e.clientX || (e.touches && e.touches[0].clientX);
+                    const startW = col2.getBoundingClientRect().width;
+                    resizer2.classList.add('is-dragging');
+                    document.body.style.cursor = 'col-resize';
+                    document.body.style.userSelect = 'none';
+
+                    function onMouseMove(ev) {
+                        const clientX = ev.clientX || (ev.touches && ev.touches[0].clientX);
+                        if (!clientX) return;
+                        const delta = clientX - startX;
+                        const containerW = container.getBoundingClientRect().width;
+                        const col1W = col1.getBoundingClientRect().width;
+                        const maxW = Math.min(850, containerW - col1W - 320);
+                        const newW = Math.max(280, Math.min(maxW, startW + delta));
+                        col2.style.setProperty('width', newW + 'px', 'important');
+                        col2.style.setProperty('flex', '0 0 ' + newW + 'px', 'important');
+                    }
+
+                    function onMouseUp() {
+                        resizer2.classList.remove('is-dragging');
+                        document.body.style.cursor = '';
+                        document.body.style.userSelect = '';
+                        document.removeEventListener('mousemove', onMouseMove);
+                        document.removeEventListener('mouseup', onMouseUp);
+                        document.removeEventListener('touchmove', onMouseMove);
+                        document.removeEventListener('touchend', onMouseUp);
+                        try {
+                            sessionStorage.setItem('gca_col2_width', Math.round(col2.getBoundingClientRect().width));
+                        } catch(e) {}
+                    }
+
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                    document.addEventListener('touchmove', onMouseMove, {passive: false});
+                    document.addEventListener('touchend', onMouseUp);
+                }
+
+                resizer2.addEventListener('mousedown', onMouseDown2);
+                resizer2.addEventListener('touchstart', onMouseDown2, {passive: false});
+                resizer2.addEventListener('dblclick', () => {
+                    col2.style.removeProperty('width');
+                    col2.style.removeProperty('flex');
+                    try { sessionStorage.removeItem('gca_col2_width'); } catch(e) {}
+                });
+            }
+        } catch(e) {}
+    }
+
+    function tryInit() {
+        if (!document.getElementById('col-resizer-1') || !document.getElementById('col-resizer-2')) {
+            initWorkstationResizers();
+        }
+    }
+
     enforceLight();
-    const observer = new MutationObserver(() => enforceLight());
+    tryInit();
+    setTimeout(tryInit, 200);
+    setTimeout(tryInit, 600);
+    setTimeout(tryInit, 1500);
+    window.addEventListener('DOMContentLoaded', tryInit);
+    window.addEventListener('load', tryInit);
+
+    const observer = new MutationObserver(() => {
+        enforceLight();
+        tryInit();
+    });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
 }
 """
@@ -47,11 +205,9 @@ GCAEMMCD_CUSTOM_CSS = """
 }
 
 html, body {
-    min-height: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    height: 100% !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -61,14 +217,14 @@ body, .gradio-container {
     color: #0f172a !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
     max-width: 100% !important;
-    min-height: 100vh !important;
-    height: auto !important;
-    max-height: none !important;
-    padding: 0 16px 20px 16px !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    padding: 0 12px 4px 12px !important;
     margin: 0 !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow: hidden !important;
     box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 /* Force light backgrounds & dark text across ALL Gradio elements */
@@ -197,131 +353,171 @@ footer {
 }
 
 /* -------------------------------------------------------------------------
-   3. RESPONSIVE THREE-COLUMN WORKSPACE WITH FLUID GRID & BREAKPOINTS
+   3. THREE COLUMNS WORKSPACE: COLUMN WIDTH ADJUSTERS & INDEPENDENT INTERNAL SCROLL
    ------------------------------------------------------------------------- */
 .workstation-row-container {
-    display: grid !important;
-    grid-template-columns: minmax(210px, 1fr) minmax(320px, 1.7fr) minmax(360px, 1.9fr) !important;
-    gap: 14px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    min-height: auto !important;
-    max-height: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    flex: 1 1 auto !important;
+    height: calc(100vh - 102px) !important;
+    max-height: calc(100vh - 102px) !important;
+    min-height: 480px !important;
     margin-top: 2px !important;
-    margin-bottom: 14px !important;
+    margin-bottom: 2px !important;
     box-sizing: border-box !important;
-    overflow: visible !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    position: relative !important;
 }
 
-/* Column Base Styling: Fluid widths, natural height expansion, no hard clipping */
-.col-sample-input,
-.col-manual-input,
-.col-diagnostic-output {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    height: auto !important;
-    min-height: auto !important;
-    max-height: none !important;
+/* Column 1: Sample Input (↕ Independent Internal Scroll) */
+.col-sample-input {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    flex: 0 0 240px !important;
+    width: 240px !important;
+    min-width: 170px !important;
+    max-width: 480px !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    min-height: 0 !important;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #2563eb #eff6ff !important;
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
-    padding: 14px !important;
+    padding: 12px !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
     box-sizing: border-box !important;
+}
+
+/* Column 2: Manual Input (↕ Independent Internal Scroll) */
+.col-manual-input {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    flex: 0 0 470px !important;
+    width: 470px !important;
+    min-width: 280px !important;
+    max-width: 850px !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    min-height: 0 !important;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
     scrollbar-width: thin !important;
     scrollbar-color: #2563eb #eff6ff !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+    box-sizing: border-box !important;
 }
 
-/* Large Desktop (>= 1240px): 3-Column Layout with sticky presets & smooth page flow */
-@media (min-width: 1240px) {
-    .workstation-row-container {
-        display: grid !important;
-        grid-template-columns: minmax(210px, 1fr) minmax(320px, 1.7fr) minmax(360px, 1.9fr) !important;
-        gap: 14px !important;
-    }
-    .col-sample-input {
-        position: sticky !important;
-        top: 10px !important;
-        max-height: calc(100vh - 80px) !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-    }
-    .col-manual-input {
-        height: auto !important;
-        max-height: none !important;
-        overflow-y: visible !important;
-        overflow-x: hidden !important;
-    }
-    .col-diagnostic-output {
-        height: auto !important;
-        max-height: none !important;
-        overflow-y: visible !important;
-        overflow-x: hidden !important;
-    }
+/* Column 3: Output (↕ Independent Internal Scroll) */
+.col-diagnostic-output {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    flex: 1 1 auto !important;
+    min-width: 320px !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    min-height: 0 !important;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #2563eb #eff6ff !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+    box-sizing: border-box !important;
 }
 
-/* Medium Screens (880px to 1239px): 2-Column Responsive Layout */
-@media (max-width: 1239px) and (min-width: 880px) {
-    .workstation-row-container {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-        grid-template-areas:
-            "col-presets col-presets"
-            "col-manual col-output" !important;
-        gap: 14px !important;
-        height: auto !important;
-        max-height: none !important;
-    }
-    .col-sample-input {
-        grid-area: col-presets !important;
-        width: 100% !important;
-        max-height: 290px !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-    }
-    .col-manual-input {
-        grid-area: col-manual !important;
-        width: 100% !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-    }
-    .col-diagnostic-output {
-        grid-area: col-output !important;
-        width: 100% !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-    }
+/* Column Width Adjuster Gutters (Interactive Splitters) */
+.col-width-resizer {
+    flex: 0 0 12px !important;
+    width: 12px !important;
+    min-width: 12px !important;
+    max-width: 12px !important;
+    cursor: col-resize !important;
+    background: transparent !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 50 !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    margin: 0 2px !important;
+    box-sizing: border-box !important;
 }
 
-/* Small Screens / Tablets (< 880px): Single-Column Stacked Layout */
-@media (max-width: 879px) {
-    .workstation-row-container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 16px !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-    }
-    .col-sample-input,
-    .col-manual-input,
-    .col-diagnostic-output {
-        flex: 1 1 100% !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 0 !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-    }
-    .col-sample-input {
-        max-height: 320px !important;
-        overflow-y: auto !important;
-    }
+/* Subtle Vertical Divider Line */
+.col-width-resizer::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 6px !important;
+    bottom: 6px !important;
+    left: 5px !important;
+    width: 2px !important;
+    background-color: #cbd5e1 !important;
+    border-radius: 1px !important;
+    transition: background-color 0.15s ease, width 0.15s ease !important;
+}
+
+/* Centered Grip Handle with Tactile Indicator Dots */
+.resizer-handle-grip {
+    width: 8px !important;
+    height: 38px !important;
+    background-color: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    z-index: 52 !important;
+    pointer-events: none !important;
+    transition: all 0.15s ease !important;
+}
+.resizer-handle-grip span {
+    display: block !important;
+    width: 2.5px !important;
+    height: 2.5px !important;
+    background-color: #64748b !important;
+    border-radius: 50% !important;
+}
+
+/* Active Hover & Drag Highlight */
+.col-width-resizer:hover::before,
+.col-width-resizer.is-dragging::before {
+    background-color: #2563eb !important;
+    width: 3px !important;
+}
+.col-width-resizer:hover .resizer-handle-grip,
+.col-width-resizer.is-dragging .resizer-handle-grip {
+    border-color: #2563eb !important;
+    background-color: #eff6ff !important;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25) !important;
+    transform: scale(1.1) !important;
+}
+.col-width-resizer:hover .resizer-handle-grip span,
+.col-width-resizer.is-dragging .resizer-handle-grip span {
+    background-color: #2563eb !important;
 }
 
 /* Prevent nested inputs/rows from horizontal clipping */
@@ -368,6 +564,35 @@ footer {
 .col-manual-input::-webkit-scrollbar-thumb:hover,
 .col-diagnostic-output::-webkit-scrollbar-thumb:hover {
     background: #1d4ed8 !important;
+}
+
+/* Responsive Fallback for Tablets (< 880px) */
+@media (max-width: 879px) {
+    body, .gradio-container {
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: auto !important;
+    }
+    .workstation-row-container {
+        flex-direction: column !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        gap: 14px !important;
+    }
+    .col-width-resizer {
+        display: none !important;
+    }
+    .col-sample-input,
+    .col-manual-input,
+    .col-diagnostic-output {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 600px !important;
+        max-height: 600px !important;
+        overflow-y: scroll !important;
+    }
 }
 
 /* -------------------------------------------------------------------------
