@@ -15,8 +15,15 @@ from transformers import AutoImageProcessor, AutoModel
 class CalibratedPhikonOrganEncoder(nn.Module):
     def __init__(self, model_name="owkin/phikon", freeze=True):
         super().__init__()
-        self.processor = AutoImageProcessor.from_pretrained(model_name, local_files_only=True)
-        self.vit = AutoModel.from_pretrained(model_name, local_files_only=True)
+        try:
+            self.processor = AutoImageProcessor.from_pretrained(model_name, local_files_only=True)
+        except Exception:
+            self.processor = AutoImageProcessor.from_pretrained(model_name, local_files_only=False)
+
+        try:
+            self.vit = AutoModel.from_pretrained(model_name, local_files_only=True)
+        except Exception:
+            self.vit = AutoModel.from_pretrained(model_name, local_files_only=False)
 
         if freeze:
             for p in self.vit.parameters():
