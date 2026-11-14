@@ -18,6 +18,22 @@ try:
 except Exception:
     pass
 
+# Patch starlette 1.0+ TemplateResponse signature change for older Gradio
+try:
+    from starlette.templating import Jinja2Templates
+    _orig_template_response = Jinja2Templates.TemplateResponse
+    def _safe_template_response(self, *args, **kwargs):
+        if args and isinstance(args[0], str):
+            name = args[0]
+            context = args[1] if len(args) > 1 else kwargs.get("context", {})
+            if isinstance(context, dict) and "request" in context:
+                req = context["request"]
+                return _orig_template_response(self, req, name, context)
+        return _orig_template_response(self, *args, **kwargs)
+    Jinja2Templates.TemplateResponse = _safe_template_response
+except Exception:
+    pass
+
 # Ensure project root is in sys.path
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
