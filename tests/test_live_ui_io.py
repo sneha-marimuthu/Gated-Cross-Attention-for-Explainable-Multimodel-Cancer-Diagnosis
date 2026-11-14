@@ -4,7 +4,10 @@ import torch
 import numpy as np
 from PIL import Image
 
-sys.path.insert(0, "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo")
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
 from src.ui.aisight_app import (
     SLIDE_PRESETS,
     process_aisight_case,
@@ -34,33 +37,37 @@ def test_inputs_and_outputs():
         tb = p["tab"]
         outs = process_aisight_case(
             im, p["text"], True, *tb,
-            active_view_layer="Faithful Grad-CAM Saliency",
+            active_view_layer="🔥 Faithful Grad-CAM Saliency",
             current_slide_id=p["id"],
-            current_badge_text=p["badge_text"]
+            current_badge_text=p["badge_text"],
+            patient_id=p.get("patient_id", "PAT-001"),
+            tumor_size=p.get("tumor_size", "3.2 cm")
         )
         
-        main_viewer_img, minimap_view, badge_component, accept_display, algo_display, align_display, faith_display, text_html_view, shap_thumbnail = outs
+        card_html, viewport_img, faith_badge, shap_img, shap_badge, meta = outs
         
         print(f"\n--- Output verification for {p['id']} ({key}) ---")
-        print(f"1. Viewport image shape: {np.array(main_viewer_img).shape}")
-        print(f"2. Minimap image shape: {np.array(minimap_view).shape}")
-        print(f"3. Badge HTML: {badge_component.strip()[:60]}...")
-        print(f"4. Acceptability (Stage 0): {'VERIFIED' if 'VERIFIED' in accept_display else 'REJECTED'}")
+        print(f"1. Viewport image shape: {np.array(viewport_img).shape if viewport_img is not None else None}")
+        print(f"2. Card HTML length: {len(card_html)} chars")
+        print(f"3. Faithfulness Badge: {faith_badge.strip()[:60]}...")
         
-        # Check Task 1 to 4 in algo_display
-        has_task1 = "Task 1: Neoplasm Classification" in algo_display
-        has_task2 = "Task 2: TNM Pathological Cancer Staging" in algo_display
-        has_task3 = "Task 3: Multimodal Treatment Recommendation" in algo_display
-        has_task4 = "Task 4: 5-Year Survival Risk" in algo_display
+        # Check Sections 01 to 06 in card_html
+        has_sec1 = "01. CANCER CLASSIFICATION" in card_html
+        has_sec2 = "02. TNM STAGING" in card_html
+        has_sec3 = "03. SURVIVAL ESTIMATION" in card_html
+        has_sec4 = "04. TREATMENT RECOMMENDATION" in card_html
+        has_sec5 = "05. EXPLAINABLE AI ANALYSIS" in card_html
+        has_sec6 = "06. MODEL & INFERENCE INFORMATION" in card_html
         
-        print(f"5. Tasks in algo_display:")
-        print(f"   - Task 1 (Classification): {has_task1}")
-        print(f"   - Task 2 (TNM Staging): {has_task2}")
-        print(f"   - Task 3 (Treatment Ranking): {has_task3}")
-        print(f"   - Task 4 (5-Year Survival): {has_task4}")
+        print(f"4. Sections in card_html:")
+        print(f"   - Section 01 (Classification): {has_sec1}")
+        print(f"   - Section 02 (TNM Staging): {has_sec2}")
+        print(f"   - Section 03 (Survival Estimation): {has_sec3}")
+        print(f"   - Section 04 (Treatment): {has_sec4}")
+        print(f"   - Section 05 (XAI): {has_sec5}")
+        print(f"   - Section 06 (Model Info): {has_sec6}")
         
-        print(f"6. BioBERT Token Saliency HTML length: {len(text_html_view)} chars (contains spans: {'<span' in text_html_view})")
-        print(f"7. SHAP chart generated: {shap_thumbnail is not None}")
+        print(f"5. SHAP chart generated: {shap_img is not None}")
 
     print("\n" + "=" * 60)
     print("STEP 3: TESTING CUSTOM UPLOAD INPUT GATE & OOD VALIDATOR")
@@ -70,8 +77,8 @@ def test_inputs_and_outputs():
         white_dummy, "Test note", True, 50, "Female", 0, "0", 1.0, 10.0, 10.0, 10.0,
         "Negative (0)", "Negative (0)", "Negative (0)", "Wildtype", "Wildtype", 13.0, 6.0, 250.0
     )
-    print(f"Blank image ingestion test: {dummy_outs[3][:80]}...")
-    print(f"Algorithm stopped: {'Execution Halted' in dummy_outs[4]}")
+    print(f"Blank image ingestion test: {dummy_outs[0][:80]}...")
+    print(f"Algorithm stopped: {'OPTICAL DOMAIN CHECK FAILED' in dummy_outs[0]}")
 
 if __name__ == "__main__":
     test_inputs_and_outputs()

@@ -12,13 +12,15 @@ import sys
 import numpy as np
 from PIL import Image, ImageFilter
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, PROJECT_ROOT)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
 
 import config
 from src.data.multimodal_dataset import generate_biomarker_vector
 from src.ui.level2_app import run_multimodal_pipeline
-from save_gradcam_images import save_gradcam_array
+from scripts.save_gradcam_images import save_gradcam_array
 
 
 def make_tab_args(vec=None, mask_ihc=False):
@@ -305,13 +307,19 @@ def main():
             "gradcam_caption": cam_cap,
         })
 
-    out_json = os.path.join(PROJECT_ROOT, "extended_test_results_summary.json")
+    out_dir_res = os.path.join(PROJECT_ROOT, "tests", "results")
+    os.makedirs(out_dir_res, exist_ok=True)
+    out_json = os.path.join(out_dir_res, "extended_test_results_summary.json")
     with open(out_json, "w") as f:
         json.dump(results, f, indent=2)
 
     print("=" * 100)
     print(f"[+] Saved extended test summary -> {out_json}")
     print(f"[+] Saved {sum(1 for r in results if r['gradcam_path'])} Grad-CAM PNGs -> {out_dir}")
+
+
+def test_extended_cases():
+    main()
 
 
 if __name__ == "__main__":

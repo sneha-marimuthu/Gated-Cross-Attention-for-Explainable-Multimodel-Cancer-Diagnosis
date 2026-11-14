@@ -15,8 +15,10 @@ import sys
 import numpy as np
 from PIL import Image
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, PROJECT_ROOT)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
 
 import config
 
@@ -30,7 +32,7 @@ from src.ui.aisight_theme import (
 from src.ui.report_generator import generate_downloadable_report_file
 
 
-def run_tests():
+def test_aisight_workstation():
     print("=" * 80)
     print("RUNNING GCAEMMCD CLINICAL WORKSTATION INTEGRATION TESTS")
     print("=" * 80)
@@ -135,4 +137,4 @@ def run_tests():
 
 
 if __name__ == "__main__":
-    run_tests()
+    test_aisight_workstation()

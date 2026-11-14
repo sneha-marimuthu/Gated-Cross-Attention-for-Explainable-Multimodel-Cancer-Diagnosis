@@ -12,14 +12,16 @@ import sys
 import numpy as np
 from PIL import Image
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, PROJECT_ROOT)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
 
 import config
 from src.ui.level3_app import run_level3_xai_audit, build_level3_dashboard
 
 
-def run_tests():
+def test_level3_xai():
     print("=" * 80)
     print("RUNNING GCAEMMCD LEVEL 3 EXPLAINABILITY & AUDIT VERIFICATION SUITE")
     print("=" * 80)
@@ -75,4 +77,4 @@ def run_tests():
 
 
 if __name__ == "__main__":
-    run_tests()
+    test_level3_xai()

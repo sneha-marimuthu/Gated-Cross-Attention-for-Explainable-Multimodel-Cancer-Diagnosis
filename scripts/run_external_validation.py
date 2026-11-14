@@ -26,7 +26,10 @@ from src.data.image_transforms import preprocess_multicrop
 from src.data.multimodal_dataset import generate_biomarker_vector
 from src.ui.level1_app import hierarchical_inference_pipeline
 from src.ui.level2_app import run_multimodal_pipeline, organ_extractor, organ_head
-from save_gradcam_images import save_gradcam_array
+try:
+    from scripts.save_gradcam_images import save_gradcam_array
+except ImportError:
+    from save_gradcam_images import save_gradcam_array
 
 
 def make_tab_args(vec=None):

@@ -1,8 +1,9 @@
 import os, json, sys, numpy as np, torch
 
-# Add project root to PYTHONPATH
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(project_root)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
 
 from src.ui.level2_app import (
     run_multimodal_pipeline,
@@ -88,42 +89,50 @@ test_cases = [
     },
 ]
 
-results = []
-for case in test_cases:
-    img = load_image(case['img_path']) if os.path.exists(case['img_path']) else None
-    txt = case.get('text', '')
-    include_tab = case.get('tabular', False)
-    tb = case.get('tab_vals', {}) if include_tab else {}
-    age = tb.get('age')
-    sex = tb.get('sex')
-    smoking = tb.get('smoking')
-    ecog = tb.get('ecog')
-    cea = tb.get('cea')
-    ca125 = tb.get('ca125')
-    ca19_9 = tb.get('ca19_9')
-    ki67 = tb.get('ki67')
-    er = tb.get('er')
-    pr = tb.get('pr')
-    her2 = tb.get('her2')
-    egfr = tb.get('egfr')
-    kras = tb.get('kras')
-    hb = tb.get('hb')
-    wbc = tb.get('wbc')
-    plt = tb.get('plt')
+def test_multimodal_pipeline():
+    results = []
+    for case in test_cases:
+        img = load_image(case['img_path']) if os.path.exists(case['img_path']) else None
+        txt = case.get('text', '')
+        include_tab = case.get('tabular', False)
+        tb = case.get('tab_vals', {}) if include_tab else {}
+        age = tb.get('age')
+        sex = tb.get('sex')
+        smoking = tb.get('smoking')
+        ecog = tb.get('ecog')
+        cea = tb.get('cea')
+        ca125 = tb.get('ca125')
+        ca19_9 = tb.get('ca19_9')
+        ki67 = tb.get('ki67')
+        er = tb.get('er')
+        pr = tb.get('pr')
+        her2 = tb.get('her2')
+        egfr = tb.get('egfr')
+        kras = tb.get('kras')
+        hb = tb.get('hb')
+        wbc = tb.get('wbc')
+        plt = tb.get('plt')
 
-    output = run_multimodal_pipeline(
-        input_img=img,
-        input_text=txt,
-        include_tabular=include_tab,
-        age=age, sex=sex, smoking=smoking, ecog=ecog, cea=cea, ca125=ca125,
-        ca19_9=ca19_9, ki67=ki67, er=er, pr=pr, her2=her2, egfr=egfr,
-        kras=kras, hb=hb, wbc=wbc, plt=plt,
-    )
-    summary = summarise_output(output)
-    results.append({"name": case['name'], "summary": summary})
+        output = run_multimodal_pipeline(
+            input_img=img,
+            input_text=txt,
+            include_tabular=include_tab,
+            age=age, sex=sex, smoking=smoking, ecog=ecog, cea=cea, ca125=ca125,
+            ca19_9=ca19_9, ki67=ki67, er=er, pr=pr, her2=her2, egfr=egfr,
+            kras=kras, hb=hb, wbc=wbc, plt=plt,
+        )
+        summary = summarise_output(output)
+        results.append({"name": case['name'], "summary": summary})
 
-out_path = os.path.join(os.path.dirname(__file__), 'test_results_summary.json')
-with open(out_path, 'w') as f:
-    json.dump(results, f, indent=2)
+    out_dir_res = os.path.join(PROJECT_ROOT, "tests", "results")
+    os.makedirs(out_dir_res, exist_ok=True)
+    out_path = os.path.join(out_dir_res, 'test_results_summary.json')
+    with open(out_path, 'w') as f:
+        json.dump(results, f, indent=2)
 
-print(f'✅ Summary saved to {out_path}')
+    print(f'✅ Summary saved to {out_path}')
+    return results
+
+
+if __name__ == "__main__":
+    test_multimodal_pipeline()

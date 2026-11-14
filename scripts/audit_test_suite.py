@@ -18,8 +18,10 @@ import sys
 import numpy as np
 from PIL import Image, ImageDraw
 
-# Ensure workspace root is in sys.path
-sys.path.insert(0, "/home/frappe/.gemini/antigravity/scratch/gcaemmcd_demo")
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
 
 from src.data.domain_validator import validate_histopathology_domain
 from src.ui.level1_app import hierarchical_inference_pipeline

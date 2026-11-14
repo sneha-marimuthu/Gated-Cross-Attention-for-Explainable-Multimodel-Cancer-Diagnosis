@@ -1,6 +1,12 @@
-import json, os, torch
+import json, os, sys, torch
 import torch.nn.functional as F
 from PIL import Image
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
+
 import config
 from src.data.image_transforms import preprocess_multicrop
 from src.ui.level2_app import organ_extractor, organ_head
