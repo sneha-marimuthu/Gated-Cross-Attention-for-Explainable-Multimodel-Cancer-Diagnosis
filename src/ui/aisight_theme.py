@@ -44,19 +44,59 @@ FORCE_LIGHT_MODE_JS = """
             const col3 = container.querySelector('.col-diagnostic-output');
             if (!col1 || !col2 || !col3) return;
 
-            // Restore previously saved widths if present
-            try {
-                const savedW1 = sessionStorage.getItem('gca_col1_width');
-                if (savedW1) {
-                    col1.style.setProperty('width', savedW1 + 'px', 'important');
-                    col1.style.setProperty('flex', '0 0 ' + savedW1 + 'px', 'important');
+            // Apply desktop vs mobile height and scrolling constraints
+            function applyLayoutConstraints() {
+                if (window.innerWidth < 992) {
+                    col1.style.removeProperty('width');
+                    col1.style.removeProperty('flex');
+                    col1.style.removeProperty('height');
+                    col1.style.removeProperty('max-height');
+                    col1.style.removeProperty('overflow-y');
+                    col2.style.removeProperty('width');
+                    col2.style.removeProperty('flex');
+                    col2.style.removeProperty('height');
+                    col2.style.removeProperty('max-height');
+                    col2.style.removeProperty('overflow-y');
+                    col3.style.removeProperty('width');
+                    col3.style.removeProperty('flex');
+                    col3.style.removeProperty('height');
+                    col3.style.removeProperty('max-height');
+                    col3.style.removeProperty('overflow-y');
+                    return;
                 }
-                const savedW2 = sessionStorage.getItem('gca_col2_width');
-                if (savedW2) {
-                    col2.style.setProperty('width', savedW2 + 'px', 'important');
-                    col2.style.setProperty('flex', '0 0 ' + savedW2 + 'px', 'important');
-                }
-            } catch(e) {}
+                const h = 'calc(100vh - 142px)';
+                col1.style.setProperty('overflow-y', 'auto', 'important');
+                col1.style.setProperty('overflow-x', 'hidden', 'important');
+                col1.style.setProperty('max-height', h, 'important');
+                col1.style.setProperty('height', h, 'important');
+
+                col2.style.setProperty('overflow-y', 'auto', 'important');
+                col2.style.setProperty('overflow-x', 'hidden', 'important');
+                col2.style.setProperty('max-height', h, 'important');
+                col2.style.setProperty('height', h, 'important');
+
+                col3.style.setProperty('overflow-y', 'auto', 'important');
+                col3.style.setProperty('overflow-x', 'hidden', 'important');
+                col3.style.setProperty('max-height', h, 'important');
+                col3.style.setProperty('height', h, 'important');
+
+                // Restore previously saved widths if present
+                try {
+                    const savedW1 = sessionStorage.getItem('gca_col1_width');
+                    if (savedW1) {
+                        col1.style.setProperty('width', savedW1 + 'px', 'important');
+                        col1.style.setProperty('flex', '0 0 ' + savedW1 + 'px', 'important');
+                    }
+                    const savedW2 = sessionStorage.getItem('gca_col2_width');
+                    if (savedW2) {
+                        col2.style.setProperty('width', savedW2 + 'px', 'important');
+                        col2.style.setProperty('flex', '0 0 ' + savedW2 + 'px', 'important');
+                    }
+                } catch(e) {}
+            }
+
+            applyLayoutConstraints();
+            window.addEventListener('resize', applyLayoutConstraints);
 
             // Resizer 1 (Between Column 1 and Column 2)
             if (!document.getElementById('col-resizer-1')) {
@@ -355,14 +395,19 @@ footer {
 /* -------------------------------------------------------------------------
    3. THREE COLUMNS WORKSPACE: COLUMN WIDTH ADJUSTERS & INDEPENDENT INTERNAL SCROLL
    ------------------------------------------------------------------------- */
+:root {
+    --workstation-height: calc(100vh - 142px);
+}
+
 .workstation-row-container {
     display: flex !important;
     flex-direction: row !important;
+    flex-wrap: nowrap !important;
     align-items: stretch !important;
     gap: 0 !important;
     flex: 1 1 auto !important;
-    height: calc(100vh - 102px) !important;
-    max-height: calc(100vh - 102px) !important;
+    height: var(--workstation-height) !important;
+    max-height: var(--workstation-height) !important;
     min-height: 480px !important;
     margin-top: 2px !important;
     margin-bottom: 2px !important;
@@ -377,14 +422,14 @@ footer {
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: nowrap !important;
-    flex: 0 0 240px !important;
-    width: 240px !important;
-    min-width: 170px !important;
+    flex: 0 0 250px !important;
+    width: 250px !important;
+    min-width: 180px !important;
     max-width: 480px !important;
-    height: 100% !important;
-    max-height: 100% !important;
+    height: var(--workstation-height) !important;
+    max-height: var(--workstation-height) !important;
     min-height: 0 !important;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     overflow-x: hidden !important;
     overscroll-behavior: contain !important;
     scrollbar-width: thin !important;
@@ -402,14 +447,14 @@ footer {
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: nowrap !important;
-    flex: 0 0 470px !important;
-    width: 470px !important;
+    flex: 0 0 490px !important;
+    width: 490px !important;
     min-width: 280px !important;
     max-width: 850px !important;
-    height: 100% !important;
-    max-height: 100% !important;
+    height: var(--workstation-height) !important;
+    max-height: var(--workstation-height) !important;
     min-height: 0 !important;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     overflow-x: hidden !important;
     overscroll-behavior: contain !important;
     scrollbar-width: thin !important;
@@ -429,10 +474,10 @@ footer {
     flex-wrap: nowrap !important;
     flex: 1 1 auto !important;
     min-width: 320px !important;
-    height: 100% !important;
-    max-height: 100% !important;
+    height: var(--workstation-height) !important;
+    max-height: var(--workstation-height) !important;
     min-height: 0 !important;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     overflow-x: hidden !important;
     overscroll-behavior: contain !important;
     scrollbar-width: thin !important;
@@ -443,6 +488,13 @@ footer {
     padding: 12px !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
     box-sizing: border-box !important;
+}
+
+/* Prevent flex children from squishing vertically so columns scroll naturally */
+.col-sample-input > *,
+.col-manual-input > *,
+.col-diagnostic-output > * {
+    flex-shrink: 0 !important;
 }
 
 /* Column Width Adjuster Gutters (Interactive Splitters) */
@@ -466,7 +518,7 @@ footer {
 
 /* Subtle Vertical Divider Line */
 .col-width-resizer::before {
-    content: '' !important;
+    content: "" !important;
     position: absolute !important;
     top: 6px !important;
     bottom: 6px !important;
@@ -500,9 +552,10 @@ footer {
     height: 2.5px !important;
     background-color: #64748b !important;
     border-radius: 50% !important;
+    transition: background-color 0.15s ease !important;
 }
 
-/* Active Hover & Drag Highlight */
+/* Hover & Active States for Resizers */
 .col-width-resizer:hover::before,
 .col-width-resizer.is-dragging::before {
     background-color: #2563eb !important;
@@ -544,21 +597,21 @@ footer {
 .col-sample-input::-webkit-scrollbar,
 .col-manual-input::-webkit-scrollbar,
 .col-diagnostic-output::-webkit-scrollbar {
-    width: 9px !important;
+    width: 8px !important;
     display: block !important;
 }
 .col-sample-input::-webkit-scrollbar-track,
 .col-manual-input::-webkit-scrollbar-track,
 .col-diagnostic-output::-webkit-scrollbar-track {
-    background: #eff6ff !important;
-    border-radius: 5px !important;
-    border-left: 1px solid #bfdbfe !important;
+    background: #f8fafc !important;
+    border-radius: 4px !important;
+    border-left: 1px solid #e2e8f0 !important;
 }
 .col-sample-input::-webkit-scrollbar-thumb,
 .col-manual-input::-webkit-scrollbar-thumb,
 .col-diagnostic-output::-webkit-scrollbar-thumb {
     background: #2563eb !important;
-    border-radius: 5px !important;
+    border-radius: 4px !important;
 }
 .col-sample-input::-webkit-scrollbar-thumb:hover,
 .col-manual-input::-webkit-scrollbar-thumb:hover,
@@ -566,19 +619,74 @@ footer {
     background: #1d4ed8 !important;
 }
 
-/* Responsive Fallback for Tablets (< 880px) */
-@media (max-width: 879px) {
-    body, .gradio-container {
+/* Active Case Inspection Banner in Column 2 */
+.active-inspection-banner {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    background: #eff6ff !important;
+    border: 1px solid #bfdbfe !important;
+    border-left: 4.5px solid #2563eb !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 10px !important;
+    font-size: 12px !important;
+    color: #1e3a8a !important;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.08) !important;
+    line-height: 1.4 !important;
+}
+.active-inspection-banner.empty-state {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-left: 4.5px solid #64748b !important;
+    color: #475569 !important;
+}
+
+/* Clinical Workstation Footer Bar */
+.gca-footer-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    color: #64748b !important;
+    padding: 6px 14px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    box-sizing: border-box !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Action Buttons Container Spacing (Prevents Cutoff) */
+.input-actions-row {
+    margin-top: 12px !important;
+    margin-bottom: 24px !important;
+    padding-bottom: 12px !important;
+    gap: 10px !important;
+}
+
+/* Responsive Layout for Mobile & Tablets (< 992px) */
+@media (max-width: 991px) {
+    html, body, .gradio-container {
         height: auto !important;
         max-height: none !important;
         overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
     .workstation-row-container {
         flex-direction: column !important;
+        flex-wrap: nowrap !important;
         height: auto !important;
         max-height: none !important;
+        min-height: auto !important;
         overflow: visible !important;
-        gap: 14px !important;
+        gap: 16px !important;
     }
     .col-width-resizer {
         display: none !important;
@@ -589,9 +697,24 @@ footer {
         flex: 1 1 100% !important;
         width: 100% !important;
         max-width: 100% !important;
-        height: 600px !important;
-        max-height: 600px !important;
-        overflow-y: scroll !important;
+        min-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+        margin-bottom: 14px !important;
+    }
+    .gca-top-bar, .gca-sub-header, .gca-footer-bar {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        height: auto !important;
+        max-height: none !important;
+        gap: 6px !important;
+        padding: 10px 14px !important;
+    }
+    .gca-telemetry {
+        flex-wrap: wrap !important;
     }
 }
 
@@ -1281,7 +1404,7 @@ def get_top_navbar_html():
             </div>
         </div>
         <div class="gca-telemetry">
-            <div><span>Hardware:</span> <strong style="color: #1d4ed8;">NVIDIA RTX 2050 (CUDA)</strong></div>
+            <div><span>Hardware:</span> <strong style="color: #1d4ed8;">NVIDIA GPU (CUDA Acceleration)</strong></div>
             <div><span>Backbones:</span> <strong>ResNet-50 · Phikon ViT-B · BioBERT</strong></div>
             <span class="gca-status-pill-active">● Models Calibrated</span>
         </div>
@@ -1302,6 +1425,27 @@ def get_sub_header_html(specimen_id="Specimen S-01", status="Ready", patient_id=
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
             <span style="color: #059669; font-weight: 700; font-size: 12px;">● Optical Domain & OOD Protection: <strong>ACTIVE</strong></span>
+        </div>
+    </div>
+    """
+
+
+def get_active_inspection_banner_html(specimen_id="H&E Slide S-01", organ="Colorectal Biopsy", patient_id="PID-84021", is_reset=False):
+    if is_reset or not specimen_id:
+        return """
+        <div class="active-inspection-banner empty-state">
+            <span style="font-size: 15px;">📋</span>
+            <div>
+                <strong>Workstation Standby:</strong> Custom input mode ready. Upload a histopathology image tile or enter clinical notes below, or select a pre-calibrated benchmark specimen from Column 1.
+            </div>
+        </div>
+        """
+    return f"""
+    <div class="active-inspection-banner">
+        <span style="font-size: 15px;">🔍</span>
+        <div>
+            <strong>Inspecting Specimen:</strong> <span style="color: #1e40af; font-weight: 800;">{specimen_id}</span> · <strong>{organ}</strong> (Patient <strong>{patient_id}</strong>)
+            <div style="font-size: 11px; color: #3b82f6; margin-top: 1px;">Histological micrograph tile and all 16 clinical biomarker parameters loaded into input fields below. Modify any parameter and click 'Run Multimodal Analysis'.</div>
         </div>
     </div>
     """
@@ -1339,7 +1483,16 @@ def get_slide_badge_html(slide_id="H&E Slide S-01", status_badge="🔴 Malignant
 
 def get_footer_disclaimer_html():
     return """
-    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; color: #64748b; text-align: center; padding: 4px 14px; font-size: 11px; font-weight: 500; height: 26px; line-height: 16px; box-sizing: border-box; margin-top: 4px;">
-        GCAEMMCD Multimodal Cancer Diagnosis Decision Support System • For Investigational & Research Use Only • Zero-Leakage 5-Fold Cross-Validated
+    <div class="gca-footer-bar">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <span style="font-weight: 800; color: #1e3a8a; font-size: 11.5px;">🏥 GCAEMMCD Clinical Decision Support (v2.4)</span>
+            <span style="color: #64748b; font-size: 11px;">• For Investigational & Research Use Only</span>
+            <span style="color: #64748b; font-size: 11px;">• AJCC 8th Ed. & NCCN Standardized</span>
+            <span style="color: #64748b; font-size: 11px;">• 5-Fold Stratified Cross-Validation</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 11px;">
+            <span style="color: #475569;">Backbones: <strong>Phikon ViT-B · BioBERT · Clinical MLP</strong></span>
+            <span style="color: #15803d; font-weight: 700;">● System Operational (CUDA)</span>
+        </div>
     </div>
     """

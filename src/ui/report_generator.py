@@ -15,6 +15,35 @@ import numpy as np
 import torch
 
 
+def render_empty_or_validation_state(message=None):
+    """
+    Renders clean, professional standby/validation card when inputs are empty or reset.
+    """
+    if not message:
+        message = "Please upload a histopathology image or select a calibrated clinical specimen from Column 1 to begin multimodal analysis."
+    return f"""
+    <div class="cancer-diag-card empty-state-card">
+        <div class="diag-card-header" style="background:#f8fafc; border-bottom: 2.5px solid #94a3b8;">
+            <div class="diag-card-top-row">
+                <span class="diag-card-brand-title" style="color: #475569;">GCAEMMCD</span>
+                <span class="diag-card-pid-badge" style="color: #475569; border-color: #cbd5e1; background: #ffffff;">STANDBY</span>
+            </div>
+            <div class="diag-card-subtitle" style="color: #64748b;">AI-POWERED MULTIMODAL CANCER DIAGNOSIS SYSTEM</div>
+        </div>
+        <div style="padding: 26px 18px; text-align: center; color: #475569;">
+            <div style="font-size: 38px; margin-bottom: 12px;">🔬</div>
+            <div style="font-size: 15px; font-weight: 800; color: #1e3a8a; margin-bottom: 8px;">Clinical Decision Support Ready</div>
+            <div style="font-size: 12.5px; line-height: 1.6; max-width: 480px; margin: 0 auto; color: #475569;">
+                {message}
+            </div>
+            <div style="margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; color: #2563eb; background: #eff6ff; padding: 6px 14px; border-radius: 20px; border: 1px solid #bfdbfe;">
+                <span>💡 <strong>Quick Start:</strong> Click any specimen in Column 1 to inspect and evaluate validated benchmark cases</span>
+            </div>
+        </div>
+    </div>
+    """
+
+
 def compute_four_class_probabilities(ps_dict, po_dict):
     """
     Computes calibrated joint probabilities for the 4 canonical research classes:

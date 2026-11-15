@@ -32,12 +32,14 @@ from src.models.clinical_staging_engine import STAGE_NAMES, TREATMENT_OPTIONS
 from src.ui.report_generator import (
     render_cancer_diagnosis_html_report,
     render_model_info_html,
+    render_empty_or_validation_state,
     generate_downloadable_report_file
 )
 from src.ui.aisight_theme import (
     GCAEMMCD_CUSTOM_CSS, FORCE_LIGHT_MODE_JS, get_gcaemmcd_theme,
     get_top_navbar_html, get_sub_header_html, get_viewer_toolbar_html,
-    get_slide_badge_html, get_footer_disclaimer_html
+    get_slide_badge_html, get_footer_disclaimer_html,
+    get_active_inspection_banner_html
 )
 from src.ui.level1_app import (
     validate_histopathology_domain
@@ -175,14 +177,11 @@ def process_aisight_case(
     """
     if input_img is None:
         blank_viewer = Image.new("RGB", (600, 450), color="#f8fafc")
-        initial_card, initial_meta = render_cancer_diagnosis_html_report(
-            patient_id, tumor_size,
-            {"Normal / Non-Neoplastic": 0.5, "Benign Neoplasm": 0.5, "Malignant Carcinoma": 0.0},
-            {"Breast Carcinoma": 0.33, "Colorectal Carcinoma": 0.33, "Lung Carcinoma": 0.34},
-            None, {}, ""
+        initial_card = render_empty_or_validation_state(
+            "Please upload a histopathology image or select a calibrated clinical specimen from Column 1 to begin multimodal analysis."
         )
         empty_badge = """<div style="font-size:10.5px; color:#64748b; padding:2px;">Awaiting specimen...</div>"""
-        return (initial_card, blank_viewer, empty_badge, None, empty_badge, initial_meta)
+        return (initial_card, blank_viewer, empty_badge, None, empty_badge, {})
 
     pil_img = input_img.convert("RGB") if hasattr(input_img, "convert") else Image.fromarray(np.asarray(input_img)).convert("RGB")
 
@@ -378,7 +377,7 @@ def build_aisight_ui():
         gr.HTML(get_top_navbar_html())
 
         # Specimen Session Sub-Header (Dynamic)
-        sub_header_comp = gr.HTML(get_sub_header_html(specimen_id="Specimen S-01", status="Ready", patient_id="PID-84021"))
+        sub_header_comp = gr.HTML(get_sub_header_html(specimen_id="H&E Slide S-01", status="Ready", patient_id="PID-84021"))
 
         # State Variables
         active_slide_img = gr.State(value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]))
@@ -388,17 +387,17 @@ def build_aisight_ui():
         # Main Workstation 3-Column Workspace: Sample Input | Manual Input | Output
         with gr.Row(equal_height=False, elem_classes=["workstation-row-container"]):
             # -----------------------------------------------------------------
-            # COLUMN 1: SAMPLE INPUT (Responsive CSS Grid, Sticky Presets)
+            # COLUMN 1: SAMPLE INPUT (Calibrated Benchmark Specimens)
             # -----------------------------------------------------------------
             with gr.Column(scale=3, min_width=0, elem_classes=["col-sample-input"]):
                 gr.HTML("""
                 <div class="column-title-bar">
-                    <span class="column-title-text">📂 Column 1: Sample Input</span>
-                    <span class="column-badge">5 Presets</span>
+                    <span class="column-title-text">📂 SPECIMEN PRESETS</span>
+                    <span class="column-badge">5 Benchmark Cases</span>
                 </div>
                 """)
                 gr.Markdown(
-                    "*Select a calibrated clinical specimen to load histological patch, clinical narrative, and 16 biomarkers:*"
+                    "*Select a calibrated clinical specimen to inspect its histological patch, clinical narrative, and 16 biomarkers:*"
                 )
 
                 # Preset Specimen 1: Colorectal
@@ -455,35 +454,39 @@ def build_aisight_ui():
                 )
 
             # -----------------------------------------------------------------
-            # COLUMN 2: MANUAL INPUT (Responsive Grid, Natural Height Flow)
-            # Exactly formatted matching User Diagnosis System Box Layout:
-            # 1. PATIENT INFORMATION | 2. HISTOPATHOLOGY IMAGE | 3. CLINICAL REPORT | 4. CLINICAL PARAMETERS | ANALYSE PATIENT
+            # COLUMN 2: PATIENT CASE & MULTIMODAL INPUTS (↕ Independent Scroll)
             # -----------------------------------------------------------------
             with gr.Column(scale=5, min_width=0, elem_classes=["col-manual-input"]):
                 gr.HTML("""
                 <div class="column-title-bar">
-                    <span class="column-title-text">🩺 CANCER DIAGNOSIS SYSTEM · MULTIMODAL INPUT</span>
-                    <span class="column-badge">Interactive Entry</span>
+                    <span class="column-title-text">🩺 PATIENT CASE & MULTIMODAL INPUTS</span>
+                    <span class="column-badge">Custom Entry</span>
                 </div>
                 """)
 
-                # 1. PATIENT INFORMATION
+                # Active Case Inspection Banner
+                inspection_banner_comp = gr.HTML(
+                    value=get_active_inspection_banner_html("H&E Slide S-01", "Colorectal Biopsy", "PID-84021")
+                )
+
+                # 1. PATIENT DEMOGRAPHICS & VITALS
                 with gr.Group(elem_classes=["input-sub-section"]):
-                    gr.HTML('<div class="input-section-header">👤 1. PATIENT INFORMATION</div>')
+                    gr.HTML('<div class="input-section-header">👤 1. PATIENT DEMOGRAPHICS & VITALS</div>')
                     with gr.Row():
                         s_patient_id = gr.Textbox(value="PID-84021", label="Patient ID", placeholder="e.g. PID-90421", scale=2)
                         s_age = gr.Slider(18, 100, value=64, step=1, label="Age (Years)", scale=2)
                     with gr.Row():
-                        s_sex = gr.Radio(["Male", "Female"], value="Male", label="Gender / Biological Sex")
-                        s_ecog = gr.Radio(["0", "1", "2", "3"], value="1", label="ECOG Performance (0: Active, 1: Ambulatory, 2: Bedridden <50%, 3: Bedridden >50%)")
+                        s_sex = gr.Radio(["Male", "Female"], value="Male", label="Biological Sex")
+                        s_ecog = gr.Radio(["0", "1", "2", "3"], value="1", label="ECOG Performance (0: Active, 1: Ambulatory, 2: In Bed <50%, 3: In Bed >50%)")
 
-                # 2. HISTOPATHOLOGY IMAGE
+                # 2. HISTOPATHOLOGY SPECIMEN
                 with gr.Group(elem_classes=["input-sub-section"]):
-                    gr.HTML('<div class="input-section-header">🔬 2. HISTOPATHOLOGY IMAGE</div>')
+                    gr.HTML('<div class="input-section-header">🔬 2. HISTOPATHOLOGY SPECIMEN</div>')
                     custom_upload_img = gr.Image(
+                        value=Image.open(SLIDE_PRESETS["slide_1"]["img_path"]),
                         type="pil",
-                        label="Upload Image / Drag & Drop (Tissue Micrograph Tile 224×224 px RGB)",
-                        height=140
+                        label="Specimen Micrograph Tile (224×224 px H&E RGB)",
+                        height=150
                     )
                     with gr.Row():
                         s_mag = gr.Radio(
@@ -499,13 +502,13 @@ def build_aisight_ui():
                                 "Breast Biopsy",
                                 "Normal / Non-Neoplastic"
                             ],
-                            value="Auto-Detect (Phikon ViT-B Gatekeeper)",
+                            value="Colorectal Biopsy",
                             label="Suspected Anatomical Site"
                         )
 
-                # 3. CLINICAL REPORT
+                # 3. CLINICAL VIGNETTE & PATHOLOGY REPORT
                 with gr.Group(elem_classes=["input-sub-section"]):
-                    gr.HTML('<div class="input-section-header">📝 3. CLINICAL REPORT</div>')
+                    gr.HTML('<div class="input-section-header">📝 3. CLINICAL VIGNETTE & PATHOLOGY REPORT</div>')
                     s_narrative_tpl = gr.Dropdown(
                         list(REPORT_TEMPLATES.keys()),
                         value="Custom / Free Text Note",
@@ -513,16 +516,16 @@ def build_aisight_ui():
                     )
                     input_text_box = gr.Textbox(
                         lines=3,
-                        label="Enter Pathology Report / Surgical Observations",
+                        label="Pathology Report / Surgical Observations",
                         placeholder="Enter clinical notes, histological observations, or oncological findings...",
                         value=SLIDE_PRESETS["slide_1"]["text"]
                     )
-                    gr.HTML('<div style="font-size: 11px; color: #64748b; margin-top: -2px;">Context: Maximum 256 BioBERT tokens (Section 2 Viva Specification)</div>')
+                    gr.HTML('<div style="font-size: 11px; color: #64748b; margin-top: -2px;">Clinical observations analyzed by BioBERT encoder (max 256 tokens).</div>')
 
-                # 4. CLINICAL PARAMETERS
+                # 4. CLINICAL BIOMARKERS & LABS
                 with gr.Group(elem_classes=["input-sub-section"]):
                     with gr.Row():
-                        gr.HTML('<div class="input-section-header" style="flex:1;">🧬 4. CLINICAL PARAMETERS & BIOMARKERS</div>')
+                        gr.HTML('<div class="input-section-header" style="flex:1;">🧬 4. CLINICAL BIOMARKERS & LABS</div>')
                         inc_tab_check = gr.Checkbox(label="Include in Fusion", value=True)
 
                     # Tumor Size & Smoking
@@ -541,15 +544,15 @@ def build_aisight_ui():
                     gr.HTML('<div class="clinical-ref-chip">ℹ️ Proliferation Index: Ki-67 < 15% Low · 15–30% Intermediate · > 30% High</div>')
                     with gr.Row():
                         s_ki67 = gr.Slider(0, 100, value=55.0, step=1.0, label="Ki-67 Index (%)")
-                        s_er = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="ER")
+                        s_er = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="ER Status")
                     with gr.Row():
-                        s_pr = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="PR")
-                        s_her2 = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="HER2")
+                        s_pr = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="PR Status")
+                        s_her2 = gr.Radio(["Negative (-)", "Positive (+)"], value="Negative (-)", label="HER2 Status")
 
                     # Genetics & CBC Labs
                     with gr.Row():
-                        s_egfr = gr.Radio(["Wild-type", "Mutant"], value="Wild-type", label="EGFR")
-                        s_kras = gr.Radio(["Wild-type", "Mutant"], value="Mutant", label="KRAS")
+                        s_egfr = gr.Radio(["Wild-type", "Mutant"], value="Wild-type", label="EGFR Mutation")
+                        s_kras = gr.Radio(["Wild-type", "Mutant"], value="Mutant", label="KRAS Mutation")
 
                     gr.HTML('<div class="clinical-ref-chip">ℹ️ Hematology Norms: Hemoglobin 12.0–17.5 g/dL · WBC 4.5–11.0 ×10³/µL · Platelets 150–450 ×10³/µL</div>')
                     with gr.Row():
@@ -557,19 +560,19 @@ def build_aisight_ui():
                         s_wbc = gr.Slider(1, 40, value=8.4, step=0.1, label="WBC (×10³/µL)")
                         s_plt = gr.Slider(50, 800, value=290.0, step=1.0, label="Platelets (×10³/µL)")
 
-                # Section 5: Primary Action Button: ANALYSE PATIENT
-                with gr.Row():
-                    btn_recompute = gr.Button("🔬 ANALYSE PATIENT", variant="primary", size="lg", elem_classes=["btn-punchy-primary"])
-                    btn_reset_tab = gr.Button("↺ Reset to Preset Defaults", variant="secondary", size="sm", elem_classes=["btn-punchy-secondary"])
+                # Section 5: Primary Action Buttons
+                with gr.Row(elem_classes=["input-actions-row"]):
+                    btn_recompute = gr.Button("🔬 Run Multimodal Analysis", variant="primary", size="lg", elem_classes=["btn-punchy-primary"], scale=3)
+                    btn_reset_tab = gr.Button("↺ Reset All Inputs", variant="secondary", size="lg", elem_classes=["btn-punchy-secondary"], scale=2)
 
             # -----------------------------------------------------------------
-            # COLUMN 3: OUTPUT (Responsive Grid, Natural Height Flow)
+            # COLUMN 3: OUTPUT (Diagnostic Findings & Explainability)
             # -----------------------------------------------------------------
             with gr.Column(scale=5, min_width=0, elem_classes=["col-diagnostic-output"]):
                 gr.HTML("""
                 <div class="column-title-bar">
-                    <span class="column-title-text">🔬 Column 3: Output</span>
-                    <span class="column-badge">Deep Model Findings</span>
+                    <span class="column-title-text">📊 DIAGNOSTIC FINDINGS & EXPLAINABILITY</span>
+                    <span class="column-badge">Tri-Modal GCA</span>
                 </div>
                 """)
 
@@ -665,56 +668,110 @@ def build_aisight_ui():
             outputs=[input_text_box]
         )
 
-        # Connect Primary Diagnostic Inference Button (ANALYSE PATIENT)
+        # Connect Primary Diagnostic Inference Button (Run Multimodal Analysis)
         def _on_run_inference(img, txt, inc_tab, p_id, t_size, mag_val, org_val, v_layer, sl_id, bdg_t, *tab_vals):
+            # Edge case handling for empty inputs
+            if img is None and (not txt or not str(txt).strip()):
+                sh_html = get_sub_header_html(specimen_id="None", status="Standby", patient_id=p_id or "Unassigned")
+                banner_html = get_active_inspection_banner_html(is_reset=True)
+                standby_card = render_empty_or_validation_state(
+                    "⚠️ Input Data Required: Please provide at least a histopathology image tile or clinical observations to perform multimodal cancer diagnosis. You may also select a calibrated benchmark specimen from Column 1."
+                )
+                blank_viewer = Image.new("RGB", (600, 450), color="#f8fafc")
+                empty_badge = """<div style="font-size:10.5px; color:#b91c1c; padding:2px;">⚠️ Incomplete Case</div>"""
+                return (sh_html, banner_html, standby_card, blank_viewer, empty_badge, None, empty_badge, {})
+
+            effective_img = img if img is not None else Image.open(SLIDE_PRESETS["slide_1"]["img_path"])
+            effective_pid = p_id.strip() if p_id and str(p_id).strip() else "PID-CUSTOM"
+            effective_slide = sl_id if sl_id else "Custom Specimen"
+
             outs = process_aisight_case(
-                img, txt, inc_tab, *tab_vals[:16],
+                effective_img, txt, inc_tab, *tab_vals[:16],
                 active_view_layer=v_layer,
-                current_slide_id=sl_id,
+                current_slide_id=effective_slide,
                 current_badge_text=bdg_t,
                 magnification=mag_val,
                 suspected_organ=org_val,
-                patient_id=p_id,
+                patient_id=effective_pid,
                 tumor_size=t_size
             )
-            sh_html = get_sub_header_html(specimen_id=sl_id, status="Analyzed", patient_id=p_id)
-            return (sh_html,) + outs
+            sh_html = get_sub_header_html(specimen_id=effective_slide, status="Analyzed", patient_id=effective_pid)
+            banner_html = get_active_inspection_banner_html(specimen_id=effective_slide, organ=org_val, patient_id=effective_pid)
+            return (sh_html, banner_html) + outs
 
         inference_outputs = [
-            sub_header_comp,
+            sub_header_comp, inspection_banner_comp,
             report_card_comp, main_viewer_img, faith_badge_comp,
             shap_thumbnail, shap_badge_comp, report_meta_state
         ]
 
         btn_recompute.click(
             fn=_on_run_inference,
-            inputs=[active_slide_img, input_text_box, inc_tab_check, s_patient_id, s_tumor_size, s_mag, s_organ, view_layer_radio, cur_slide_id, cur_badge_text] + all_tab_inputs,
+            inputs=[custom_upload_img, input_text_box, inc_tab_check, s_patient_id, s_tumor_size, s_mag, s_organ, view_layer_radio, cur_slide_id, cur_badge_text] + all_tab_inputs,
             outputs=inference_outputs
         )
 
         # Connect Viewport Layer Switcher
         view_layer_radio.change(
             fn=_on_run_inference,
-            inputs=[active_slide_img, input_text_box, inc_tab_check, s_patient_id, s_tumor_size, s_mag, s_organ, view_layer_radio, cur_slide_id, cur_badge_text] + all_tab_inputs,
+            inputs=[custom_upload_img, input_text_box, inc_tab_check, s_patient_id, s_tumor_size, s_mag, s_organ, view_layer_radio, cur_slide_id, cur_badge_text] + all_tab_inputs,
             outputs=inference_outputs
         )
 
-        # Reset Biomarkers Handler
-        def _reset_biomarkers(slide_id):
-            matched = SLIDE_PRESETS["slide_1"]
-            for p in SLIDE_PRESETS.values():
-                if p["id"] == slide_id:
-                    matched = p
-                    break
-            tb = matched["tab"]
-            p_id = matched["patient_id"]
-            t_size = matched["tumor_size"]
-            return (p_id, t_size) + tuple(tb)
+        # Reset All Inputs Handler (Full Clean Reset - No Default Values)
+        def _reset_all_inputs():
+            sh_html = get_sub_header_html(specimen_id="None", status="Standby", patient_id="Unassigned")
+            banner_html = get_active_inspection_banner_html(is_reset=True)
+            standby_card = render_empty_or_validation_state(
+                "Workstation reset complete. Upload a histopathology micrograph tile and enter clinical findings below, or select a calibrated clinical specimen from Column 1."
+            )
+            blank_viewer = Image.new("RGB", (600, 450), color="#f8fafc")
+            empty_badge = """<div style="font-size:10.5px; color:#64748b; padding:2px;">Standby</div>"""
+
+            return (
+                sh_html,
+                banner_html,
+                None,  # active_slide_img (State)
+                None,  # custom_upload_img (Image Component)
+                "Custom Specimen",  # cur_slide_id
+                "🔬 Custom Specimen",  # cur_badge_text
+                "",  # s_patient_id (Empty)
+                0.0,  # s_tumor_size (0.0)
+                "Auto-Detect (Phikon ViT-B Gatekeeper)",  # s_organ
+                "Custom / Free Text Note",  # s_narrative_tpl
+                "",  # input_text_box (Empty)
+                True,  # inc_tab_check
+                50, "Male", 0, "0",  # age, sex, smoke, ecog
+                1.5, 12.0, 15.0, 10.0,  # cea, ca125, ca19_9, ki67
+                "Negative (-)", "Negative (-)", "Negative (-)",  # er, pr, her2
+                "Wild-type", "Wild-type",  # egfr, kras
+                14.0, 7.0, 250.0,  # hb, wbc, plt
+                standby_card, blank_viewer, empty_badge, None, empty_badge, {},
+                gr.update(value=None, visible=False)
+            )
+
+        reset_outputs = [
+            sub_header_comp, inspection_banner_comp,
+            active_slide_img, custom_upload_img, cur_slide_id, cur_badge_text,
+            s_patient_id, s_tumor_size, s_organ, s_narrative_tpl,
+            input_text_box, inc_tab_check,
+            s_age, s_sex, s_smoke, s_ecog, s_cea, s_ca125, s_ca19_9, s_ki67,
+            s_er, s_pr, s_her2, s_egfr, s_kras, s_hb, s_wbc, s_plt,
+            report_card_comp, main_viewer_img, faith_badge_comp,
+            shap_thumbnail, shap_badge_comp, report_meta_state,
+            download_file_comp
+        ]
 
         btn_reset_tab.click(
-            fn=_reset_biomarkers,
-            inputs=[cur_slide_id],
-            outputs=[s_patient_id, s_tumor_size] + all_tab_inputs
+            fn=_reset_all_inputs,
+            inputs=[],
+            outputs=reset_outputs
+        )
+
+        btn_new_analysis.click(
+            fn=_reset_all_inputs,
+            inputs=[],
+            outputs=reset_outputs
         )
 
         # Download Report Click Handler
@@ -730,42 +787,55 @@ def build_aisight_ui():
             outputs=[download_file_comp]
         )
 
-        # Custom Upload Image Handler: Updates active slide image state & toolbars
-        def _on_custom_upload(upl_img, cur_layer, txt, inc_tab, p_id, t_size, *tab_args):
+        # Custom Upload Image Handler
+        def _on_custom_upload(upl_img, cur_layer, txt, inc_tab, p_id, t_size, org_val, *tab_args):
             if upl_img is not None:
                 sl_id = "Custom Micrograph"
                 bdg_t = "🔬 Custom Specimen"
-                sh_html = get_sub_header_html(specimen_id=sl_id, status="Uploaded", patient_id=p_id)
+                effective_pid = p_id.strip() if p_id and str(p_id).strip() else "PID-CUSTOM"
+                sh_html = get_sub_header_html(specimen_id=sl_id, status="Uploaded", patient_id=effective_pid)
+                banner_html = f"""
+                <div class="active-inspection-banner">
+                    <span style="font-size: 15px;">🔬</span>
+                    <div>
+                        <strong>Inspecting Custom Micrograph Tile</strong> · Patient <strong>{effective_pid}</strong>
+                        <div style="font-size: 11px; color: #3b82f6; margin-top: 1px;">Custom tissue patch uploaded. Review clinical parameters below and click 'Run Multimodal Analysis' to evaluate.</div>
+                    </div>
+                </div>
+                """
                 outs = process_aisight_case(
                     upl_img, txt, inc_tab, *tab_args[:16],
                     active_view_layer=cur_layer,
                     current_slide_id=sl_id,
                     current_badge_text=bdg_t,
-                    patient_id=p_id,
+                    suspected_organ=org_val,
+                    patient_id=effective_pid,
                     tumor_size=t_size
                 )
                 return (
-                    sh_html, upl_img, sl_id, bdg_t,
+                    sh_html, banner_html, upl_img, sl_id, bdg_t,
                     outs[0], outs[1], outs[2], outs[3], outs[4], outs[5]
                 )
             p = SLIDE_PRESETS["slide_1"]
             im = Image.open(p["img_path"])
             sh_html = get_sub_header_html(specimen_id=p["id"], status="Ready", patient_id=p["patient_id"])
+            banner_html = get_active_inspection_banner_html(p["id"], p["organ_label"], p["patient_id"])
             outs = process_aisight_case(
                 im, p["text"], True, *p["tab"],
                 active_view_layer=cur_layer,
                 current_slide_id=p["id"],
                 current_badge_text=p["badge_text"],
+                suspected_organ=p["organ_label"],
                 patient_id=p["patient_id"],
                 tumor_size=p["tumor_size"]
             )
             return (
-                sh_html, im, p["id"], p["badge_text"],
+                sh_html, banner_html, im, p["id"], p["badge_text"],
                 outs[0], outs[1], outs[2], outs[3], outs[4], outs[5]
             )
 
         custom_upload_outputs = [
-            sub_header_comp,
+            sub_header_comp, inspection_banner_comp,
             active_slide_img, cur_slide_id, cur_badge_text,
             report_card_comp, main_viewer_img, faith_badge_comp,
             shap_thumbnail, shap_badge_comp, report_meta_state
@@ -773,11 +843,11 @@ def build_aisight_ui():
 
         custom_upload_img.change(
             fn=_on_custom_upload,
-            inputs=[custom_upload_img, view_layer_radio, input_text_box, inc_tab_check, s_patient_id, s_tumor_size] + all_tab_inputs,
+            inputs=[custom_upload_img, view_layer_radio, input_text_box, inc_tab_check, s_patient_id, s_tumor_size, s_organ] + all_tab_inputs,
             outputs=custom_upload_outputs
         )
 
-        # Slide Carousel Click Handlers
+        # Slide Carousel Click Handler (Auto-Fills All Custom Input Columns & Runs Evaluation)
         def _select_slide(preset_key, cur_layer):
             p = SLIDE_PRESETS[preset_key]
             im = Image.open(p["img_path"])
@@ -786,6 +856,7 @@ def build_aisight_ui():
             badge_t = p["badge_text"]
             p_id = p["patient_id"]
             t_size = p["tumor_size"]
+            organ_name = p["organ_label"]
 
             # Process case immediately
             outs = process_aisight_case(
@@ -793,64 +864,37 @@ def build_aisight_ui():
                 active_view_layer=cur_layer,
                 current_slide_id=slide_id,
                 current_badge_text=badge_t,
+                magnification="20× (Benchmark)",
+                suspected_organ=organ_name,
                 patient_id=p_id,
                 tumor_size=t_size
             )
             sh_html = get_sub_header_html(specimen_id=slide_id, status="Verified", patient_id=p_id)
+            banner_html = get_active_inspection_banner_html(specimen_id=slide_id, organ=organ_name, patient_id=p_id)
 
             return (
                 sh_html,
-                im, slide_id, badge_t,
+                banner_html,
+                im,  # active_slide_img (State)
+                im,  # custom_upload_img (AUTO-FILLS IMAGE IN COLUMN 2)
+                slide_id, badge_t,
                 p_id, t_size,
+                organ_name,  # s_organ (AUTO-FILLS ORGAN IN COLUMN 2)
                 p["text"], True,
                 tb[0], tb[1], tb[2], tb[3], tb[4], tb[5], tb[6], tb[7], tb[8], tb[9], tb[10], tb[11], tb[12], tb[13], tb[14], tb[15],
                 outs[0], outs[1], outs[2], outs[3], outs[4], outs[5]
             )
 
         slide_outputs = [
-            sub_header_comp,
-            active_slide_img, cur_slide_id, cur_badge_text,
-            s_patient_id, s_tumor_size,
+            sub_header_comp, inspection_banner_comp,
+            active_slide_img, custom_upload_img, cur_slide_id, cur_badge_text,
+            s_patient_id, s_tumor_size, s_organ,
             input_text_box, inc_tab_check,
             s_age, s_sex, s_smoke, s_ecog, s_cea, s_ca125, s_ca19_9, s_ki67,
             s_er, s_pr, s_her2, s_egfr, s_kras, s_hb, s_wbc, s_plt,
             report_card_comp, main_viewer_img, faith_badge_comp,
             shap_thumbnail, shap_badge_comp, report_meta_state
         ]
-
-        # New Analysis Click Handler
-        def _new_analysis_handler():
-            p_id = "PAT001"
-            t_size = 2.5
-            txt = ""
-            def_ps = {"Normal / Non-Neoplastic": 0.5, "Benign Neoplasm": 0.5, "Malignant Carcinoma": 0.0}
-            def_po = {"Breast Carcinoma": 0.33, "Colorectal Carcinoma": 0.33, "Lung Carcinoma": 0.34}
-            init_html, init_meta = render_cancer_diagnosis_html_report(
-                p_id, t_size, def_ps, def_po, None,
-                {"age": 50, "ki67": 15.0, "ecog": 0}, ""
-            )
-            sh_html = get_sub_header_html(specimen_id="New Patient", status="Awaiting Input", patient_id=p_id)
-            empty_badge = """<div style="font-size:10.5px; color:#64748b; padding:2px;">Awaiting specimen...</div>"""
-
-            return (
-                sh_html,
-                None, # active_slide_img
-                "New Specimen", "⚪ Awaiting Analysis",
-                p_id, t_size,
-                txt, True,
-                50, "Female", 0, "0 - Fully active",
-                2.5, 15.0, 18.0, 15.0,
-                "Negative (-)", "Negative (-)", "Negative (-)", "Wild-type", "Wild-type",
-                13.5, 6.5, 250.0,
-                init_html, None, empty_badge, None, empty_badge, init_meta,
-                gr.update(value=None, visible=False)
-            )
-
-        btn_new_analysis.click(
-            fn=_new_analysis_handler,
-            inputs=[],
-            outputs=slide_outputs + [download_file_comp]
-        )
 
         btn_slide_1.click(
             fn=lambda l: _select_slide("slide_1", l),
